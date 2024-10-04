@@ -1,0 +1,61 @@
+{% load static %}
+<html>
+  <head>
+    <base href="#" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Nyasha Chizampeni" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="A comprehensive school management system."
+    />
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href='{% static "images/favicon.png" %}' />
+    <!-- Page Title  -->
+    <title>EndFrame</title>
+    <!-- StyleSheets  -->
+{% include 'layouts/styles.html' %}
+  </head>
+  <body class="nk-body ui-rounder has-sidebar">
+    <div class="nk-app-root">
+      <!-- main @s -->
+      <div class="nk-main">
+        <!-- sidebar @s -->
+        {% include 'layouts/sidebar.html' %}
+        <!-- sidebar @e -->
+
+      <!-- wrap @s -->
+      <div class="nk-wrap">
+        <!-- main header @s -->
+        {% include 'layouts/header.html' %}
+        <!-- main header @e -->
+        <!-- content @s -->
+        {% include 'layouts/messages.html' %}
+        <div class="nk-content nk-content-fluid">
+          <div class="container-xl wide-xl">
+            {% block body %} {% endblock %}
+          </div>
+        </div>
+        <!-- content @e -->
+        <!-- footer @s -->
+        {% block modal %} {% endblock %}
+        {% include 'layouts/footer.html' %}
+        <!-- footer @e -->
+      </div>
+      <!-- wrap @e -->
+      <!-- main @e -->
+    </div>
+
+    <script src="" async defer>
+
+    </script>
+
+    {% block scripts %}
+
+    {% endblock%}
+    {% include 'layouts/scripts.html' %}
+  </body>
+</html>

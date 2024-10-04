@@ -1,0 +1,231 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-xl">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Personal Information</h3>
+                        <div class="nk-block-des">
+                            <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card">
+                    <ul class="nav nav-tabs nav-tabs-s1 px-4" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#profile-tab-pane" aria-selected="true" role="tab">Profile</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#payment-billing-tab-pane" aria-selected="false" tabindex="-1" role="tab">Payment &amp; Billing</a>
+                        </li>
+                    </ul>
+                    <div class="card-inner">
+                        <div class="tab-content mt-0">
+                            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel">
+                                <div class="nk-data data-list">
+                                    <div class="data-head">
+                                        <h6 class="overline-title">Basics</h6>
+                                    </div>
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Full Name</span>
+                                            <span class="data-value">Abu Bin Ishtiyak</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Display Name</span>
+                                            <span class="data-value">Ishtiyak</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item">
+                                        <div class="data-col">
+                                            <span class="data-label">Email</span>
+                                            <span class="data-value">info@softnio.com</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Phone Number</span>
+                                            <span class="data-value text-soft">Not add yet</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Date of Birth</span>
+                                            <span class="data-value">29 Feb, 1986</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
+                                        <div class="data-col">
+                                            <span class="data-label">Address</span>
+                                            <span class="data-value">2337 Kildeer Drive,<br>Kentucky, Canada</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                </div><!-- data-list -->
+                                <div class="nk-data data-list">
+                                    <div class="data-head">
+                                        <h6 class="overline-title">Preferences</h6>
+                                    </div>
+                                    <div class="data-item">
+                                        <div class="data-col">
+                                            <span class="data-label">Language</span>
+                                            <span class="data-value">English (United State)</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><a href="#" class="link link-primary">Change Language</a></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item">
+                                        <div class="data-col">
+                                            <span class="data-label">Date Format</span>
+                                            <span class="data-value">M d, YYYY</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><a href="#" class="link link-primary">Change</a></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item">
+                                        <div class="data-col">
+                                            <span class="data-label">Timezone</span>
+                                            <span class="data-value">Bangladesh (GMT +6)</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><a href="#" class="link link-primary">Change</a></div>
+                                    </div><!-- data-item -->
+                                </div><!-- data-list -->
+                            </div><!-- .tab-pane -->
+                            <div class="tab-pane fade" id="payment-billing-tab-pane" role="tabpanel">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+                                    <h5 class="mb-0">Your Subscription</h5>
+                                    <ul class="d-flex gx-4">
+                                        <li>
+                                            <a class="link link-danger fw-normal" data-bs-toggle="modal" href="#cancelSubscriptionModal">Cancel Subscription</a>
+                                        </li>
+                                        <li>
+                                            <a class="link link-primary fw-normal" data-bs-toggle="modal" href="#changePlanModal">Change Plan</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="alert alert-warning alert-dismissible fade show mb-4 rounded-6" role="alert">
+                                    <p class="small mb-0">Save big up to 75% on your upgrade to our <strong><a class="alert-link" href="#">Enterprise plan</a></strong> and enjoy premium features at a fraction of the cost!</p>
+                                    <div class="d-inline-flex position-absolute end-0 top-50 translate-middle-y me-2">
+                                        <button type="button" class="btn btn-xs btn-icon btn-warning rounded-pill" data-bs-dismiss="alert">
+                                            <em class="icon ni ni-cross"></em>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row g-gs">
+                                    <div class="col-xl-3 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-inner">
+                                                <div class="text-base mb-1">Plan</div>
+                                                <h5>Professional Plan</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-inner">
+                                                <div class="text-base mb-1">Recurring Payment</div>
+                                                <h5>$23/Month</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-inner">
+                                                <div class="text-base mb-1">Next Due Date</div>
+                                                <h5>Mar 15, 2023</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-inner">
+                                                <div class="text-base mb-1">Payment Method</div>
+                                                <div class="d-flex align-items-center">
+                                                    <h5 class="ms-2">PayPal</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-1 pb-1 mb-3">
+                                    <h5>Billing History</h5>
+                                </div>
+                                <div class="card">
+                                    <table class="table table-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="tb-col">
+                                                    <div class="fs-13px text-base">Subscription</div>
+                                                </th>
+                                                <th class="tb-col tb-col-md">
+                                                    <div class="fs-13px text-base">Payment Date</div>
+                                                </th>
+                                                <th class="tb-col tb-col-sm">
+                                                    <div class="fs-13px text-base">Total</div>
+                                                </th>
+                                                <th class="tb-col tb-col-sm">
+                                                    <div class="fs-13px text-base">Status</div>
+                                                </th>
+                                                <th class="tb-col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="tb-col">
+                                                    <div class="caption-text">Starter - 12 Months <div class="d-sm-none dot bg-success"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-col tb-col-md">
+                                                    <div class="fs-6 text-base d-inline-flex flex-wrap gap gx-2"><span>Feb 15,2023 </span> <span>02:31 PM</span></div>
+                                                </td>
+                                                <td class="tb-col tb-col-sm">
+                                                    <div class="fs-6 text-base">$23.00</div>
+                                                </td>
+                                                <td class="tb-col tb-col-sm">
+                                                    <div class="badge bg-success-dim text-success rounded-pill">Paid</div>
+                                                </td>
+                                                <td class="tb-col tb-col-end">
+                                                    <a href="#" class="link">Get Invoice</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tb-col">
+                                                    <div class="caption-text">Starter - 12 Months <div class="d-sm-none dot bg-warning"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-col tb-col-md">
+                                                    <div class="fs-6 text-base d-inline-flex flex-wrap gap gx-2"><span>Feb 15,2023 </span> <span>02:31 PM</span></div>
+                                                </td>
+                                                <td class="tb-col tb-col-sm">
+                                                    <div class="fs-6 text-base">$23.00</div>
+                                                </td>
+                                                <td class="tb-col tb-col-sm">
+                                                    <div class="badge bg-warning-dim text-warning rounded-pill">Faild</div>
+                                                </td>
+                                                <td class="tb-col tb-col-end">
+                                                    <a href="#" class="link">Get Invoice</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- .tab-pane -->
+                        </div><!-- .tab-content -->
+                    </div>
+                </div>
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+{% endblock %}

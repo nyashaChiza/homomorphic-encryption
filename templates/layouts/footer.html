@@ -1,0 +1,20 @@
+{% block scripts %}
+<script>
+  // Get the current year
+  var currentYear = new Date().getFullYear();
+  document.getElementById('current-year').textContent = currentYear;
+</script>
+{% endblock %}
+
+<div class="nk-footer">
+  <div class="container-xl wide-xl">
+    <div class="nk-footer-wrap">
+      <div class="nk-footer-copyright">
+        &copy; 2024<span id="current-year"></span> <a href="#" target="_blank">EndFrame</a>
+      </div>
+      <div class="nk-footer-links">
+        <!-- Add your footer links here -->
+      </div>
+    </div>
+  </div>
+</div>
