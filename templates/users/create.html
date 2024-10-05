@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="card card-inner">
+        <ul class="nav nav-tabs nav-tabs-s1 px-4 py-2 my-2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#profile-tab-pane" aria-selected="true" role="tab">Create User</a>
+            </li>
+           </ul>
+        <div class="my-3">
+        <form action="{% url 'user_create' %}" method="post">
+           {% csrf_token %}
+            {{ form }}
+           <button type="submit" class="btn btn-md bg-primary my-3 text-white">Save</button>
+        </form>
+        </div>
+    </div>
+{% endblock %}

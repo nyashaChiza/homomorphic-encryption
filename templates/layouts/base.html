@@ -35,6 +35,9 @@
         <!-- content @s -->
         {% include 'layouts/messages.html' %}
         <div class="nk-content nk-content-fluid">
+          <div class="nk-block-between my-3">
+            {% block nav %} {% endblock %}
+            
           <div class="container-xl wide-xl">
             {% block body %} {% endblock %}
           </div>

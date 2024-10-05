@@ -191,7 +191,7 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>{{ request.user.avatar }}</span>
+                                        <span>{{ request.user.get_initials }}</span>
                                     </div>
                                     <div class="user-info">
                                         <span class="lead-text">{{ request.user }}</span>
