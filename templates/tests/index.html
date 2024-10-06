@@ -1,0 +1,73 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="nk-block-head-content">
+    <h3 class="nk-block-title page-title">Tests List</h3>
+
+</div><!-- .nk-block-head-content -->
+<div class="nk-block-head-content">
+    <div class="toggle-wrap nk-block-tools-toggle">
+        <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+        <div class="toggle-expand-content" data-content="pageMenu">
+            <ul class="nk-block-tools g-3 mx-1">
+                <li><a href="{% url 'test_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>
+            </ul>
+        </div>
+    </div><!-- .toggle-wrap -->
+</div><!-- .nk-block-head-content -->
+</div>
+{% endblock %}
+{% block body %}
+
+<div class="nk-block nk-block-lg">
+    <div class="card card-bordered card-preview">
+        <div class="card-inner">
+            <table class="datatable-init-export nowrap table" data-export-title="Export">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Doctor
+                        </th>
+                        <th>
+                            Patient
+                        </th>
+                        <th>
+                            Test Type
+                        </th>
+                        <th>
+                            Updated On
+                        </th>
+                        <th></th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for test in tests %}
+                            <tr>
+                                <td>{{test.title}}</td>
+                                <td>{{test.doctor}}</td>
+                                <td>{{test.patient}}</td>
+                                <td>{{test.test_type}}</td>
+                                <td>{{test.updated}}</td>
+                                <td class="tb-tnx-action">
+                                    <div class="dropdown">
+                                        <a class="text-soft dropdown-toggle btn btn-icon btn-trigger " data-bs-toggle="dropdown" aria-expanded="true"><em class="icon ni ni-more-h"></em></a>
+                                    </div>
+                                </td>
+                            </tr>
+                  
+                        
+
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

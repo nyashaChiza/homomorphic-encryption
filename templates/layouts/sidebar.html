@@ -40,6 +40,28 @@
                     </li>
                     
                     {% endif %}
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-folder-list"></em></span>
+                            <span class="nk-menu-text">Medical History</span>
+                        </a>
+                        <ul class="nk-menu-sub" style="display: none;">
+                            <li class="nk-menu-item">
+                                <a href="{% url 'treatment_index' %}" class="nk-menu-link"><span class="nk-menu-text">Treatments</span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{% url 'test_index' %}" class="nk-menu-link"><span class="nk-menu-text">Tests</span></a>
+                            </li>
+                        </ul><!-- .nk-menu-sub -->
+                    </li>
+                    <li class="nk-menu-item">
+                        <a href="{% url 'approval_index' %}" class="nk-menu-link">
+                            <span class="nk-menu-icon">
+                                <em class="icon ni ni-folder-list"></em>
+                            </span>
+                            <span class="nk-menu-text">Approvals</span>
+                        </a>
+                    </li>
                     <!-- .nk-menu-item -->
                 </ul><!-- .nk-menu -->
             </div><!-- .nk-sidebar-menu -->
