@@ -12,11 +12,19 @@ class ApprovalListView(LoginRequiredMixin, ListView):
     template_name = 'approval/index.html'
     context_object_name = 'approvals'
 
+class ApprovalCreateView(LoginRequiredMixin, CreateView):
+    model = Approval
+    form_class = ApprovalForm
+    template_name = 'approval/create.html'
+    context_object_name = 'approval'
+    success_url = reverse_lazy('approval_index')
+
+
 
 class ApprovalUpdateView(LoginRequiredMixin, UpdateView):
     model = Approval
     form_class = ApprovalForm
-    template_name = 'approval/create.html'
+    template_name = 'approval/update.html'
     context_object_name = 'approval'
     success_url = reverse_lazy('approval_index')
     

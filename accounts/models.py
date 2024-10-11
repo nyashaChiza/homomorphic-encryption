@@ -35,6 +35,7 @@ GENDER_CHOICES = (
 class User(AbstractUser):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     role = models.CharField(choices=ROLE_CHOICES, max_length=20)
+    email = models.EmailField(unique=True)
 
     # Add related_name to avoid clashes with the auth.User model
     groups = models.ManyToManyField(
@@ -54,6 +55,9 @@ class User(AbstractUser):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
