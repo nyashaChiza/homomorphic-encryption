@@ -1,9 +1,10 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load custom_tags %}
 
 {% block nav %}
 <div class="nk-block-head-content">
-    <h3 class="nk-block-title page-title">Approval List</h3>
+    <h3 class="nk-block-title page-title">Patients List</h3>
 
 </div><!-- .nk-block-head-content -->
 <div class="nk-block-head-content">
@@ -11,7 +12,7 @@
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
         <div class="toggle-expand-content" data-content="pageMenu">
             <ul class="nk-block-tools g-3 mx-1">
-                <li><a href="{% url 'approval_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>
+                <li><a href="{% url 'approval_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Request Access</span></a></li>
             </ul>
         </div>
     </div><!-- .toggle-wrap -->
@@ -27,43 +28,42 @@
                 <thead>
                     <tr>
                         <th>
-                            Doctor
-                        </th>
-                        <th>
                             Patient
                         </th>
                         <th>
-                            Status
+                            Treatments
                         </th>
                         <th>
-                            Created
+                            Tests
                         </th>
-                        {% if user.role == 'Patient' %}
+                        <th>
+                            Access
+                        </th>
                         <th>
                             Actions
                         </th>
-                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
-                    {%for approval in approvals %}
+                    {% for approval in user.patients.all %}
                             <tr>
-                                <td>{{approval.doctor}}</td>
                                 <td>{{approval.patient}}</td>
-                                <td>{{approval.status}}</td>
-                                <td>{{approval.created}}</td>
-                                {%if user == approval.patient %}
+                                <td>{{approval.patient.treatments.count}}</td>
+                                <td>{{approval.patient.tests.count }}</td>
+                                <td>{% if approval.patient|has_access:user %}<em class="icon ni ni-check-circle-cut text-success"></em>{% else %}<em class="icon ni ni-cross-circle text-danger"></em>{% endif %}</td>
                                 <td class="tb-tnx-action">
+                                    {% if approval.patient|has_access:user %}
                                     <div class="dropdown">
                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                             <ul class="link-list-plain">
-                                                <li><a href="{% url 'approval_update' approval.pk %}" class='px-1'>Approve Request</a></li> 
+                                                <li><a href="#" class='px-1'>View Treatments</a></li>
+                                                <li><a href="#" class='px-1'>View Tests </a></li> 
                                             </ul>
                                         </div>
                                     </div>
+                                    {% endif %}
                                 </td>
-                                {% endif %}
                             </tr>
                   
                         

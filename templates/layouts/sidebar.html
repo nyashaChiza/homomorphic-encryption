@@ -40,6 +40,7 @@
                     </li>
                     
                     {% endif %}
+                    {% if user.role == 'Patient' %}
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-folder-list"></em></span>
@@ -54,6 +55,17 @@
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li>
+                    {% endif %}
+                {% if user.role == 'Doctor' %}
+                <li class="nk-menu-item">
+                    <a href="{% url 'patient_index' %}" class="nk-menu-link">
+                        <span class="nk-menu-icon">
+                            <em class="icon ni ni-folder-list"></em>
+                        </span>
+                        <span class="nk-menu-text">Patients</span>
+                    </a>
+                </li>
+                {% endif %}
                     <li class="nk-menu-item">
                         <a href="{% url 'approval_index' %}" class="nk-menu-link">
                             <span class="nk-menu-icon">

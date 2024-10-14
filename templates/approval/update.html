@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="card card-inner">
+        <ul class="nav nav-tabs nav-tabs-s1 px-4 py-2 my-2" role="tablist">
+            <div class="example-alert">
+                <span class='h3 my-2'>Approve Request</span>
+                <div class="alert alert-light alert-icon">
+                    <span> Doctor: <strong>{{ approval.doctor }}</strong></span>
+                    <span class="px-4"> Patient: <strong>{{ approval.patient }}</strong></span>
+                </div>
+                
+            </div>
+        </ul>
+        <div class="my-3">
+        <form method="post">
+           {% csrf_token %}
+            {{ form }}
+           <button type="submit" class="btn btn-md bg-primary my-3 text-white">Save</button>
+        </form>
+        </div>
+    </div>
+{% endblock %}

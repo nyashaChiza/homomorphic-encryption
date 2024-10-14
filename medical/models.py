@@ -8,7 +8,7 @@ ASSESSMENT_CHOICES = (
 
 class Treatment(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
-    patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='records', limit_choices_to={'role':'Patient'} )  
+    patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='treatments', limit_choices_to={'role':'Patient'} )  
     doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='assessments', limit_choices_to={'role':'Doctor'})
     title = models.CharField(max_length=255)
     assessment_type = models.TextField(max_length=255, choices=ASSESSMENT_CHOICES)

@@ -1,4 +1,5 @@
 from django.db import models
+from approval.models import Approval
 from django.contrib.auth.models import AbstractUser
 import uuid
 
@@ -64,6 +65,9 @@ class User(AbstractUser):
 
     def get_initials(self):
         return f"{self.first_name[0]} {self.last_name[0]}"
+
+    def has_access(self, doctor):
+        return Approval.objects.filter(patient=self, doctor=doctor).first().status == 'Granted'
 
 
 class Profile(models.Model):
