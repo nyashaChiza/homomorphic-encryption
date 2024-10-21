@@ -59,7 +59,8 @@
                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                             <ul class="link-list-plain">
-                                                <li><a href="{% url 'test_details' test.pk %}" class='px-1'>Details</a></li> 
+                                                <li><a href="{% url 'test_details' test.pk %}" class='px-1'>Details</a></li>
+                                                {% if user.role == 'Doctor' %}<li><a href="{% url 'test_add_results' test.pk %}" class='px-1'>Set Results</a></li> {% endif %}
                                             </ul>
                                         </div>
                                     </div>

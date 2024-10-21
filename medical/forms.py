@@ -27,3 +27,15 @@ class TestsForm(forms.ModelForm):
         for _, field in self.fields.items():
             field.widget.attrs["class"] = "form-control"
 
+
+class TestResultsForm(forms.ModelForm):
+    class Meta:
+        model = Tests
+        fields = ('result', 'result_description',)
+        
+
+    def __init__(self,  *args, **kwargs):
+        super(TestResultsForm, self).__init__(*args, **kwargs)
+
+        for _, field in self.fields.items():
+            field.widget.attrs["class"] = "form-control"
