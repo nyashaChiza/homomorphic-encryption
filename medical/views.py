@@ -13,6 +13,10 @@ class TestListView(LoginRequiredMixin, ListView):
     template_name = 'tests/index.html'
     context_object_name = 'tests'
 
+class TestDetailView(DetailView):
+    template_name = 'tests/detail.html'
+    context_object_name = 'test'
+    model = Tests
 
 class TestCreateView(LoginRequiredMixin, CreateView):
     model = Tests
@@ -26,6 +30,11 @@ class TreatmentListView(LoginRequiredMixin, ListView):
     template_name = 'treatment/index.html'
     context_object_name = 'treatments'
 
+
+class TreatmentDetailView(DetailView):
+    template_name = 'treatment/details.html'
+    context_object_name = 'treatment'
+    model = Treatment
 
 class TreatmentCreateView(LoginRequiredMixin, CreateView):
     model = Treatment

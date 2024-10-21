@@ -27,7 +27,8 @@ class Tests(models.Model):
     title = models.CharField(max_length=255)
     test_type = models.TextField(max_length=255, choices=ASSESSMENT_CHOICES)
     description = models.TextField()
-    description = models.TextField(null=True, blank=True)
+    result = models.CharField(max_length=255, null=True, blank=True)
+    result_description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -56,7 +56,12 @@
                                 <td>{{test.updated}}</td>
                                 <td class="tb-tnx-action">
                                     <div class="dropdown">
-                                        <a class="text-soft dropdown-toggle btn btn-icon btn-trigger " data-bs-toggle="dropdown" aria-expanded="true"><em class="icon ni ni-more-h"></em></a>
+                                        <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
+                                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
+                                            <ul class="link-list-plain">
+                                                <li><a href="{% url 'test_details' test.pk %}" class='px-1'>Details</a></li> 
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
