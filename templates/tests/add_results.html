@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="nk-block-head-content"></div>
+    <div class="toggle-wrap nk-block-tools-toggle">
+        <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+        <div class="toggle-expand-content" data-content="pageMenu">
+            <ul class="nk-block-tools g-3 mx-1">
+                <li><a href="{% url 'test_index' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-arrow-left"></em><span>Back</span></a></li>
+            </ul>
+        </div>
+    </div><!-- .toggle-wrap -->
+</div>
+{% endblock %}
+
+
+{% block body %}
+    <div class="card card-inner">
+        <ul class="nav nav-tabs nav-tabs-s1 px-4 py-2 my-2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#profile-tab-pane" aria-selected="true" role="tab">Add Test Results For {{test}}</a>
+            </li>
+           </ul>
+        <div class="my-3">
+        <form action="{% url 'test_add_results' test.pk %}" method="post">
+           {% csrf_token %}
+            {{ form }}
+           <button type="submit" class="btn btn-md bg-primary my-3 text-white">Save</button>
+        </form>
+        </div>
+    </div>
+{% endblock %}
