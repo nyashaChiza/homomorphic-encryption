@@ -19,14 +19,25 @@ class TestDetailView(DetailView):
     model = Tests
 
 class PatientTestsView(DetailView):
-    template_name = 'tests/detail.html'
+    template_name = 'tests/tests.html'
     context_object_name = 'test'
     model = User
 
     def get_context_data(self, **kwargs) :
         context =  super().get_context_data(**kwargs)
-        input(kwargs)
-        context['tests'] = User.objects.filter(pk = self.request.GET.get('pk')).first().tests.all()
+        
+        context['tests'] = kwargs.get('object').tests.all()
+        return context
+
+class PatientTreatmentsView(DetailView):
+    template_name = 'treatment/treatments.html'
+    context_object_name = 'treatment'
+    model = User
+
+    def get_context_data(self, **kwargs) :
+        context =  super().get_context_data(**kwargs)
+        
+        context['treatments'] = kwargs.get('object').treatments.all()
         return context
 
 class TestCreateView(LoginRequiredMixin, CreateView):

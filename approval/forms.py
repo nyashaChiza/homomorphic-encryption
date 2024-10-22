@@ -7,7 +7,10 @@ class ApprovalCreateForm(forms.ModelForm):
         model = Approval
         fields = "__all__"
         exclude = ('status', )
-        
+    
+        widgets = {
+            "doctor": forms.HiddenInput(),
+        }
 
     def __init__(self,  *args, **kwargs):
         super(ApprovalCreateForm, self).__init__(*args, **kwargs)

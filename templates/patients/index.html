@@ -11,8 +11,19 @@
     <div class="toggle-wrap nk-block-tools-toggle">
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
         <div class="toggle-expand-content" data-content="pageMenu">
-            <ul class="nk-block-tools g-3 mx-1">
-                <li><a href="{% url 'approval_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Request Access</span></a></li>
+            <ul class="nk-block-tools g-3">
+                <li>
+                    <div class="drodown">
+                        <a href="#" class="dropdown-toggle btn btn-white btn-dim btn-outline-light" data-bs-toggle="dropdown" aria-expanded="false"><em class="d-none d-sm-inline icon ni ni-plus"></em><span><span class="d-none d-md-inline"></span>Add New</span><em class="dd-indc icon ni ni-chevron-right"></em></a>
+                        <div class="dropdown-menu dropdown-menu-end" style="">
+                            <ul class="link-list-opt no-bdr">
+                                <li><a href="{% url 'test_create' %}"><span>Test</span></a></li>
+                                <li><a href="{% url 'treatment_create' %}"><span>Treatment</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                
             </ul>
         </div>
     </div><!-- .toggle-wrap -->
@@ -57,7 +68,7 @@
                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                             <ul class="link-list-plain">
-                                                <li><a href="#" class='px-1'>View Treatments</a></li>
+                                                <li><a href="{% url 'patient_treatments' approval.patient.pk %}" class='px-1'>View Treatments</a></li>
                                                 <li><a href="{% url 'patient_tests' approval.patient.pk %}" class='px-1'>View Tests </a></li> 
                                             </ul>
                                         </div>

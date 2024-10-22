@@ -1,3 +1,4 @@
+from django.forms.models import BaseModelForm
 from django.shortcuts import render
 from approval.models import Approval
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,12 +13,33 @@ class ApprovalListView(LoginRequiredMixin, ListView):
     template_name = 'approval/index.html'
     context_object_name = 'approvals'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.role == 'Patient':
+            context['approvals'] = self.request.user.doctors.all()
+
+        elif self.request.user.role == 'Doctor':
+            context['approvals'] = self.request.user.patients.all()
+
+        else:
+            context['approvals'] = Approval.objects.all()
+        
+        return context
+
+
 class ApprovalCreateView(LoginRequiredMixin, CreateView):
     model = Approval
     form_class = ApprovalCreateForm
     template_name = 'approval/create.html'
     context_object_name = 'approval'
     success_url = reverse_lazy('approval_index')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['doctor'] = self.request.user
+        return initial
+
+
 
 
 

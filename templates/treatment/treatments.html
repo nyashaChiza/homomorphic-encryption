@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="nk-block-head-content"></div>
+    <div class="toggle-wrap nk-block-tools-toggle">
+        <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+        <div class="toggle-expand-content" data-content="pageMenu">
+            <ul class="nk-block-tools g-3 mx-1">
+                <li><a href="{% url 'patient_index' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-arrow-left"></em><span>Back</span></a></li>
+            </ul>
+        </div>
+    </div><!-- .toggle-wrap -->
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="card p-3">
+    <div class="col-lg-8 col-xxl-10 mx-auto">
+        <div class="card h-100">
+            <div class="card-inner border-bottom">
+                <div class="card-title-group">
+                    <div class="card-title">
+                        <h6 class="title">{{object}}</h6>
+                    </div>
+                    <div class="card-tools">
+                        <a href="#" class="link">All Treatments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-inner">
+                <div class="timeline">
+ 
+                    <ul class="timeline-list">
+                        
+                        {% for treatment in treatments %}
+                        <li class="timeline-item">
+                            <div class="timeline-status bg-primary"></div>
+                            <div class="timeline-date">{{treatment.created|date:"d M Y" }} </div>
+                            <div class="timeline-data">
+                                <h6 class="timeline-title"><a href="{% url 'treatment_details' treatment.pk %}">{{treatment}}</h6>
+                                <div class="timeline-des">
+                                    <p>{{treatment.assessment_type}}.</p>
+                                    <span class="time">Doctor: {{ treatment.doctor }}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .card -->
+    </div>
+</div>
+{% endblock %}

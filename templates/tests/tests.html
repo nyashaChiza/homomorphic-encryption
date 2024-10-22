@@ -7,7 +7,7 @@
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
         <div class="toggle-expand-content" data-content="pageMenu">
             <ul class="nk-block-tools g-3 mx-1">
-                <li><a href="{% url 'test_index' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-arrow-left"></em><span>Back</span></a></li>
+                <li><a href="{% url 'patient_index' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-arrow-left"></em><span>Back</span></a></li>
             </ul>
         </div>
     </div><!-- .toggle-wrap -->
@@ -15,77 +15,42 @@
 {% endblock %}
 
 {% block body %}
-<div class="card">
-    <div class="card-aside-wrap">
-        <div class="card-inner card-inner-lg">
-            <div class="nk-block-head nk-block-head-lg">
-                <div class="nk-block-between">
-                    <div class="nk-block-head-content">
-                        <h4 class="nk-block-title">Tests Information</h4>
-                       
+<div class="card p-3">
+    <div class="col-lg-8 col-xxl-10 mx-auto">
+        <div class="card h-100">
+            <div class="card-inner border-bottom">
+                <div class="card-title-group">
+                    <div class="card-title">
+                        <h6 class="title">{{object}}</h6>
                     </div>
-                    <div class="nk-block-head-content align-self-start d-lg-none">
-                        <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em class="icon ni ni-menu-alt-r"></em></a>
+                    <div class="card-tools">
+                        <a href="#" class="link">All Tests</a>
                     </div>
                 </div>
-            </div><!-- .nk-block-head -->
-            <div class="col-lg-8 col-xxl-10 mx-auto">
-                <div class="card h-100">
-                    <div class="card-inner border-bottom">
-                        <div class="card-title-group">
-                            <div class="card-title">
-                                <h6 class="title">Notifications</h6>
-                            </div>
-                            <div class="card-tools">
-                                <a href="#" class="link">Patient Tests</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-inner">
-                        <div class="timeline">
-                            <h6 class="timeline-head">November, 2019</h6>
-                            <ul class="timeline-list">
-                                <li class="timeline-item">
-                                    <div class="timeline-status bg-primary is-outline"></div>
-                                    <div class="timeline-date">13 Nov <em class="icon ni ni-alarm-alt"></em></div>
-                                    <div class="timeline-data">
-                                        <h6 class="timeline-title">Submitted KYC Application</h6>
-                                        <div class="timeline-des">
-                                            <p>Re-submitted KYC form.</p>
-                                            <span class="time">09:30am</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-item">
-                                    <div class="timeline-status bg-primary"></div>
-                                    <div class="timeline-date">13 Nov <em class="icon ni ni-alarm-alt"></em></div>
-                                    <div class="timeline-data">
-                                        <h6 class="timeline-title">Submitted KYC Application</h6>
-                                        <div class="timeline-des">
-                                            <p>Ishtiyak submitted KYC form.</p>
-                                            <span class="time">09:30am</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-item">
-                                    <div class="timeline-status bg-pink"></div>
-                                    <div class="timeline-date">13 Nov <em class="icon ni ni-alarm-alt"></em></div>
-                                    <div class="timeline-data">
-                                        <h6 class="timeline-title">Submitted KYC Application</h6>
-                                        <div class="timeline-des">
-                                            <p>Re-submitted KYC form.</p>
-                                            <span class="time">09:30am</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!-- .card -->
             </div>
-            <!-- .nk-block -->
-        </div>
-        <!-- card-aside -->
-    </div><!-- .card-aside-wrap -->
+            <div class="card-inner">
+                <div class="timeline">
+
+                    <ul class="timeline-list">
+                        
+                        {% for test in tests %}
+                        <li class="timeline-item">
+                            <div class="timeline-status bg-primary"></div>
+                            <div class="timeline-date">{{test.created|date:"d M Y" }} </div>
+                            <div class="timeline-data">
+                                <h6 class="timeline-title"><a href="{% url 'test_details' test.pk %}">{{test}}</h6>
+                                <div class="timeline-des">
+                                    <p>{{test.test_type}}.</p>
+                                    <span class="time">Result: {% if test.result %}{{ test.result }}{% else %} <span class='text-danger'>Result Not Set</span>{% endif %}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .card -->
+    </div>
 </div>
 {% endblock %}
