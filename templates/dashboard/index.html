@@ -65,62 +65,7 @@
                     </div><!-- .col -->
                 </div><!-- .row -->
             </div><!-- .nk-block -->
-            <!-- .nk-block-head -->
-            <!-- .nk-block -->
-            <div class="nk-block-head">
-                <div class="nk-block-between">
-                    <div class="nk-block-head-content">
-                        <h4 class="nk-block-title">Payments</h4>
-                    </div>
-                    
-                </div>
-            </div><!-- .nk-block-head -->
-            <div class="nk-block">
-                <div class="card">
-                    <table class="table">
-                        <thead>
-                            <tr class="nk-tb-item nk-tb-head">
-                                
-                                <th class="nk-tb-col">
-                                    <h6 class="overline-title">Student</h6>
-                                </th>
-                                <th class="nk-tb-col tb-col-sm">
-                                    <h6 class="overline-title">Amount</h6>
-                                </th>
-                                <th class="nk-tb-col tb-col-sm">
-                                    <h6 class="overline-title">Status</h6>
-                                </th>
-                                <th class="nk-tb-col tb-col-md">
-                                    <h6 class="overline-title">Payment Date</h6>
-                                </th>
-                                <th class="nk-tb-col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for payment in data.payment_list %}
-                            <tr class="nk-tb-item">
-                                <td class="nk-tb-col">
-                                    <div class="caption-text">{{ payment.student}}</div>
-                                </td>
-                                <td class="nk-tb-col">
-                                    <div class="caption-text">{{ payment.amount }}</div>
-                                </td>
-                                <td class="nk-tb-col tb-col-sm">
-                                    <div class="badge badge-dim bg-dark rounded-pill">{{payment.status}}</div>
-                                </td>
-                                <td class="nk-tb-col tb-col-md">
-                                    <div class="sub-text d-inline-flex flex-wrap gx-2">
-                                        <div>{{ payment.payment_date}} </div>
-                                        
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                    </table>
-                </div><!-- .card -->
-            </div><!-- .nk-block -->
+          
         </div>
     </div>
 </div>
@@ -190,60 +135,8 @@
             </div><!-- .nk-block -->
             <!-- .nk-block-head -->
             <!-- .nk-block -->
-            <div class="nk-block-head">
-                <div class="nk-block-between">
-                    <div class="nk-block-head-content">
-                        <h4 class="nk-block-title">Payments</h4>
-                    </div>
-                    
-                </div>
-            </div><!-- .nk-block-head -->
-            <div class="nk-block">
-                <div class="card">
-                    <table class="table">
-                        <thead>
-                            <tr class="nk-tb-item nk-tb-head">
-                                
-                                <th class="nk-tb-col">
-                                    <h6 class="overline-title">Student</h6>
-                                </th>
-                                <th class="nk-tb-col tb-col-sm">
-                                    <h6 class="overline-title">Amount</h6>
-                                </th>
-                                <th class="nk-tb-col tb-col-sm">
-                                    <h6 class="overline-title">Status</h6>
-                                </th>
-                                <th class="nk-tb-col tb-col-md">
-                                    <h6 class="overline-title">Payment Date</h6>
-                                </th>
-                                <th class="nk-tb-col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for payment in data.payment_list %}
-                            <tr class="nk-tb-item">
-                                <td class="nk-tb-col">
-                                    <div class="caption-text">{{ payment.student}}</div>
-                                </td>
-                                <td class="nk-tb-col">
-                                    <div class="caption-text">{{ payment.amount }}</div>
-                                </td>
-                                <td class="nk-tb-col tb-col-sm">
-                                    <div class="badge badge-dim bg-dark rounded-pill">{{payment.status}}</div>
-                                </td>
-                                <td class="nk-tb-col tb-col-md">
-                                    <div class="sub-text d-inline-flex flex-wrap gx-2">
-                                        <div>{{ payment.payment_date}} </div>
-                                        
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                    </table>
-                </div><!-- .card -->
-            </div><!-- .nk-block -->
+            <!-- .nk-block-head -->
+            <!-- .nk-block -->
         </div>
     </div>
 </div>
