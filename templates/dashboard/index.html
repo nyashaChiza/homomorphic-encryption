@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-{% if request.user.role == 'Student' %}
+{% if user.role == 'Doctor' %}
 <div class="nk-content nk-content-fluid">
     <div class="container-xl wide-xl">
         <div class="nk-content-body">
@@ -19,10 +19,10 @@
                         <div class="card card-full bg-primary">
                             <div class="card-inner">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <div class="fs-6 text-white text-opacity-75 mb-0">Courses</div>
-                                    <a href="#" class="link link-white">See All</a>
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Patients</div>
+                                    <a href="{% url 'patient_index' %}" class="link link-white">See All</a>
                                 </div>
-                                <h5 class="fs-1 text-white">{{ data.courses }} <small class="fs-3">courses</small></h5>
+                                <h5 class="fs-1 text-white">{{ user.patients.count }} <small class="fs-3">patients</small></h5>
                                 
                             </div>
                         </div><!-- .card -->
@@ -31,10 +31,10 @@
                         <div class="card card-full bg-warning is-dark">
                             <div class="card-inner">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <div class="fs-6 text-white text-opacity-75 mb-0">Payments</div>
-                                    <a href="#" class="link link-white">See All</a>
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Treatments</div>
+                                    
                                 </div>
-                                <h5 class="fs-1 text-white">{{ data.payments}} <small class="fs-3">payments</small></h5>
+                                <h5 class="fs-1 text-white">{{ user.assessments.count}} <small class="fs-3">treatments</small></h5>
                                 
                             </div>
                         </div><!-- .card -->
@@ -43,10 +43,10 @@
                         <div class="card card-full bg-info is-dark">
                             <div class="card-inner">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <div class="fs-6 text-white text-opacity-75 mb-0">Assessments</div>
-                                    <a href="#" class="link link-white">See All</a>
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Tests</div>
+                                    
                                 </div>
-                                <h5 class="fs-1 text-white">{{ data.assessments }}<small class="fs-3">assessments</small></h5>
+                                <h5 class="fs-1 text-white">{{ user.medical_tests.count }}<small class="fs-3"> tests</small></h5>
                                 
                             </div>
                         </div><!-- .card -->
@@ -55,10 +55,133 @@
                         <div class="card card-full bg-danger is-dark">
                             <div class="card-inner">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <div class="fs-6 text-white text-opacity-75 mb-0">Notifications</div>
-                                    <a href="html/copywriter/templates.html" class="link link-white">See All</a>
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Approvals</div>
+                                    
                                 </div>
-                                <h5 class="fs-1 text-white">{{ data.notifications}} <small class="fs-3">notifications</small></h5>
+                                <h5 class="fs-1 text-white">{{ user.patients.count }} <small class="fs-3">approvals</small></h5>
+                                
+                            </div>
+                        </div><!-- .card -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .nk-block -->
+            <!-- .nk-block-head -->
+            <!-- .nk-block -->
+            <div class="nk-block-head">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h4 class="nk-block-title">Payments</h4>
+                    </div>
+                    
+                </div>
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card">
+                    <table class="table">
+                        <thead>
+                            <tr class="nk-tb-item nk-tb-head">
+                                
+                                <th class="nk-tb-col">
+                                    <h6 class="overline-title">Student</h6>
+                                </th>
+                                <th class="nk-tb-col tb-col-sm">
+                                    <h6 class="overline-title">Amount</h6>
+                                </th>
+                                <th class="nk-tb-col tb-col-sm">
+                                    <h6 class="overline-title">Status</h6>
+                                </th>
+                                <th class="nk-tb-col tb-col-md">
+                                    <h6 class="overline-title">Payment Date</h6>
+                                </th>
+                                <th class="nk-tb-col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payment in data.payment_list %}
+                            <tr class="nk-tb-item">
+                                <td class="nk-tb-col">
+                                    <div class="caption-text">{{ payment.student}}</div>
+                                </td>
+                                <td class="nk-tb-col">
+                                    <div class="caption-text">{{ payment.amount }}</div>
+                                </td>
+                                <td class="nk-tb-col tb-col-sm">
+                                    <div class="badge badge-dim bg-dark rounded-pill">{{payment.status}}</div>
+                                </td>
+                                <td class="nk-tb-col tb-col-md">
+                                    <div class="sub-text d-inline-flex flex-wrap gx-2">
+                                        <div>{{ payment.payment_date}} </div>
+                                        
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                    </table>
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+
+{% elif user.role == 'Patient' %}
+<div class="nk-content nk-content-fluid"></div>
+    <div class="container-xl wide-xl">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-page-head nk-block-head-sm">
+                <div class="nk-block-head-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Welcome Back {{ request.user }}!</h3>
+                    </div>
+                </div>
+            </div><!-- .nk-page-head -->
+            <div class="nk-block">
+                <div class="row g-gs">
+                    <div class="col-sm-6 col-xxl-3">
+                        <div class="card card-full bg-primary">
+                            <div class="card-inner">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Doctors</div>
+                                    
+                                </div>
+                                <h5 class="fs-1 text-white">{{ user.doctors.count }} <small class="fs-3">Doctors</small></h5>
+                                
+                            </div>
+                        </div><!-- .card -->
+                    </div><!-- .col -->
+                    <div class="col-sm-6 col-xxl-3">
+                        <div class="card card-full bg-warning is-dark">
+                            <div class="card-inner">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Treatments</div>
+                                    
+                                </div>
+                                <h5 class="fs-1 text-white">{{ user.treatments.count}} <small class="fs-3">treatments</small></h5>
+                                
+                            </div>
+                        </div><!-- .card -->
+                    </div><!-- .col -->
+                    <div class="col-sm-6 col-xxl-3">
+                        <div class="card card-full bg-info is-dark">
+                            <div class="card-inner">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Tests</div>
+                                    
+                                </div>
+                                <h5 class="fs-1 text-white">{{ user.tests.count }}<small class="fs-3"> tests</small></h5>
+                                
+                            </div>
+                        </div><!-- .card -->
+                    </div><!-- .col -->
+                    <div class="col-sm-6 col-xxl-3">
+                        <div class="card card-full bg-danger is-dark">
+                            <div class="card-inner">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="fs-6 text-white text-opacity-75 mb-0">Approvals</div>
+                                    
+                                </div>
+                                <h5 class="fs-1 text-white">{{ user.doctors.count }} <small class="fs-3">approvals</small></h5>
                                 
                             </div>
                         </div><!-- .card -->

@@ -47,6 +47,12 @@ class TestCreateView(LoginRequiredMixin, CreateView):
     context_object_name = 'tests'
     success_url = reverse_lazy('test_index')
 
+    def get_form(self) :
+        form = super().get_form()
+        patients = [('',approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()]
+        form.fields['patient'].choices = patients
+        return form
+
 class TestResultsView(LoginRequiredMixin, UpdateView):
     model = Tests
     form_class = TestResultsForm
@@ -72,6 +78,12 @@ class TreatmentCreateView(LoginRequiredMixin, CreateView):
     template_name = 'treatment/create.html'
     context_object_name = 'treatments'
     success_url = reverse_lazy('test_index')
+
+    def get_form(self) :
+        form = super().get_form()
+        patients = [('',approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()]
+        form.fields['patient'].choices = patients
+        return form
     
 
 class PatientstListView(LoginRequiredMixin, ListView):
