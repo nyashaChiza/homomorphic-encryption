@@ -13,6 +13,7 @@ class Approval(models.Model):
     doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='patients', limit_choices_to={'role':'Doctor'})
     comment = models.TextField(blank=True, null=True)
     status = models.TextField(max_length=255, choices=STATUS_CHOICES, default='Pending')
+    viewed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -43,7 +43,7 @@
                     {% if 1 %}
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-folder-list"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-clipboard"></em></span>
                             <span class="nk-menu-text">Medical History</span>
                         </a>
                         <ul class="nk-menu-sub" style="display: none;">
@@ -60,16 +60,24 @@
                 <li class="nk-menu-item">
                     <a href="{% url 'patient_index' %}" class="nk-menu-link">
                         <span class="nk-menu-icon">
-                            <em class="icon ni ni-folder-list"></em>
+                            <em class="icon ni ni-user-c"></em>
                         </span>
                         <span class="nk-menu-text">Patients</span>
+                    </a>
+                </li>
+                <li class="nk-menu-item">
+                    <a href="{% url 'medicine_index' %}" class="nk-menu-link">
+                        <span class="nk-menu-icon">
+                            <em class="icon ni ni-bag"></em>
+                        </span>
+                        <span class="nk-menu-text">Medicine</span>
                     </a>
                 </li>
                 {% endif %}
                     <li class="nk-menu-item">
                         <a href="{% url 'approval_index' %}" class="nk-menu-link">
                             <span class="nk-menu-icon">
-                                <em class="icon ni ni-folder-list"></em>
+                                <em class="icon ni ni-shield-check"></em>
                             </span>
                             <span class="nk-menu-text">Approvals</span>
                         </a>

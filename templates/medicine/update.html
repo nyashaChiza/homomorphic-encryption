@@ -5,14 +5,14 @@
     <div class="card card-inner">
         <ul class="nav nav-tabs nav-tabs-s1 px-4 py-2 my-2" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" data-bs-toggle="tab" href="#profile-tab-pane" aria-selected="true" role="tab">Update {{treatment}}</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#profile-tab-pane" aria-selected="true" role="tab">Update {{ medicine}} </a>
             </li>
            </ul>
         <div class="my-3">
-        <form action="{% url 'treatment_update' treatment.pk %}" method="post">
+        <form action="{% url 'medicine_update' medicine.pk %}" method="post">
            {% csrf_token %}
             {{ form }}
-           <button type="submit" class="btn btn-md bg-primary my-3 text-white">Update</button>
+           <button type="submit" class="btn btn-md bg-primary my-3 text-white">Save</button>
         </form>
         </div>
     </div>

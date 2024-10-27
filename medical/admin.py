@@ -22,7 +22,7 @@ class TreatmentAdmin(admin.ModelAdmin):
             'fields': ('title', 'patient', 'doctor', 'description', 'symptoms', 'diagnosis')
         }),
         ('Assessment Details', {
-            'fields': ('assessment_type', 'status', 'follow_up_date', 'notes')
+            'fields': ('treatment_type', 'status', 'follow_up_date', 'notes')
         }),
         ('Medications', {
             'fields': ('medications',)

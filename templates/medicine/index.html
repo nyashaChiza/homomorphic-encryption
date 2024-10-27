@@ -3,7 +3,7 @@
 
 {% block nav %}
 <div class="nk-block-head-content">
-    <h3 class="nk-block-title page-title">Approval List</h3>
+    <h3 class="nk-block-title page-title">Medicine List</h3>
 
 </div><!-- .nk-block-head-content -->
 <div class="nk-block-head-content">
@@ -11,7 +11,7 @@
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
         <div class="toggle-expand-content" data-content="pageMenu">
             <ul class="nk-block-tools g-3 mx-1">
-                {% if user.role == 'Doctor' %}<li><a href="{% url 'approval_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>{% endif%}
+                <li><a href="{% url 'medicine_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>
             </ul>
         </div>
     </div><!-- .toggle-wrap -->
@@ -27,43 +27,45 @@
                 <thead>
                     <tr>
                         <th>
-                            Doctor
+                            Name
                         </th>
                         <th>
-                            Patient
+                            Dosage
                         </th>
                         <th>
-                            Status
+                            Frequency
                         </th>
                         <th>
-                            Created
+                            Administration
                         </th>
-                        {% if user.role == 'Patient' %}
                         <th>
+                            added On
+                        </th>
+                        <th></th>
                             Actions
                         </th>
-                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
-                    {%for approval in approvals %}
+                    {%for medicine in meds %}
                             <tr>
-                                <td>{{approval.doctor}}</td>
-                                <td>{{approval.patient}}</td>
-                                <td>{{approval.status}}</td>
-                                <td>{{approval.created}}</td>
-                                {%if user == approval.patient %}
+                                <td>{{medicine.name}}</td>
+                                <td>{{medicine.dosage}}</td>
+                                <td>{{medicine.frequency}}</td>
+                                <td>{{medicine.route_of_administration}}</td>
+                                <td>{{medicine.created}}</td>
                                 <td class="tb-tnx-action">
                                     <div class="dropdown">
                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                             <ul class="link-list-plain">
-                                                <li><a href="{% url 'approval_update' approval.pk %}" class='px-1'>Approve Request</a></li> 
+                                                <li><a href="{% url 'test_details' medicine.pk %}" class='px-1'>Details</a></li>
+                                                <li><a href="{% url 'medicine_update' medicine.pk %}" class='px-1'>Update</a></li>
+                                                <li><a href="{% url 'medicine_delete' medicine.pk %}" class='px-1 text-danger'>Delete</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </td>
-                                {% endif %}
                             </tr>
                   
                         

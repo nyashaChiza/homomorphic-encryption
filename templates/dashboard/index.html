@@ -71,7 +71,7 @@
 </div>
 
 {% elif user.role == 'Patient' %}
-<div class="nk-content nk-content-fluid"></div>
+<div class="nk-content nk-content-fluid">
     <div class="container-xl wide-xl">
         <div class="nk-content-body">
             <div class="nk-block-head nk-page-head nk-block-head-sm">
@@ -138,6 +138,87 @@
             <!-- .nk-block-head -->
             <!-- .nk-block -->
         </div>
+    </div>
+</div>
+{% else %}
+<div class="nk-content nk-content-fluid"></div>
+<div class="container-xl wide-xl">
+    <div class="nk-content-body">
+        <div class="nk-block-head nk-page-head nk-block-head-sm">
+            <div class="nk-block-head-between">
+                <div class="nk-block-head-content">
+                    <h3 class="nk-block-title page-title">Welcome Back {{ request.user }}!</h3>
+                </div>
+            </div>
+        </div><!-- .nk-page-head -->
+        <div class="nk-block">
+            <div class="row g-gs">
+                <div class="col-sm-6 col-xxl-3">
+                    <div class="card card-full bg-primary">
+                        <div class="card-inner">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="fs-6 text-white text-opacity-75 mb-0">Users</div>
+                                
+                            </div>
+                            <h5 class="fs-1 text-white">{{ users.count }} <small class="fs-3">Users</small></h5>
+                            
+                        </div>
+                    </div><!-- .card -->
+                </div><!-- .col -->
+                <div class="col-sm-6 col-xxl-3">
+                    <div class="card card-full bg-warning is-dark">
+                        <div class="card-inner">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="fs-6 text-white text-opacity-75 mb-0">Treatments</div>
+                                
+                            </div>
+                            <h5 class="fs-1 text-white">{{ treatments.count}} <small class="fs-3">treatments</small></h5>
+                            
+                        </div>
+                    </div><!-- .card -->
+                </div><!-- .col -->
+                <div class="col-sm-6 col-xxl-3">
+                    <div class="card card-full bg-info is-dark">
+                        <div class="card-inner">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="fs-6 text-white text-opacity-75 mb-0">Tests</div>
+                                
+                            </div>
+                            <h5 class="fs-1 text-white">{{ tests.count }}<small class="fs-3"> tests</small></h5>
+                            
+                        </div>
+                    </div><!-- .card -->
+                </div><!-- .col -->
+                <div class="col-sm-6 col-xxl-3">
+                    <div class="card card-full bg-danger is-dark">
+                        <div class="card-inner">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="fs-6 text-white text-opacity-75 mb-0">Approvals</div>
+                                
+                            </div>
+                            <h5 class="fs-1 text-white">{{ approval.count }} <small class="fs-3">approvals</small></h5>
+                            
+                        </div>
+                    </div><!-- .card -->
+                </div>
+                <div class="col-sm-6 col-xxl-3"></div>
+                    <div class="card card-full bg-success is-dark">
+                        <div class="card-inner">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="fs-6 text-white text-opacity-75 mb-0">Medicine</div>
+                                
+                            </div>
+                            <h5 class="fs-1 text-white">{{ medicine.count }} <small class="fs-3">medicine</small></h5>
+                            
+                        </div>
+                    </div><!-- .card -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .nk-block -->
+        <!-- .nk-block-head -->
+        <!-- .nk-block -->
+        <!-- .nk-block-head -->
+        <!-- .nk-block -->
     </div>
 </div>
 {% endif %}

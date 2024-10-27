@@ -1,5 +1,8 @@
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.shortcuts import render
+from django.contrib import messages
 from approval.models import Approval
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
@@ -52,6 +55,15 @@ class ApprovalUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'approval/update.html'
     context_object_name = 'approval'
     success_url = reverse_lazy('approval_index')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        object = self.get_object()
+        object.viewed = False 
+        object.save()
+        messages.success(self.request, 'Approval updated successfully!')
+        return response
     
 
 class ApprovalDetailView(LoginRequiredMixin, DetailView):
@@ -61,3 +73,9 @@ class ApprovalDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'approval'
     success_url = reverse_lazy('approval_index')
     lookup_field = 'uuid'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['object'].viewed = True
+        context['object'].save()
+        return context

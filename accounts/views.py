@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, TemplateView
+from django.contrib import messages
 from accounts.forms import ProfileForm, UserForm
 from accounts.models import Profile
 
@@ -85,14 +85,10 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         return get_object_or_404(User, pk=self.kwargs.get('pk'))
 
 
-# View to delete a user account
-class UserDeleteView(LoginRequiredMixin, DeleteView):
-    model = User
-    template_name = 'account/user_confirm_delete.html'
-    success_url = reverse_lazy('user_list')
 
-    def delete(self, request, *args, **kwargs):
-        # Optionally, perform additional cleanup before deleting a user
-        self.object = self.get_object()
-        self.object.delete()
-        return redirect(self.success_url)
+
+def user_delete_view(request, pk):
+    User.objects.get(pk=pk).delete()
+    messages.success(request, 'User deleted successfully!')
+
+    return redirect(reverse('users_index'))

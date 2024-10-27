@@ -14,8 +14,8 @@
                     
                     <li class="dropdown notification-dropdown">
                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                            {% if notifications %}
-                            <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
+                            {% if notifications  %}
+                            <div class=""><em class="icon ni ni-bell"></em></div>
                             {% else %}
                             <div class=""><em class="icon ni ni-bell"></em></div>
                             {% endif %}
@@ -28,15 +28,38 @@
                             <div class="dropdown-body">
                                 <div class="nk-notification">
                                     {% for note in notifications %}
-                                    <a href="{% url 'notification_detail' note.uuid %}">
+                                    <a href="{% url 'approval_details' note.pk %}">
+                                    {% if note.status == 'Granted' and user.role == 'Doctor' and note.doctor == user %}
+
                                     <div class="nk-notification-item dropdown-inner">
                                         <div class="nk-notification-content">
-                                            <div class="nk-notification-text">{{ note }}.</div>
-                                            <div class="nk-notification-time">{{ note.created }}</div>
+                                            <div class="nk-notification-text text-success">{{ note.patient }} has approved this Access Request.</div>
+                                            <div class="nk-notification-time">{{ note.updated }}</div>
                                         </div>
                                     </div>
+                                    <hr class='mx-auto'> 
+                                
+                                    {% elif note.status == 'Denied' and user.role == 'Doctor' and note.doctor == user %}
+                                    <div class="nk-notification-item dropdown-inner">
+                                        <div class="nk-notification-content">
+                                            <div class="nk-notification-text text-danger">{{ note.patient }} has denied this Access Request</div>
+                                            <div class="nk-notification-time">{{ note.updated }}</div>
+                                        </div>
+                                    </div>
+                                    <hr class='mx-auto'> 
+                                
+                                    {% elif note.status == 'Pending' and user.role == 'Patient' and note.patient == user %}
+                                    <div class="nk-notification-item dropdown-inner">
+                                        <div class="nk-notification-content">
+                                            <div class="nk-notification-text text-primary">{{ note.doctor }} has requested access to your data.</div>
+                                            <div class="nk-notification-time">{{ note.updated }}</div>
+                                        </div>
+                                    </div>
+                                    <hr class='mx-auto'> 
+                                    
+                                    {% endif %}
+                                    
                                 </a>
-                                <hr class='mx-auto'> 
                                     {% endfor %}   
                                 </div><!-- .nk-notification -->
                             </div><!-- .nk-dropdown-body -->

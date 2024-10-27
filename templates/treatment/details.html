@@ -68,7 +68,7 @@
                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                         <div class="data-col">
                             <span class="data-label">Treatement Type</span>
-                            <span class="data-value text-soft">{{ treatment.assessment_type }}</span>
+                            <span class="data-value text-soft">{{ treatment.treatment_type }}</span>
                         </div>
                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                     </div><!-- data-item -->
@@ -88,6 +88,47 @@
                     </div><!-- data-item -->
                 </div><!-- data-list -->
                 <!-- data-list -->
+                <div class="nk-data data-list">
+                    <div class="data-head">
+                        <h6 class="overline-title">More Details</h6>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-col">
+                            <span class="data-label">Sympthoms</span>
+                            <span class="data-value">{{ treatment.symptoms}}</span>
+                        </div>
+                        
+                    </div><!-- data-item -->
+                    <!-- data-item -->
+                    <div class="data-item">
+                        <div class="data-col">
+                            <span class="data-label">Diagnosis</span>
+                            <span class="data-value">{{treatment.diagnosis}}</span>
+                        </div>
+                        
+                    </div><!-- data-item -->
+                    <div class="data-item">
+                        <div class="data-col">
+                            <span class="data-label">Notes</span>
+                            <span class="data-value">{{treatment.notes}}</span>
+                        </div>
+                        
+                    </div>
+                    <div class="data-item">
+                        <div class="data-col">
+                            <span class="data-label">Follow Up date</span>
+                            <span class="data-value">{{treatment.follow_up_date}}</span>
+                        </div>
+                        
+                    </div>
+                    <div class="data-item">
+                        <div class="data-col">
+                            <span class="data-label">Medicine</span>
+                            <span class="data-value">{{treatment.medicine.all}}</span>
+                        </div>
+                        
+                    </div>
+                </div>
             </div><!-- .nk-block -->
         </div>
         <!-- card-aside -->

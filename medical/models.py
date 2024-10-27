@@ -3,17 +3,16 @@ from django.db import models
 import uuid
 
 TREATMENT_TYPE_CHOICES = (
-    ('initial_assessment', 'Initial Assessment'),
-    ('follow_up', 'Follow-Up'),
-    ('therapy', 'Therapy'),
-    ('surgery', 'Surgery'),
-    ('medication', 'Medication'),
-    ('rehabilitation', 'Rehabilitation'),
-    ('diagnostic', 'Diagnostic'),
-    ('preventive', 'Preventive'),
-    ('consultation', 'Consultation'),
+    ('Initial Assessment', 'Initial Assessment'),
+    ('Follow Up', 'Follow Up'),
+    ('Therapy', 'Therapy'),
+    ('Surgery', 'Surgery'),
+    ('Medication', 'Medication'),
+    ('Rehabilitation', 'Rehabilitation'),
+    ('Diagnostic', 'Diagnostic'),
+    ('Preventive', 'Preventive'),
+    ('Consultation', 'Consultation'),
 )
-
 
 STATUS_CHOICES = ( 
     ('Pending', 'Pending'),
@@ -23,33 +22,39 @@ STATUS_CHOICES = (
 )
 
 TEST_TYPE_CHOICES = (
-    ('blood_test', 'Blood Test'),
-    ('urinalysis', 'Urinalysis'),
-    ('imaging', 'Imaging'),
-    ('biopsy', 'Biopsy'),
-    ('genetic_test', 'Genetic Test'),
-    ('culture', 'Culture'),
-    ('function_test', 'Function Test'),  # e.g., pulmonary function test
-    ('electrocardiogram', 'Electrocardiogram (ECG)'),
-    ('x_ray', 'X-Ray'),
-    ('ct_scan', 'CT Scan'),
-    ('mri', 'MRI'),
-    ('ultrasound', 'Ultrasound'),
-    ('other', 'Other'),  # For any tests that don't fit the above categories
+    ('Blood Test', 'Blood Test'),
+    ('Urinalysis', 'Urinalysis'),
+    ('Imaging', 'Imaging'),
+    ('Biopsy', 'Biopsy'),
+    ('Genetic Test', 'Genetic Test'),
+    ('Culture', 'Culture'),
+    ('Function Test', 'Function Test'),  # e.g., pulmonary function test
+    ('Electrocardiogram', 'Electrocardiogram (ECG)'),
+    ('X-Ray', 'X-Ray'),
+    ('CT-Scan', 'CT-Scan'),
+    ('MRI', 'MRI'),
+    ('Ultrasound', 'Ultrasound'),
+    ('Other', 'Other'),  # For any tests that don't fit the above categories
 )
 
 ROUTE_OF_ADMINISTRATION_CHOICES = (
-    ('oral', 'Oral'),
-    ('intravenous', 'Intravenous'),
-    ('intramuscular', 'Intramuscular'),
-    ('subcutaneous', 'Subcutaneous'),
-    ('topical', 'Topical'),
-    ('inhalation', 'Inhalation'),
-    ('sublingual', 'Sublingual'),
-    ('transdermal', 'Transdermal'),
-    ('nasal', 'Nasal'),
-    ('ophthalmic', 'Ophthalmic'),
-    ('otic', 'Otic'),  # Ear drops
+    ('Oral', 'Oral'),
+    ('Intravenous', 'Intravenous'),
+    ('Intramuscular', 'Intramuscular'),
+    ('Subcutaneous', 'Subcutaneous'),
+    ('Topical', 'Topical'),
+    ('Inhalation', 'Inhalation'),
+    ('Sublingual', 'Sublingual'),
+    ('Transdermal', 'Transdermal'),
+    ('Nasal', 'Nasal'),
+    ('Ophthalmic', 'Ophthalmic'),
+    ('Otic', 'Otic'),  # Ear drops
+)
+
+FREQUENCY_CHOICES = (
+    ('Once', 'Once'),
+    ('Twice', 'Twice'),
+    ('Thrice', 'Thrice'),
 )
 
 
@@ -63,7 +68,6 @@ class Treatment(models.Model):
     description = models.TextField()
     symptoms = models.TextField(blank=True, null=True)
     diagnosis = models.TextField(blank=True, null=True)
-    treatment_duration = models.DurationField(blank=True, null=True)
     follow_up_date = models.DateTimeField(null=True, blank=True)
     notes = models.TextField(blank=True, null=True)
     medications = models.ManyToManyField('Medication', blank=True)
@@ -107,7 +111,7 @@ class Medication(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=255)
     dosage = models.CharField(max_length=50)
-    frequency = models.CharField(max_length=50)
+    frequency = models.CharField(max_length=50, choices=FREQUENCY_CHOICES)
     route_of_administration = models.CharField(
         max_length=50,
         choices=ROUTE_OF_ADMINISTRATION_CHOICES
