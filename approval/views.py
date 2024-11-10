@@ -42,11 +42,11 @@ class ApprovalCreateView(LoginRequiredMixin, CreateView):
         initial['doctor'] = self.request.user
         return initial
     
-    def get_form(self) :
-        form = super().get_form()
-        patients = [('',approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()]
-        form.fields['patient'].choices = patients
-        return form
+    # def get_form(self) :
+    #     form = super().get_form()
+    #     patients = [('',approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()]
+    #     form.fields['patient'].choices = patients
+    #     return form
 
 
 class ApprovalUpdateView(LoginRequiredMixin, UpdateView):

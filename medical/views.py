@@ -50,7 +50,7 @@ class TestCreateView(LoginRequiredMixin, CreateView):
 
     def get_form(self) :
         form = super().get_form()
-        if self.request.user.role == 'Doctor':
+        if self.request.user.role in ['Doctor', 'Clerk']:
             patients = [('','---------')]
             patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
         else:
@@ -95,7 +95,7 @@ class TreatmentCreateView(LoginRequiredMixin, CreateView):
 
     def get_form(self) :
         form = super().get_form()
-        if self.request.user.role == 'Doctor':
+        if self.request.user.role in ['Doctor', 'Clerk']:
             patients = [('','---------')]
             patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
         else:

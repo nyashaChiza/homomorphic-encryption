@@ -11,7 +11,7 @@
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
         <div class="toggle-expand-content" data-content="pageMenu">
             <ul class="nk-block-tools g-3 mx-1">
-                {% if user.role == 'Doctor' %}<li><a href="{% url 'approval_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>{% endif%}
+                {% if user.role == 'Doctor' or 'Clerk' %}<li><a href="{% url 'approval_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>{% endif%}
             </ul>
         </div>
     </div><!-- .toggle-wrap -->

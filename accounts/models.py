@@ -60,6 +60,12 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name']
     USERNAME_FIELD = 'email'
 
+    def age():
+        return 25
+    
+    def __age__():
+        return 25
+        
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

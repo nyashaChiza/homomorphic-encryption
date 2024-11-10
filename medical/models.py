@@ -61,7 +61,7 @@ FREQUENCY_CHOICES = (
 class Treatment(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='treatments', limit_choices_to={'role':'Patient'})
-    doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='assessments', limit_choices_to={'role':'Doctor'})
+    doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='assessments')
     title = models.CharField(max_length=255)
     treatment_type = models.CharField(max_length=50, choices=TREATMENT_TYPE_CHOICES, default='Oral')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
@@ -93,7 +93,7 @@ class Treatment(models.Model):
 class Tests(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='tests', limit_choices_to={'role':'Patient'})  
-    doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='medical_tests', limit_choices_to={'role':'Doctor'})
+    doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='medical_tests')
     title = models.CharField(max_length=255)
     test_type = models.TextField(max_length=255, choices=TEST_TYPE_CHOICES)
     description = models.TextField()

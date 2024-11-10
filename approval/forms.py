@@ -6,7 +6,7 @@ class ApprovalCreateForm(forms.ModelForm):
     class Meta:
         model = Approval
         fields = "__all__"
-        exclude = ('status', )
+        exclude = ('status', 'viewed')
     
         widgets = {
             "doctor": forms.HiddenInput(),
@@ -23,6 +23,7 @@ class ApprovalUpdateForm(forms.ModelForm):
     class Meta:
         model = Approval
         fields = ("comment","status",)  # Include all fields from the model
+        
 
     def __init__(self, *args, **kwargs):
         super(ApprovalUpdateForm, self).__init__(*args, **kwargs)
