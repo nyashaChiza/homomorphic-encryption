@@ -52,10 +52,13 @@ class TestCreateView(LoginRequiredMixin, CreateView):
         form = super().get_form()
         if self.request.user.role in ['Doctor', 'Clerk']:
             patients = [('','---------')]
+            doctors = [('','---------'), (self.request.user.pk,self.request.user)]
             patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
         else:
             patients = [(self.request.user.pk,self.request.user)]
         form.fields['patient'].choices = patients
+        form.fields['doctor'].choices = doctors
+        form.fields['doctor'].label = 'Doctor/ Clerk'
         return form
     
     def form_valid(self, form):
@@ -97,11 +100,15 @@ class TreatmentCreateView(LoginRequiredMixin, CreateView):
         form = super().get_form()
         if self.request.user.role in ['Doctor', 'Clerk']:
             patients = [('','---------')]
+            doctors = [('','---------'), (self.request.user.pk,self.request.user)]
             patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
+            
         else:
             patients = [(self.request.user.pk,self.request.user)]
 
         form.fields['patient'].choices = patients
+        form.fields['doctor'].choices = doctors
+        form.fields['doctor'].label = 'Doctor/ Clerk'
         return form
     
     def form_valid(self, form):
@@ -123,10 +130,14 @@ class TreatmentUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         # Call the parent class's form_valid method to save the form
         response = super().form_valid(form)
-
         # Add a success message
         messages.success(self.request, 'Treatment updated successfully!')
         return response
+
+    def get_form(self) :
+        form = super().get_form()
+        form.fields['doctor'].label = 'Doctor/ Clerk'
+        return form
     
 
 class TestUpdateView(LoginRequiredMixin, UpdateView):
@@ -139,10 +150,14 @@ class TestUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         # Call the parent class's form_valid method to save the form
         response = super().form_valid(form)
-
         # Add a success message
         messages.success(self.request, 'Test updated successfully!')
         return response
+    
+    def get_form(self) :
+        form = super().get_form()
+        form.fields['doctor'].label = 'Doctor/ Clerk'
+        return form
 
 class PatientstListView(LoginRequiredMixin, ListView):
     model = User

@@ -6,7 +6,7 @@ class TreatmentForm(forms.ModelForm):
     class Meta:
         model = Treatment
         fields = "__all__"
-        
+
         widgets = {
             "follow_up_date": forms.widgets.DateInput(attrs={"type": "date"}),
         }
@@ -23,6 +23,9 @@ class TestsForm(forms.ModelForm):
         model = Tests
         fields = "__all__"
         
+        widgets = {
+            "follow_up_date": forms.widgets.DateInput(attrs={"type": "date"}),
+        }
 
     def __init__(self,  *args, **kwargs):
         super(TestsForm, self).__init__(*args, **kwargs)
