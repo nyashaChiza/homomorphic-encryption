@@ -9,8 +9,8 @@ STATUS_CHOICES = (
 
 class Approval(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
-    patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='doctors', limit_choices_to={'role':'Patient'} )  
-    doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='patients', limit_choices_to={'role':'Doctor'})
+    patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='doctors' )  
+    doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='patients')
     comment = models.TextField(blank=True, null=True)
     status = models.TextField(max_length=255, choices=STATUS_CHOICES, default='Pending')
     viewed = models.BooleanField(default=False)
