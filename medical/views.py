@@ -102,13 +102,11 @@ class TreatmentCreateView(LoginRequiredMixin, CreateView):
             patients = [('','---------')]
             doctors = [('','---------'), (self.request.user.pk,self.request.user)]
             patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
-            
         else:
             patients = [(self.request.user.pk,self.request.user)]
-
-        form.fields['patient'].choices = [(patient.pk, patient) for patient in User.objects.filter(role='Patient').all()] 
-        form.fields['doctor'].choices = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
-        form.fields['doctor'].label = 'Doctor/ Clerk'
+            form.fields['patient'].choices = [(patient.pk, patient) for patient in User.objects.filter(role='Patient').all()] 
+            form.fields['doctor'].choices = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
+            form.fields['doctor'].label = 'Doctor/ Clerk'
         return form
     
     def form_valid(self, form):
