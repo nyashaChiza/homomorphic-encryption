@@ -27,13 +27,13 @@
                 <thead>
                     <tr>
                         <th>
-                            Name
+                            Patient
                         </th>
                         <th>
-                            Dosage
+                            Medicine
                         </th>
                         <th>
-                            Frequency
+                            Treatment
                         </th>
                         <th>
                             Administration
@@ -47,21 +47,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for medicine in meds %}
+                    {%for object in objects %}
                             <tr>
-                                <td>{{medicine.name}}</td>
-                                <td>{{medicine.dosage}}</td>
-                                <td>{{medicine.frequency}}</td>
-                                <td>{{medicine.route_of_administration}}</td>
-                                <td>{{medicine.created}}</td>
+                                <td>{{object.treatment.patient}}</td>
+                                <td>{{object.medicine}}</td>
+                                <td>{{object.treatment}}</td>
+                                <td>{{object.medicine.route_of_administration}}</td>
+                                <td>{{object.treatment.created}}</td>
                                 <td class="tb-tnx-action">
                                     <div class="dropdown">
                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                             <ul class="link-list-plain">
-                                                <li><a href="{% url 'test_details' medicine.pk %}" class='px-1'>Details</a></li>
-                                                <li><a href="{% url 'medicine_update' medicine.pk %}" class='px-1'>Update</a></li>
-                                                <li><a href="{% url 'medicine_delete' medicine.pk %}" class='px-1 text-danger'>Delete</a></li>
+                                                <li><a href="{% url 'treatment_details' object.treatment.pk %}" class='px-1'>Details</a></li>
+                                                <li><a href="{% url 'medicine_update' object.medicine.pk %}" class='px-1'>Update</a></li>
+                                                <li><a href="{% url 'medicine_delete' object.medicine.pk %}" class='px-1 text-danger'>Delete</a></li>
                                             </ul>
                                         </div>
                                     </div>

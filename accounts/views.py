@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import BaseModelForm
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, TemplateView
@@ -48,6 +49,12 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse('account_detail', kwargs={'pk': self.request.user.pk})
+    
+    def get_form(self):
+        form = super().get_form()
+        form.fields['user'].choices = [(self.request.user.pk, self.request.user)]
+        return form
+
 
 
 # View to create a new user profile
@@ -59,6 +66,12 @@ class ProfileCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self) -> str:
         return reverse('account_detail', kwargs={'pk': self.request.user.pk})
+    
+    def get_form(self):
+        form = super().get_form()
+        form.fields['user'].choices = [(self.request.user.pk, self.request.user)]
+        return form
+
 
 
 # View to create a new user account
@@ -83,8 +96,6 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         # Optionally, limit to certain users if required
         return get_object_or_404(User, pk=self.kwargs.get('pk'))
-
-
 
 
 def user_delete_view(request, pk):

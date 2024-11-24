@@ -69,7 +69,7 @@
                                         <h6 class="overline-title">Profile Information</h6>
                                     </div>
                                     
-                                    {% if 1 %}
+                                    
                                     <!-- data-item -->
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
@@ -109,7 +109,7 @@
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
                                     
-                                    {% endif %}
+                                   
                                 </div><!-- data-list -->
                             </div><!-- .nk-block -->
                         </div>
@@ -125,18 +125,16 @@
                                             <span class="sub-text">{{ request.user.email}}</span>
                                         </div>
                                         <div class="user-action">
+                                            {% if not request.user.profile %}
                                             <div class="dropdown">
                                                 <a class="btn btn-icon btn-trigger me-n2" data-bs-toggle="dropdown" href="#" aria-expanded="false"><em class="icon ni ni-more-v"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-end" style="">
                                                     <ul class="link-list-opt no-bdr">
-                                                        {% if request.user.profile %}
-                                                            <li><a href="{% url 'profile_update' request.user.pk  %}"><em class="icon ni ni-edit-fill"></em><span>Update Profile</span></a></li>
-                                                        {% else %}
-                                                            <li><a href="{% url 'profile_create' %}"><em class="icon ni ni-edit-fill"></em><span>Create Profile</span></a></li>
-                                                        {% endif %}
+                                                        <li><a href="{% url 'profile_create' %}"><em class="icon ni ni-edit-fill"></em><span>Create Profile</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
+                                            {% endif %}
                                         </div>
                                     </div><!-- .user-card -->
                                 </div><!-- .card-inner -->
@@ -144,7 +142,6 @@
                                 <div class="card-inner p-0">
                                     <ul class="link-list-menu">
                                         <li><a class="active" href="html/user-profile-regular.html"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
-                                        <li><a href="html/user-profile-notification.html"><em class="icon ni ni-bell-fill"></em><span>Notifications</span></a></li>
                                         </ul>
                                 </div><!-- .card-inner -->
                             </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 503px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none; transform: translate3d(0px, 0px, 0px);"></div></div></div><!-- .card-inner-group -->

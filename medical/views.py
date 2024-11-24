@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from accounts.models import User
 from django.contrib import messages 
+from medical.helpers import get_treatments_with_medication
 from medical.forms import TestsForm, TreatmentForm, TestResultsForm, MedicineForm
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
@@ -104,7 +105,7 @@ class TreatmentCreateView(LoginRequiredMixin, CreateView):
             patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
         else:
             patients = [(self.request.user.pk,self.request.user)]
-            form.fields['patient'].choices = [(patient.pk, patient) for patient in User.objects.filter(role='Patient').all()] 
+            form.fields['patient'].choices = patients 
             form.fields['doctor'].choices = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
             form.fields['doctor'].label = 'Doctor/ Clerk'
         return form
@@ -167,6 +168,11 @@ class MedicineListView(LoginRequiredMixin, ListView):
     model = Medication
     template_name = 'medicine/index.html'
     context_object_name = 'meds'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['objects'] =  get_treatments_with_medication()
+        return context
 
 
 class MedicineCreateView(LoginRequiredMixin, CreateView):

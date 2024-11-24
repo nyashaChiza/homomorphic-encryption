@@ -9,11 +9,13 @@
 <div class="nk-block-head-content">
     <div class="toggle-wrap nk-block-tools-toggle">
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+        {% if user.role != 'Patient' %}
         <div class="toggle-expand-content" data-content="pageMenu">
             <ul class="nk-block-tools g-3 mx-1">
                 <li><a href="{% url 'test_create' %}" class="btn btn-white btn-outline-light"><em class="icon ni ni-plus"></em><span>Add New</span></a></li>
             </ul>
         </div>
+        {% endif %}
     </div><!-- .toggle-wrap -->
 </div><!-- .nk-block-head-content -->
 </div>
@@ -48,7 +50,7 @@
                 </thead>
                 <tbody>
                     {%for test in tests %}
-                    {% if user.role == 'Patient' and test.patient == user %}
+                    {% if test.patient == user %}
                             <tr>
                                 <td>{{test.title}}</td>
                                 <td>{{test.doctor}}</td>
@@ -61,7 +63,7 @@
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                             <ul class="link-list-plain">
                                                 <li><a href="{% url 'test_details' test.pk %}" class='px-1'>Details</a></li>
-                                                <li><a href="{% url 'test_update' test.pk %}" class='px-1'>Update</a></li>
+                                                {% if user.role != 'Patient' %}<li><a href="{% url 'test_update' test.pk %}" class='px-1'>Update</a></li>{% endif %}
                                                 {% if user.role == 'Doctor' %}<li><a href="{% url 'test_add_results' test.pk %}" class='px-1'>Set Results</a></li> {% endif %}
                                             </ul>
                                         </div>
@@ -90,27 +92,7 @@
                         </td>
                         
                     </tr>
-                    {% else %}
-                    <tr>
-                        <td>{{test.title}}</td>
-                        <td>{{test.doctor}}</td>
-                        <td>{{test.patient}}</td>
-                        <td>{{test.test_type}}</td>
-                        <td>{{test.updated}}</td>
-                        <td class="tb-tnx-action">
-                            <div class="dropdown">
-                                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
-                                    <ul class="link-list-plain">
-                                        <li><a href="{% url 'test_details' test.pk %}" class='px-1'>Details</a></li>
-                                        <li><a href="{% url 'test_update' test.pk %}" class='px-1'>Update</a></li>
-                                        {% if user.role == 'Doctor' %}<li><a href="{% url 'test_add_results' test.pk %}" class='px-1'>Set Results</a></li> {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
+                    
                     {% endif %}
                         
 

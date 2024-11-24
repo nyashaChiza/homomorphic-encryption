@@ -141,3 +141,12 @@ class MedicalDataAnalytics:
             '66 and above': Q(patient__pk__gte=66),
         }
         return {age_group: Treatment.objects.filter(criteria).count() for age_group, criteria in age_groups.items()}
+
+
+def get_treatments_with_medication():
+    treatments = []
+    for medicine in Medication.objects.all():
+        for treat in Treatment.objects.filter(medications= medicine):
+            treatments.append({'medicine': medicine, 'treatment': treat})
+
+    return treatments

@@ -70,7 +70,7 @@ class Treatment(models.Model):
     diagnosis = models.TextField(blank=True, null=True)
     follow_up_date = models.DateTimeField(null=True, blank=True)
     notes = models.TextField(blank=True, null=True)
-    medications = models.ManyToManyField('Medication', blank=True)
+    medications = models.ManyToManyField('Medication', blank=True, related_name='medicine')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -124,7 +124,7 @@
                     <div class="data-item">
                         <div class="data-col">
                             <span class="data-label">Medicine</span>
-                            <span class="data-value">{{treatment.medicine.all}}</span>
+                            <span class="data-value">{% for med in treatment.medications.all %} {{med}}, {% endfor %}</span>
                         </div>
                         
                     </div>
