@@ -22,3 +22,58 @@ class DashboardView(TemplateView):
         return context
 
     
+@method_decorator(login_required, name='dispatch')
+class AgeDashboardView(TemplateView):
+    template_name = 'research/age/index.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['test_age_donut'] = Tests.objects.all()
+        context['treatment_age_donut'] = Tests.objects.all()
+        context['treatment_type_age_bar'] = Tests.objects.all()
+        context['age_test_status_bar'] = Tests.objects.all()
+        context['age_medicine_bar'] = Tests.objects.all()
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class LocationDashboardView(TemplateView):
+    template_name = 'research/location/index.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['test_age_donut'] = Tests.objects.all()
+        context['treatment_age_donut'] = Tests.objects.all()
+        context['treatment_type_age_bar'] = Tests.objects.all()
+        context['age_test_status_bar'] = Tests.objects.all()
+        context['age_medicine_bar'] = Tests.objects.all()
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class GenderDashboardView(TemplateView):
+    template_name = 'research/gender/index.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['test_age_donut'] = Tests.objects.all()
+        context['treatment_age_donut'] = Tests.objects.all()
+        context['treatment_type_age_bar'] = Tests.objects.all()
+        context['age_test_status_bar'] = Tests.objects.all()
+        context['age_medicine_bar'] = Tests.objects.all()
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class MedicationDashboardView(TemplateView):
+    template_name = 'research/medication/index.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['test_age_donut'] = Tests.objects.all()
+        context['treatment_age_donut'] = Tests.objects.all()
+        context['treatment_type_age_bar'] = Tests.objects.all()
+        context['age_test_status_bar'] = Tests.objects.all()
+        context['age_medicine_bar'] = Tests.objects.all()
+
+        return context

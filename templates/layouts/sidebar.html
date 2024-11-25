@@ -40,7 +40,7 @@
                     </li>
                     
                     {% endif %}
-                    {% if 1 %}
+                    {% if user.role == 'Doctor' or user.role == 'Admin' or user.role == 'Patient' %}
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-clipboard"></em></span>
@@ -56,6 +56,29 @@
                         </ul><!-- .nk-menu-sub -->
                     </li>
                     {% endif %}
+                {% if user.role == 'Researcher' %}
+                <li class="nk-menu-item has-sub">
+                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                        <span class="nk-menu-icon"><em class="icon ni ni-clipboard"></em></span>
+                        <span class="nk-menu-text">Medical Data</span>
+                    </a>
+                    <ul class="nk-menu-sub" style="display: none;">
+                        <li class="nk-menu-item">
+                            <a href="{% url 'age_dashboard' %}" class="nk-menu-link"><span class="nk-menu-text">Age</span></a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{% url 'location_dashboard' %}" class="nk-menu-link"><span class="nk-menu-text">Location</span></a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{% url 'gender_dashboard' %}" class="nk-menu-link"><span class="nk-menu-text">Gender</span></a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{% url 'medication_dashboard' %}" class="nk-menu-link"><span class="nk-menu-text">Medicine</span></a>
+                        </li>
+                    </ul><!-- .nk-menu-sub -->
+                </li>
+                {% endif %}
+                
                 {% if user.role == 'Doctor' %}
                 <li class="nk-menu-item">
                     <a href="{% url 'patient_index' %}" class="nk-menu-link">
@@ -74,6 +97,7 @@
                     </a>
                 </li>
                 {% endif %}
+                {% if user.role == Doctor or user.role == Admin or user.role == Patient %}
                     <li class="nk-menu-item">
                         <a href="{% url 'approval_index' %}" class="nk-menu-link">
                             <span class="nk-menu-icon">
@@ -82,6 +106,7 @@
                             <span class="nk-menu-text">Approvals</span>
                         </a>
                     </li>
+                    {% endif %}
                     <!-- .nk-menu-item -->
                 </ul><!-- .nk-menu -->
             </div><!-- .nk-sidebar-menu -->

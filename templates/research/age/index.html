@@ -1,0 +1,143 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="nk-block-between py-3">
+     <div class="nk-block-head-content">
+         <h3 class="nk-block-title page-title">Age Analysis</h3>
+         <div class="nk-block-des text-soft">
+             <p>Welcome to Age Analysis Dashboard.</p>
+         </div>
+     </div><!-- .nk-block-head-content -->
+     <div class="nk-block-head-content">
+          <div class="toggle-wrap nk-block-tools-toggle">
+              <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+              <div class="toggle-expand-content" data-content="pageMenu">
+                  <ul class="nk-block-tools g-3">
+                      
+                      <li class="nk-block-tools-opt"><a href="#" class="btn btn-primary"><em class="icon ni ni-download"></em><span>Download Dataset</span></a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+     <!-- .nk-block-head-content -->
+ </div>
+
+<div class="row g-gs">
+<div class="col-sm-6 col-lg-6">
+     <div class="card h-100">
+         <div class="card-inner h-100 stretch flex-column">
+             <div class="card-title-group">
+                 <div class="card-title card-title-sm">
+                     <h6 class="title">Age By Treatments Count</h6>
+                 </div>
+                 <div class="card-tools">
+                     
+                 </div>
+             </div>
+             <div class="device-status my-auto">
+                 <div class="device-status-ck">
+                     <canvas class="analytics-doughnut" id="deviceStatusData" width="620" height="320" style="display: block; box-sizing: border-box; height: 160px; width: 310px;"></canvas>
+                 </div>
+                 <div class="device-status-group">
+                     <div class="device-status-data">
+                         <em data-color="#798bff" class="icon ni ni-tablet" style="color: rgb(121, 139, 255);"></em>
+                         <div class="title">Age</div>
+                         <div class="amount">0-16</div>
+                         
+                     </div>
+                     <div class="device-status-data">
+                         <em data-color="#baaeff" class="icon ni ni-tablet" style="color: rgb(186, 174, 255);"></em>
+                         <div class="title">Age</div>
+                         <div class="amount">17-30</div>
+                         
+                     </div>
+                     <div class="device-status-data">
+                         <em data-color="#7de1f8" class="icon ni ni-tablet" style="color: rgb(125, 225, 248);"></em>
+                         <div class="title">Age</div>
+                         <div class="amount">31-60</div>
+                         
+                     </div>
+                     <div class="device-status-data">
+                         <em data-color="#7de1f8" class="icon ni ni-tablet" style="color: rgb(215, 225, 248);"></em>
+                         <div class="title">Age</div>
+                         <div class="amount">61+</div>
+                         
+                     </div>
+                 </div><!-- .device-status-group -->
+             </div><!-- .device-status -->
+         </div>
+     </div><!-- .card -->
+ </div>
+ <div class="col-sm-6 col-lg-">
+     <div class="card h-100">
+         <div class="card-inner">
+             <div class="card-title-group">
+                 <div class="card-title card-title-sm">
+                    <h6 class="title">Age By Tests Count</h6>
+                 </div>
+                 <div class="card-tools">
+                     
+                 </div>
+             </div>
+             <div class="traffic-channel">
+                 <div class="traffic-channel-doughnut-ck">
+                     <canvas class="analytics-doughnut" id="TrafficChannelDoughnutData" width="620" height="320" style="display: block; box-sizing: border-box; height: 160px; width: 310px;"></canvas>
+                 </div>
+                 <div class="device-status-group">
+                    <div class="device-status-data">
+                        <em data-color="#798bff" class="icon ni ni-tablet" style="color: rgb(121, 139, 255);"></em>
+                        <div class="title">Age</div>
+                        <div class="amount">0-16</div>
+                        
+                    </div>
+                    <div class="device-status-data">
+                        <em data-color="#baaeff" class="icon ni ni-tablet" style="color: rgb(186, 174, 255);"></em>
+                        <div class="title">Age</div>
+                        <div class="amount">17-30</div>
+                        
+                    </div>
+                    <div class="device-status-data">
+                        <em data-color="#7de1f8" class="icon ni ni-tablet" style="color: rgb(125, 225, 248);"></em>
+                        <div class="title">Age</div>
+                        <div class="amount">31-60</div>
+                        
+                    </div>
+                    <div class="device-status-data">
+                        <em data-color="#7de1f8" class="icon ni ni-tablet" style="color: rgb(215, 225, 248);"></em>
+                        <div class="title">Age</div>
+                        <div class="amount">61+</div>
+                        
+                    </div>
+                </div><!-- .traffic-channel-group -->
+             </div><!-- .traffic-channel -->
+         </div>
+     </div><!-- .card -->
+ </div>
+</div>
+
+<div class="row g-gs py-5">
+     <div class="col-md-12 col-lg-12">
+          <div class="card h-100">
+              <div class="card-inner">
+                  <div class="card-title-group align-start pb-3 g-2">
+                      <div class="card-title card-title-sm">
+                          <h6 class="title">Age By Treatement Type</h6>
+                          
+                      </div>
+                      <div class="card-tools">
+                          <em class="card-hint icon ni ni-help" data-bs-toggle="tooltip" data-bs-placement="left" aria-label="Users of this month" data-bs-original-title="Users of this month"></em>
+                      </div>
+                  </div>
+                  <div class="analytic-au">
+                      
+                      <div class="analytic-au-ck">
+                          <canvas class="analytics-au-chart" id="analyticAuData" width="813" height="340" style="display: block; box-sizing: border-box; height: 170px; width: 406px;"></canvas>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div><!-- .card -->
+      </div>
+</div>
+{% endblock %}

@@ -1,7 +1,12 @@
 from django.urls import path, include
-from dashboard.views import DashboardView
+from dashboard.views import DashboardView, AgeDashboardView, GenderDashboardView, LocationDashboardView, MedicationDashboardView
 
 
 urlpatterns = [
-    path('', DashboardView.as_view(), name='dashboard')
+    path('', DashboardView.as_view(), name='dashboard'),
+    path('research/age', AgeDashboardView.as_view(), name='age_dashboard'),
+    path('research/gender', GenderDashboardView.as_view(), name='gender_dashboard'),
+    path('research/location', LocationDashboardView.as_view(), name='location_dashboard'),
+    path('research/medication', MedicationDashboardView.as_view(), name='medication_dashboard'),
 ]
+
