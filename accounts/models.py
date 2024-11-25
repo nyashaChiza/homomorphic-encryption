@@ -24,7 +24,8 @@ ROLE_CHOICES = (
     ('Patient', 'Patient'),
     ('Doctor', 'Doctor'),
     ('Clerk', 'Clerk'),
-    ('Admin', 'Admin')
+    ('Admin', 'Admin'),
+    ('Researcher', 'Researcher')
 )
 
 GENDER_CHOICES = (

@@ -65,11 +65,11 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
-                                <form action="{% url 'accounts_login' %}" method="Post" class="form-validate is-alter" autocomplete="off">
+                                <form action="{% url 'account_login' %}" method="Post" class="form-validate is-alter" autocomplete="off">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="email-address">Email or Username</label>
+                                            <label class="form-label" for="email-address">Email</label>
                                         </div>
                                         <div class="form-control-wrap">
                                             <input autocomplete="off" type="text" name="username"  class="form-control form-control-lg" required id="email-address" placeholder="Enter your email address or username">

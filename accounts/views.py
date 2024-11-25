@@ -14,7 +14,7 @@ User = get_user_model()
 # View for logging out a user
 def custom_logout(request):
     logout(request)
-    return redirect(reverse('accounts_login'))
+    return redirect(reverse('account_login'))
 
 
 # View to list all users
