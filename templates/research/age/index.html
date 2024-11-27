@@ -2,9 +2,10 @@
 {% load static %}
 
 {% block body %}
+
 <div class="nk-block-between py-3">
      <div class="nk-block-head-content">
-         <h3 class="nk-block-title page-title">Age Analysis</h3>
+         <h3 class="nk-block-title page-title">Age Analysis - {{ treatment_age_donut_y }}</h3>
          <div class="nk-block-des text-soft">
              <p>Welcome to Age Analysis Dashboard.</p>
          </div>
@@ -140,4 +141,8 @@
           </div><!-- .card -->
       </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+
 {% endblock %}

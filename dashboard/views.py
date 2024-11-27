@@ -5,7 +5,9 @@ from django.views.generic import TemplateView
 from medical.models import Tests, Treatment, Medication
 from approval.models import Approval
 from accounts.models import User
+from medical.helpers import MedicalDataAnalytics
 
+analyticts = MedicalDataAnalytics()
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
@@ -13,7 +15,6 @@ class DashboardView(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['tests'] = Tests.objects.all()
         context['treatments'] = Treatment.objects.all()
         context['approval'] = Approval.objects.all()
         context['medicine'] = Medication.objects.all()
@@ -29,7 +30,8 @@ class AgeDashboardView(TemplateView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['test_age_donut'] = Tests.objects.all()
-        context['treatment_age_donut'] = Tests.objects.all()
+        context['treatment_age_donut_x'] = list(analyticts.get_treatment_age_pie().keys())
+        context['treatment_age_donut_y'] = list(analyticts.get_treatment_age_pie().values())
         context['treatment_type_age_bar'] = Tests.objects.all()
         context['age_test_status_bar'] = Tests.objects.all()
         context['age_medicine_bar'] = Tests.objects.all()
@@ -43,7 +45,6 @@ class LocationDashboardView(TemplateView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['test_age_donut'] = Tests.objects.all()
-        context['treatment_age_donut'] = Tests.objects.all()
         context['treatment_type_age_bar'] = Tests.objects.all()
         context['age_test_status_bar'] = Tests.objects.all()
         context['age_medicine_bar'] = Tests.objects.all()

@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if user.role == Doctor or user.role == Admin or user.role == Patient %}
+                {% if user.role == 'Doctor' or user.role == 'Admin' or user.role == 'Patient' %}
                     <li class="nk-menu-item">
                         <a href="{% url 'approval_index' %}" class="nk-menu-link">
                             <span class="nk-menu-icon">
