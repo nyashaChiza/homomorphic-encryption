@@ -12,5 +12,6 @@ set DJANGO_PROJECT_PATH=C:\Users\User\Documents\projects\homomorphic-encryption
 REM Start the Django development server
 
 cd %DJANGO_PROJECT_PATH%
+python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
