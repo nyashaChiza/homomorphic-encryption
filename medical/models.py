@@ -110,18 +110,13 @@ class Medication(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=255)
     dosage = models.CharField(max_length=50)
-    frequency = models.CharField(max_length=50, choices=FREQUENCY_CHOICES)
-    route_of_administration = models.CharField(
-        max_length=50,
-        choices=ROUTE_OF_ADMINISTRATION_CHOICES
-    )
     side_effects = models.TextField(blank=True, null=True)
     instructions = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} ({self.dosage})"
+        return f"{self.name}"
 
 
 class TreatmentMedication(models.Model):
@@ -135,9 +130,9 @@ class TreatmentMedication(models.Model):
         on_delete=models.CASCADE,
         related_name='treatment_medications'
     )
-    method_of_administration = models.CharField(max_length=255)
+    method_of_administration = models.CharField(max_length=255, choices=ROUTE_OF_ADMINISTRATION_CHOICES)
     quantity = models.IntegerField()
-    frequency = models.CharField(max_length=50)
+    frequency = models.CharField(max_length=50, choices=FREQUENCY_CHOICES)
 
     class Meta:
         unique_together = ('treatment', 'medication')  # Prevent duplicate entries

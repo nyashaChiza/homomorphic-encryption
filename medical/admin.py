@@ -3,11 +3,11 @@ from .models import Tests, Treatment, Medication, TreatmentMedication
 
 
 class MedicationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'dosage', 'frequency', 'route_of_administration', 'created', 'updated')
-    list_filter = ('route_of_administration',)
+    list_display = ('name', 'dosage',  'created', 'updated')
+    list_filter = ('dosage',)
     search_fields = ('name',)
     ordering = ('name',)
-    prepopulated_fields = {'name': ('dosage',)}  # If you want to auto-populate the name
+  # If you want to auto-populate the name
 
 
 class TreatmentAdmin(admin.ModelAdmin):
@@ -23,9 +23,6 @@ class TreatmentAdmin(admin.ModelAdmin):
         }),
         ('Assessment Details', {
             'fields': ('treatment_type', 'status', 'follow_up_date', 'notes')
-        }),
-        ('Medications', {
-            'fields': ('medications',)
         }),
     )
 class TestsAdmin(admin.ModelAdmin):
@@ -57,6 +54,7 @@ class CustomTreatmentAdmin(TreatmentAdmin):
 
 # Re-register Treatment with the custom admin
 admin.site.register(Treatment, CustomTreatmentAdmin)
+
 admin.site.register(Tests, TestsAdmin)
 admin.site.register(Medication, MedicationAdmin)
 
