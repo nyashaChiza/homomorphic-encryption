@@ -123,3 +123,25 @@ class Medication(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.dosage})"
+
+
+class TreatmentMedication(models.Model):
+    treatment = models.ForeignKey(
+        Treatment,
+        on_delete=models.CASCADE,
+        related_name='treatment_medications'
+    )
+    medication = models.ForeignKey(
+        Medication,
+        on_delete=models.CASCADE,
+        related_name='treatment_medications'
+    )
+    method_of_administration = models.CharField(max_length=255)
+    quantity = models.IntegerField()
+    frequency = models.CharField(max_length=50)
+
+    class Meta:
+        unique_together = ('treatment', 'medication')  # Prevent duplicate entries
+
+    def __str__(self):
+        return f"{self.medication.name} for {self.treatment.title}"

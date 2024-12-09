@@ -9,13 +9,15 @@ class TreatmentForm(forms.ModelForm):
 
         widgets = {
             "follow_up_date": forms.widgets.DateInput(attrs={"type": "date"}),
+            "medications": forms.widgets.SelectMultiple(attrs={"class": "form-select js-select2 select2-hidden-accessible"}),
         }
 
     def __init__(self,  *args, **kwargs):
         super(TreatmentForm, self).__init__(*args, **kwargs)
 
         for _, field in self.fields.items():
-            field.widget.attrs["class"] = "form-control"
+            if field is not "medications":
+                field.widget.attrs["class"] = "form-control"
 
 
 class TestsForm(forms.ModelForm):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tests, Treatment, Medication
+from .models import Tests, Treatment, Medication, TreatmentMedication
 
 
 class MedicationAdmin(admin.ModelAdmin):
@@ -35,8 +35,28 @@ class TestsAdmin(admin.ModelAdmin):
     ordering = ('-created',)
     readonly_fields = ('created', 'updated')
 
-# Register models with their respective admin classes
+class TreatmentMedicationInline(admin.TabularInline):
+    model = TreatmentMedication
+    extra = 1  # Number of empty rows displayed for adding new medications
+    autocomplete_fields = ('medication',)
+    fields = ('medication', 'method_of_administration', 'quantity', 'frequency')  # Fields shown in the inline form
+
+
+@admin.register(TreatmentMedication)
+class TreatmentMedicationAdmin(admin.ModelAdmin):
+    list_display = ('treatment', 'medication', 'method_of_administration', 'quantity', 'frequency')
+    list_filter = ('frequency', 'treatment__status')
+    search_fields = ('treatment__title', 'medication__name', 'method_of_administration')
+    ordering = ('treatment', 'medication')
+
+
+# Add inlines to the Treatment admin interface
+class CustomTreatmentAdmin(TreatmentAdmin):
+    inlines = [TreatmentMedicationInline]
+
+
+# Re-register Treatment with the custom admin
+admin.site.register(Treatment, CustomTreatmentAdmin)
 admin.site.register(Tests, TestsAdmin)
-admin.site.register(Treatment, TreatmentAdmin)
 admin.site.register(Medication, MedicationAdmin)
 
