@@ -8,7 +8,7 @@ from medical.helpers import get_treatments_with_medication
 from medical.forms import TestsForm, TreatmentForm, TestResultsForm, MedicineForm
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-
+from .forms import TreatmentForm, TreatmentMedicationFormSet
 
 class TestListView(LoginRequiredMixin, ListView):
     model = Tests
@@ -93,37 +93,58 @@ class TreatmentDetailView(DetailView):
     context_object_name = 'treatment'
     model = Treatment
 
-class TreatmentCreateView(LoginRequiredMixin, CreateView):
-    model = Treatment
-    form_class = TreatmentForm
-    template_name = 'treatment/create.html'
-    context_object_name = 'treatments'
-    success_url = reverse_lazy('treatment_index')
+def create_treatment(request):
+    if request.method == "POST":
+        treatment_form = TreatmentForm(request.POST)
+        medication_formset = TreatmentMedicationFormSet(request.POST)
 
-    def get_form(self) :
-        form = super().get_form()
-        if self.request.user.role in ['Doctor', 'Clerk']:
+        # Dynamically set patient and doctor choices based on user role
+        if request.user.role in ['Doctor', 'Clerk']:
             patients = [('','---------')]
-            doctors = [('','---------'), (self.request.user.pk,self.request.user)]
-            patients.extend([(approval.patient.pk, approval.patient) for approval in self.request.user.patients.filter(status="Granted").all()])
+            doctors = [('','---------'), (request.user.pk, request.user)]
+            # Assuming `request.user.patients` is a reverse relation that gives all associated patients
+            patients.extend([(approval.patient.pk, approval.patient) for approval in request.user.patients.filter(status="Granted").all()])
         else:
-            patients = [(self.request.user.pk,self.request.user)]
-            doctors = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()] 
-            form.fields['doctor'].label = 'Doctor/ Clerk'
+            patients = [(request.user.pk, request.user)]
+            doctors = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
 
-        form.fields['patient'].choices = patients
-        form.fields['doctor'].choices = doctors
-        return form
-    
-    def form_valid(self, form):
-        # Call the parent class's form_valid method to save the form
-        response = super().form_valid(form)
+        # Set the choices dynamically for the form
+        treatment_form.fields['patient'].choices = patients
+        treatment_form.fields['doctor'].choices = doctors
 
-        # Add a success message
-        messages.success(self.request, 'Treatment added successfully!')
+        if treatment_form.is_valid() and medication_formset.is_valid():
+            treatment = treatment_form.save()
 
-        return response
-    
+            # Save each medication associated with the treatment
+            medication_formset.instance = treatment
+            medication_formset.save()
+
+            messages.success(request, "Treatment and medications added successfully!")
+            return redirect('treatment_list')  # Redirect to a list or detail view
+
+    else:
+        treatment_form = TreatmentForm()
+        medication_formset = TreatmentMedicationFormSet()
+
+        # Dynamically set patient and doctor choices for GET request
+        if request.user.role in ['Doctor', 'Clerk']:
+            patients = [('','---------')]
+            doctors = [('','---------'), (request.user.pk, request.user)]
+            patients.extend([(approval.patient.pk, approval.patient) for approval in request.user.patients.filter(status="Granted").all()])
+        else:
+            patients = [(request.user.pk, request.user)]
+            doctors = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
+
+        # Set the choices dynamically for the form
+        treatment_form.fields['patient'].choices = patients
+        treatment_form.fields['doctor'].choices = doctors
+
+    context = {
+        'treatment_form': treatment_form,
+        'medication_formset': medication_formset,
+    }
+    return render(request, 'treatment/create.html', context)
+
 class TreatmentUpdateView(LoginRequiredMixin, UpdateView):
     model = Treatment
     form_class = TreatmentForm

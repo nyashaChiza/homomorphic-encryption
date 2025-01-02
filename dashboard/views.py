@@ -78,3 +78,14 @@ class MedicationDashboardView(TemplateView):
         context['age_medicine_bar'] = Tests.objects.all()
 
         return context
+
+
+@method_decorator(login_required, name='dispatch')
+class MedicationDataDownloadView(TemplateView):
+    
+    def get(self, request, *args, **kwargs):
+        if kwargs.get('type'):
+            dataset = analyticts.get_research_dataset(kwargs.get('type'))
+            # return csv file for download
+        return super().get(request, *args, **kwargs)
+    

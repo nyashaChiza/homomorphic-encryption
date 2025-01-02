@@ -9,11 +9,54 @@
             </li>
            </ul>
         <div class="my-3">
-        <form action="{% url 'treatment_create' %}" method="post">
-           {% csrf_token %}
-            {{ form }}
-           <button type="submit" class="btn btn-md bg-primary my-3 text-white">Save</button>
-        </form>
+            <form method="post">
+                {% csrf_token %}
+                {{ treatment_form.as_p }}
+            
+                 <!-- Treatment Medication Formset Table -->
+    <h3>Treatment Medications</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Medication</th>
+          <th>Method of Administration</th>
+          <th>Quantity</th>
+          <th>Frequency</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in medication_formset %}
+        <tr>
+          <td>{{ form.medication }}</td>
+          <td>{{ form.method_of_administration }}</td>
+          <td>{{ form.quantity }}</td>
+          <td>{{ form.frequency }}</td>
+          <td>
+            {% if form.instance.pk %}
+              <button type="submit" class="btn btn-danger" onclick="removeRow(this)">Remove</button>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+   
+
+
+  <script>
+    function removeRow(button) {
+      // Remove the row corresponding to the delete button clicked
+      var row = button.closest("tr");
+      row.remove();
+    }
+  </script>
+
+
+                <button type="submit" class="btn btn-md bg-primary my-3 text-white">Save</button>
+            </form>
+            
         </div>
     </div>
 {% endblock %}

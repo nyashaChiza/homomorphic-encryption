@@ -6,6 +6,13 @@ from accounts.models import User
 class MedicalDataAnalytics:
     """A class to generate descriptive analytics for medical data."""
 
+
+    @staticmethod
+    def get_research_dataset(option: str):
+        """Returns csv with dataset"""
+        option = option
+        return None
+
     @staticmethod
     def get_treatment_frequency():
         """Returns the frequency of each treatment type."""
