@@ -3,7 +3,6 @@ from django.db.models.functions import TruncMonth, TruncYear
 from .models import Treatment, Tests, Medication
 from accounts.models import User
 
-
 class MedicalDataAnalytics:
     """A class to generate descriptive analytics for medical data."""
 
