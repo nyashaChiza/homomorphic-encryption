@@ -76,7 +76,6 @@ class MedicationDashboardView(TemplateView):
         context['treatment_type_age_bar'] = Tests.objects.all()
         context['age_test_status_bar'] = Tests.objects.all()
         context['age_medicine_bar'] = Tests.objects.all()
-
         return context
 
 
