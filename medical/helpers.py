@@ -47,6 +47,7 @@ class MedicalDataAnalytics:
         """Returns a breakdown of common symptoms and associated diagnoses."""
         return Treatment.objects.values('symptoms', 'diagnosis').annotate(total=Count('pk'))
 
+
     @staticmethod
     def get_doctor_activity():
         """Returns the number of treatments handled by each doctor."""
