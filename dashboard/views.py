@@ -32,6 +32,8 @@ class AgeDashboardView(TemplateView):
         context['test_age_donut'] = Tests.objects.all()
         context['treatment_age_donut_x'] = list(analyticts.get_treatment_age_pie().keys())
         context['treatment_age_donut_y'] = list(analyticts.get_treatment_age_pie().values())
+        context['test_age_donut_x'] = list(analyticts.get_test_age_pie().keys())
+        context['test_age_donut_y'] = list(analyticts.get_test_age_pie().values())
         context['treatment_type_age_bar'] = Tests.objects.all()
         context['age_test_status_bar'] = Tests.objects.all()
         context['age_medicine_bar'] = Tests.objects.all()

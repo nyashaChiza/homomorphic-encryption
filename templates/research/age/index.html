@@ -124,7 +124,7 @@
               <div class="card-inner">
                   <div class="card-title-group align-start pb-3 g-2">
                       <div class="card-title card-title-sm">
-                          <h6 class="title">Age By Treatement Type</h6>
+                          <h6 class="title">Average Age By Treatement Type</h6>
                           
                       </div>
                       <div class="card-tools">
@@ -376,23 +376,23 @@
 
   // Charts 
   var deviceStatusData = {
-    labels: ["Desktop", "Mobile", "Tablet"],
+    labels: {{treatment_age_donut_x|safe}},
     dataUnit: 'People',
     legend: false,
     datasets: [{
       borderColor: "#fff",
       background: ["#9C73F5", "#b8acff", "#7de1f8"],
-      data: [84.5, 14.2, 1.3]
+      data: {{treatment_age_donut_y|safe}}
     }]
   };
   var TrafficChannelDoughnutData = {
-    labels: ["Organic Search", "Social Media", "Referrals", "Others"],
+    labels: {{ test_age_donut_x|safe }},
     dataUnit: 'People',
     legend: false,
     datasets: [{
       borderColor: "#fff",
       background: ["#733AEA", "#b8acff", "#ffa9ce", "#f9db7b"],
-      data: [4305, 859, 482, 138]
+      data: {{ test_age_donut_y|safe }}
     }]
   };
   function analyticsDoughnut(selector, set_data) {
@@ -642,7 +642,7 @@
                 color: NioApp.hexRGB("#526484", .2),
                 tickLength: 0,
                 zeroLineColor: NioApp.hexRGB("#526484", .2),
-                drawTicks: false
+
               }
             },
             x: {
@@ -659,9 +659,9 @@
               grid: {
                 color: "transparent",
                 tickLength: 0,
-                zeroLineColor: NioApp.hexRGB("#526484", .2),
-                offset: true,
-                drawTicks: false
+                zeroLineColor: NioApp.hexRGB("#526484", .2),analyticAuData
+                
+                 
               }
             }
           }
@@ -767,7 +767,7 @@
                 color: NioApp.hexRGB("#526484", .2),
                 tickLength: 0,
                 zeroLineColor: NioApp.hexRGB("#526484", .2),
-                drawTicks: false
+                 
               }
             },
             x: {
@@ -786,7 +786,7 @@
                 tickLength: 0,
                 zeroLineColor: 'transparent',
                 offset: true,
-                drawTicks: false
+                 
               }
             }
           }
@@ -906,7 +906,7 @@
                 color: NioApp.hexRGB("#526484", .2),
                 tickLength: 0,
                 zeroLineColor: NioApp.hexRGB("#526484", .2),
-                drawTicks: false
+                 
               }
             },
             x: {
@@ -925,7 +925,7 @@
                 tickLength: 0,
                 zeroLineColor: 'transparent',
                 offset: true,
-                drawTicks: false
+                 
               }
             }
           }

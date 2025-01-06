@@ -23,6 +23,11 @@ class MedicalDataAnalytics:
         """Returns the frequency of each treatment type."""
         return {"0-16":35, "17-30": 10, "31-60":35, "61+": 10}#Treatment.objects.values('treatment_type').annotate(total=Count('treatment_type'))
 
+    @staticmethod
+    def get_test_age_pie():
+            """Returns the frequency of each treatment type."""
+            return {"0-16":9, "17-30": 12, "31-60":6, "61+": 4}#Treatment.objects.values('treatment_type').annotate(total=Count('treatment_type'))
+
 
     @staticmethod
     def get_treatment_status_breakdown():
