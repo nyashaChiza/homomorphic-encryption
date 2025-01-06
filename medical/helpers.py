@@ -147,13 +147,13 @@ class MedicalDataAnalytics:
         """Returns the average number of tests per patient."""
         total_patients = User.objects.filter(role='Patient').count()
         total_tests = Tests.objects.count()
-        return total_tests / total_patients if total_patients > 0 else 0
+        return total_tests / total_patients if total_patients > 0 else  0
 
     @staticmethod
     def get_treatments_by_age_group():
         """Returns the count of treatments segmented by age groups."""
         age_groups = {
-            'Under 18': Q(patient__pk__lt=18),
+            'Under 18':  Q(patient__pk__lt=18),
             '18-35': Q(patient__pk__gte=18, patient__pk__lte=35),
             '36-50': Q(patient__pk__gte=36, patient__pk__lte=50),
             '51-65': Q(patient__pk__gte=51, patient__pk__lte=65),
