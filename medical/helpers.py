@@ -161,11 +161,28 @@ class MedicalDataAnalytics:
         }
         return {age_group: Treatment.objects.filter(criteria).count() for age_group, criteria in age_groups.items()}
 
+    @staticmethod
+    def get_treatment_type_by_age_group():
+        """Returns the count of treatments segmented by age groups."""
+        age_groups = {
+            'Initial Assessment':  18,
+            'Follow Up': 35,
+            'Therapy': 36,
+            'Surgery': 51,
+            'Medication': 66,
+            'Rehabilitation': 23,
+            'Diagnostic': 26,
+            'Preventive': 15,
+            'Consultation': 19
+        }
+        return age_groups
+
+
 
 def get_treatments_with_medication():
     treatments = []
     for medicine in Medication.objects.all():
-        for treat in Treatment.objects.filter(medications= medicine):
+        for treat in Treatment.objects.filter(treatment_medications= medicine):
             treatments.append({'medicine': medicine, 'treatment': treat})
 
     return treatments

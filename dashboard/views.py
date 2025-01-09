@@ -7,7 +7,7 @@ from approval.models import Approval
 from accounts.models import User
 from medical.helpers import MedicalDataAnalytics
 
-analyticts = MedicalDataAnalytics()
+analytics = MedicalDataAnalytics()
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
@@ -30,11 +30,12 @@ class AgeDashboardView(TemplateView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['test_age_donut'] = Tests.objects.all()
-        context['treatment_age_donut_x'] = list(analyticts.get_treatment_age_pie().keys())
-        context['treatment_age_donut_y'] = list(analyticts.get_treatment_age_pie().values())
-        context['test_age_donut_x'] = list(analyticts.get_test_age_pie().keys())
-        context['test_age_donut_y'] = list(analyticts.get_test_age_pie().values())
-        context['treatment_type_age_bar'] = Tests.objects.all()
+        context['treatment_age_donut_x'] = list(analytics.get_treatment_age_pie().keys())
+        context['treatment_age_donut_y'] = list(analytics.get_treatment_age_pie().values())
+        context['test_age_donut_x'] = list(analytics.get_test_age_pie().keys())
+        context['test_age_donut_y'] = list(analytics.get_test_age_pie().values())
+        context['treatment_type_age_bar_x'] = list(analytics.get_treatment_type_by_age_group().keys())
+        context['treatment_type_age_bar_y'] = list(analytics.get_treatment_type_by_age_group().values())
         context['age_test_status_bar'] = Tests.objects.all()
         context['age_medicine_bar'] = Tests.objects.all()
 
@@ -86,7 +87,7 @@ class MedicationDataDownloadView(TemplateView):
     
     def get(self, request, *args, **kwargs):
         if kwargs.get('type'):
-            dataset = analyticts.get_research_dataset(kwargs.get('type'))
+            dataset = analytics.get_research_dataset(kwargs.get('type'))
             # return csv file for download
         return super().get(request, *args, **kwargs)
     
