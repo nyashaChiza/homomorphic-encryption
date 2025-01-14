@@ -177,6 +177,34 @@ class MedicalDataAnalytics:
         }
         return age_groups
 
+    @staticmethod
+    def get_dataset(data_type = None):
+        if data_type == 'age':
+            return Treatment.objects.values(
+            'patient__profile__dob',  # Assuming patient has an 'age' field
+            'treatment_type',
+            'status',
+            'created',
+            'follow_up_date'
+        )
+        
+        if data_type == 'gender':
+            return Treatment.objects.values(
+            'patient__profile__gender',
+            'treatment_type',
+            'status',
+            'created',
+            'follow_up_date'
+        )        
+
+        if data_type == 'location':
+            return Treatment.objects.values(
+            'patient__profile__location',
+            'treatment_type',
+            'status',
+            'created',
+            'follow_up_date'
+        )        
 
 
 def get_treatments_with_medication():
@@ -186,3 +214,4 @@ def get_treatments_with_medication():
             treatments.append({'medicine': medicine, 'treatment': treat})
 
     return treatments
+

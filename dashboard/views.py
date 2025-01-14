@@ -6,6 +6,11 @@ from medical.models import Tests, Treatment, Medication
 from approval.models import Approval
 from accounts.models import User
 from medical.helpers import MedicalDataAnalytics
+import csv
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
 
 analytics = MedicalDataAnalytics()
 
@@ -91,3 +96,22 @@ class MedicationDataDownloadView(TemplateView):
             # return csv file for download
         return super().get(request, *args, **kwargs)
     
+
+def export_treatment_data(request, data_type=None):
+    # Fetch dataset based on the given data_type
+    dataset = analytics.get_dataset(data_type=f"{data_type}")
+    if not dataset:
+        return HttpResponse("No data available for the given type.", status=400)
+    
+    # Prepare the HttpResponse to serve CSV file
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="{data_type}_treatment_data.csv"'
+    
+    writer = csv.DictWriter(response, fieldnames=dataset[0].keys())
+    writer.writeheader()  # Write the header (keys)
+    
+    # Write the rows of the CSV
+    for row in dataset:
+        writer.writerow(row)
+    
+    return response

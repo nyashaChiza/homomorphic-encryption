@@ -1,5 +1,5 @@
 from django.urls import path, include
-from dashboard.views import DashboardView, AgeDashboardView, GenderDashboardView, LocationDashboardView, MedicationDashboardView, MedicationDataDownloadView
+from dashboard.views import DashboardView, AgeDashboardView, GenderDashboardView, LocationDashboardView, MedicationDashboardView, MedicationDataDownloadView, export_treatment_data
 
 
 urlpatterns = [
@@ -9,6 +9,8 @@ urlpatterns = [
     path('research/location', LocationDashboardView.as_view(), name='location_dashboard'),
     path('research/medication', MedicationDashboardView.as_view(), name='medication_dashboard'),
     path('research/dataset/download', MedicationDataDownloadView.as_view(), name='dataset_download'),
+    path('export-treatments/<str:data_type>/', export_treatment_data, name='export_treatment_data'),
+
 ]
 
 
