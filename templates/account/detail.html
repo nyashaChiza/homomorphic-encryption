@@ -135,9 +135,18 @@
                                             {% if not request.user.profile %}
                                             <div class="dropdown">
                                                 <a class="btn btn-icon btn-trigger me-n2" data-bs-toggle="dropdown" href="#" aria-expanded="false"><em class="icon ni ni-more-v"></em></a>
-                                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                                <div class="dropdown-menu dropdown-menu-end">
                                                     <ul class="link-list-opt no-bdr">
                                                         <li><a href="{% url 'profile_create' %}"><em class="icon ni ni-edit-fill"></em><span>Create Profile</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-trigger me-n2" data-bs-toggle="dropdown" href="#" aria-expanded="false"><em class="icon ni ni-more-v"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="{% url 'profile_update' user.pk %}"><em class="icon ni ni-edit-fill"></em><span>Uodate Profile</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -148,7 +157,7 @@
                                 <!-- .card-inner -->
                                 <div class="card-inner p-0">
                                     <ul class="link-list-menu">
-                                        <li><a class="active" href="html/user-profile-regular.html"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
+                                        <li><a class="active" href="#"><em class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
                                         </ul>
                                 </div><!-- .card-inner -->
                             </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 503px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none; transform: translate3d(0px, 0px, 0px);"></div></div></div><!-- .card-inner-group -->

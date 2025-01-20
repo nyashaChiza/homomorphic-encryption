@@ -352,92 +352,120 @@
 
   // Charts 
   var deviceStatusData = {
-    labels: {{treatment_age_donut_x|safe}},
+    labels: {{treatment_gender_donut_x|safe}},
     dataUnit: 'People',
     legend: false,
     datasets: [{
       borderColor: "#fff",
       background: ["#9C73F5", "#b8acff", "#7de1f8"],
-      data: {{treatment_age_donut_y|safe}}
+      data: {{treatment_gender_donut_y|safe}}
     }]
   };
   var TrafficChannelDoughnutData = {
-    labels: {{ test_age_donut_x|safe }},
+    labels: {{ test_gender_donut_x|safe }},
     dataUnit: 'People',
     legend: false,
     datasets: [{
       borderColor: "#fff",
       background: ["#733AEA", "#b8acff", "#ffa9ce", "#f9db7b"],
-      data: {{ test_age_donut_y|safe }}
+      data: {{ test_gender_donut_y|safe }}
     }]
   };
   function analyticsDoughnut(selector, set_data) {
+    // Select the target elements
     var $selector = selector ? $(selector) : $('.analytics-doughnut');
+
     $selector.each(function () {
-      var $self = $(this),
-        _self_id = $self.attr('id'),
-        _get_data = typeof set_data === 'undefined' ? eval(_self_id) : set_data;
-      var selectCanvas = document.getElementById(_self_id).getContext("2d");
-      var chart_data = [];
-      for (var i = 0; i < _get_data.datasets.length; i++) {
-        chart_data.push({
-          backgroundColor: _get_data.datasets[i].background,
-          borderWidth: 2,
-          borderColor: _get_data.datasets[i].borderColor,
-          hoverBorderColor: _get_data.datasets[i].borderColor,
-          data: _get_data.datasets[i].data
-        });
-      }
-      var chart = new Chart(selectCanvas, {
-        type: 'doughnut',
-        data: {
-          labels: _get_data.labels,
-          datasets: chart_data
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: _get_data.legend ? _get_data.legend : false,
-              rtl: NioApp.State.isRTL,
-              labels: {
-                boxWidth: 12,
-                padding: 20,
-                color: '#6783b8'
-              }
-            },
-            tooltip: {
-              enabled: true,
-              rtl: NioApp.State.isRTL,
-              callbacks: {
-                label: function label(context) {
-                  return "".concat(context.parsed, " ").concat(_get_data.dataUnit);
-                }
-              },
-              backgroundColor: '#fff',
-              borderColor: '#eff6ff',
-              borderWidth: 2,
-              titleFont: {
-                size: 13
-              },
-              titleColor: '#6783b8',
-              titleMarginBottom: 6,
-              bodyColor: '#9eaecf',
-              bodyFont: {
-                size: 12
-              },
-              bodySpacing: 4,
-              padding: 10,
-              footerMarginTop: 0,
-              displayColors: false
-            }
-          },
-          rotation: -1.5,
-          cutoutPercentage: 70,
-          maintainAspectRatio: false
+        var $self = $(this),
+            _self_id = $self.attr('id');
+
+        // Ensure the element has an ID and fetch the data
+        if (!_self_id) {
+            console.warn("Element is missing an ID. Skipping...");
+            return;
         }
-      });
+
+        var _get_data = typeof set_data === 'undefined' 
+            ? window[_self_id] || null 
+            : set_data;
+
+        // Ensure the data exists
+        if (!_get_data || !_get_data.datasets || !_get_data.labels) {
+            console.error(`Data is missing or invalid for ID: ${_self_id}`);
+            return;
+        }
+
+        var selectCanvas = document.getElementById(_self_id);
+        if (!selectCanvas) {
+            console.error(`Canvas element with ID: ${_self_id} not found.`);
+            return;
+        }
+
+        var ctx = selectCanvas.getContext("2d");
+
+        // Prepare the chart data
+        var chart_data = _get_data.datasets.map(function (dataset) {
+            return {
+                backgroundColor: dataset.background || [],
+                borderWidth: 2,
+                borderColor: dataset.borderColor || '#000',
+                hoverBorderColor: dataset.borderColor || '#000',
+                data: dataset.data || []
+            };
+        });
+
+        // Create the chart
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: _get_data.labels || [],
+                datasets: chart_data
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: _get_data.legend || false,
+                        rtl: NioApp.State.isRTL,
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20,
+                            color: '#6783b8'
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        rtl: NioApp.State.isRTL,
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.parsed} ${_get_data.dataUnit || ''}`;
+                            }
+                        },
+                        backgroundColor: '#fff',
+                        borderColor: '#eff6ff',
+                        borderWidth: 2,
+                        titleFont: {
+                            size: 13
+                        },
+                        titleColor: '#6783b8',
+                        titleMarginBottom: 6,
+                        bodyColor: '#9eaecf',
+                        bodyFont: {
+                            size: 12
+                        },
+                        bodySpacing: 4,
+                        padding: 10,
+                        footerMarginTop: 0,
+                        displayColors: false
+                    }
+                },
+                rotation: -1.5,
+                cutout: '70%',
+                maintainAspectRatio: false
+            }
+        });
     });
-  }
+}
+
   // init chart
   NioApp.coms.docReady.push(function () {
     analyticsDoughnut();
@@ -605,12 +633,8 @@
           maintainAspectRatio: false,
           scales: {
             y: {
-              display: true,
-              ticks: {
-                beginAtZero: false,
-                font: {
-                  size: 12
-                },
+              display: true,analyticAuData,
+
                 color: '#9eaecf',
                 padding: 0
               },
@@ -632,15 +656,9 @@
                 padding: 0,
                 reverse: NioApp.State.isRTL
               },
-              grid: {
-                color: "transparent",
-                tickLength: 0,
-                zeroLineColor: NioApp.hexRGB("#526484", .2),analyticAuData
-                
-                 
-              }
+
             }
-          }
+    
         }
       });
     });
@@ -650,14 +668,14 @@
     analyticsLineSmall();
   });
   var analyticAuData = {
-    labels:{{ treatment_type_age_bar_x| safe }},
+    labels:{{ treatment_type_gender_bar_x| safe }},
     dataUnit: 'Average Age',
     lineTension: .1,
     datasets: [{
       label: "Average Age",
       color: "#9C73F5",
       background: "#9C73F5",
-      data: {{ treatment_type_age_bar_y|safe }}
+      data: {{ treatment_type_gender_bar_y|safe }}
     }]
   };
   function analyticsAu(selector, set_data) {
@@ -794,121 +812,141 @@
   };
   function analyticsLineLarge(selector, set_data) {
     var $selector = selector ? $(selector) : $('.analytics-line-large');
+
     $selector.each(function () {
-      var $self = $(this),
-        _self_id = $self.attr('id'),
-        _get_data = typeof set_data === 'undefined' ? eval(_self_id) : set_data;
-      var selectCanvas = document.getElementById(_self_id).getContext("2d");
-      var chart_data = [];
-      for (var i = 0; i < _get_data.datasets.length; i++) {
-        chart_data.push({
-          label: _get_data.datasets[i].label,
-          tension: _get_data.lineTension,
-          backgroundColor: _get_data.datasets[i].background,
-          fill: true,
-          borderWidth: 2,
-          borderDash: _get_data.datasets[i].dash,
-          borderColor: _get_data.datasets[i].color,
-          pointBorderColor: 'transparent',
-          pointBackgroundColor: 'transparent',
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: _get_data.datasets[i].color,
-          pointBorderWidth: 2,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 2,
-          pointRadius: 4,
-          pointHitRadius: 4,
-          data: _get_data.datasets[i].data
-        });
-      }
-      var chart = new Chart(selectCanvas, {
-        type: 'line',
-        data: {
-          labels: _get_data.labels,
-          datasets: chart_data
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: _get_data.legend ? _get_data.legend : false,
-              rtl: NioApp.State.isRTL,
-              labels: {
-                boxWidth: 12,
-                padding: 20,
-                color: '#6783b8'
-              }
-            },
-            tooltip: {
-              enabled: true,
-              rtl: NioApp.State.isRTL,
-              callbacks: {
-                label: function label(context) {
-                  return "".concat(context.parsed.y, " ").concat(_get_data.dataUnit);
-                }
-              },
-              backgroundColor: '#fff',
-              borderColor: '#eff6ff',
-              borderWidth: 2,
-              titleFont: {
-                size: 13
-              },
-              titleColor: '#6783b8',
-              titleMarginBottom: 6,
-              bodyColor: '#9eaecf',
-              bodyFont: {
-                size: 12
-              },
-              bodySpacing: 4,
-              padding: 10,
-              footerMarginTop: 0,
-              displayColors: false
-            }
-          },
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              display: true,
-              position: NioApp.State.isRTL ? "right" : "left",
-              ticks: {
-                beginAtZero: true,
-                font: {
-                  size: 12
-                },
-                color: '#9eaecf',
-                padding: 8,
-                stepSize: 2400
-              },
-              grid: {
-                color: NioApp.hexRGB("#526484", .2),
-                tickLength: 0,
-                zeroLineColor: NioApp.hexRGB("#526484", .2),
-                 
-              }
-            },
-            x: {
-              display: false,
-              ticks: {
-                font: {
-                  size: 12
-                },
-                color: '#9eaecf',
-                source: 'auto',
-                padding: 0,
-                reverse: NioApp.State.isRTL
-              },
-              grid: {
-                color: "transparent",
-                tickLength: 0,
-                zeroLineColor: 'transparent',
-                offset: true,
-                 
-              }
-            }
-          }
+        var $self = $(this),
+            _self_id = $self.attr('id');
+
+        // Ensure the element has an ID and fetch the data
+        if (!_self_id) {
+            console.warn("Element is missing an ID. Skipping...");
+            return;
         }
-      });
+
+        var _get_data = typeof set_data === 'undefined' 
+            ? window[_self_id] || null 
+            : set_data;
+
+        // Ensure the data exists
+        if (!_get_data || !_get_data.datasets || !_get_data.labels) {
+            console.error(`Data is missing or invalid for ID: ${_self_id}`);
+            return;
+        }
+
+        var canvasElement = document.getElementById(_self_id);
+        if (!canvasElement) {
+            console.error(`Canvas element with ID: ${_self_id} not found.`);
+            return;
+        }
+
+        var ctx = canvasElement.getContext("2d");
+
+        // Prepare chart data
+        var chart_data = _get_data.datasets.map(function (dataset) {
+            return {
+                label: dataset.label || '',
+                tension: _get_data.lineTension || 0.4,
+                backgroundColor: dataset.background || 'rgba(0,0,0,0)',
+                fill: true,
+                borderWidth: 2,
+                borderDash: dataset.dash || [],
+                borderColor: dataset.color || '#000',
+                pointBorderColor: 'transparent',
+                pointBackgroundColor: 'transparent',
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: dataset.color || '#000',
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 2,
+                pointRadius: 4,
+                pointHitRadius: 4,
+                data: dataset.data || []
+            };
+        });
+
+        // Create the chart
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: _get_data.labels || [],
+                datasets: chart_data
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: _get_data.legend || false,
+                        rtl: NioApp.State.isRTL,
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20,
+                            color: '#6783b8'
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        rtl: NioApp.State.isRTL,
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.parsed.y} ${_get_data.dataUnit || ''}`;
+                            }
+                        },
+                        backgroundColor: '#fff',
+                        borderColor: '#eff6ff',
+                        borderWidth: 2,
+                        titleFont: {
+                            size: 13
+                        },
+                        titleColor: '#6783b8',
+                        titleMarginBottom: 6,
+                        bodyColor: '#9eaecf',
+                        bodyFont: {
+                            size: 12
+                        },
+                        bodySpacing: 4,
+                        padding: 10,
+                        footerMarginTop: 0,
+                        displayColors: false
+                    }
+                },
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        display: true,
+                        position: NioApp.State.isRTL ? "right" : "left",
+                        ticks: {
+                            color: '#9eaecf',
+                            padding: 8,
+                            stepSize: 2400
+                        },
+                        grid: {
+                            color: NioApp.hexRGB("#526484", 0.2),
+                            tickLength: 0,
+                            zeroLineColor: NioApp.hexRGB("#526484", 0.2)
+                        }
+                    },
+                    x: {
+                        display: false,
+                        ticks: {
+                            font: {
+                                size: 12
+                            },
+                            color: '#9eaecf',
+                            source: 'auto',
+                            padding: 0,
+                            reverse: NioApp.State.isRTL
+                        },
+                        grid: {
+                            color: "transparent",
+                            tickLength: 0,
+                            zeroLineColor: 'transparent',
+                            offset: true
+                        }
+                    }
+                }
+            }
+        });
     });
-  }
+}
   // init chart
   NioApp.coms.docReady.push(function () {
     analyticsLineLarge();

@@ -66,13 +66,16 @@ class GenderDashboardView(TemplateView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['test_age_donut'] = Tests.objects.all()
-        context['treatment_age_donut'] = Tests.objects.all()
-        context['treatment_type_age_bar'] = Tests.objects.all()
-        context['age_test_status_bar'] = Tests.objects.all()
-        context['age_medicine_bar'] = Tests.objects.all()
-
+        context['treatment_gender_donut_x'] = list(analytics.get_treatment_gender_pie().keys())
+        context['treatment_gender_donut_y'] = list(analytics.get_treatment_gender_pie().values())
+        context['test_gender_donut_x'] = list(analytics.get_test_gender_pie().keys())
+        context['test_gender_donut_y'] = list(analytics.get_test_gender_pie().values())
+        context['treatment_type_gender_bar_x'] = list(analytics.get_treatment_by_gender().keys())
+        context['treatment_type_gender_bar_y'] = list(analytics.get_treatment_by_gender().values())
+        context['gender_test_status_bar'] = Tests.objects.all()
+        context['gender_medicine_bar'] = Tests.objects.all()
         return context
-
+    
 @method_decorator(login_required, name='dispatch')
 class MedicationDashboardView(TemplateView):
     template_name = 'research/medication/index.html'

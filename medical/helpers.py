@@ -28,6 +28,15 @@ class MedicalDataAnalytics:
             """Returns the frequency of each treatment type."""
             return {"0-16":9, "17-30": 12, "31-60":6, "61+": 4}#Treatment.objects.values('treatment_type').annotate(total=Count('treatment_type'))
 
+    @staticmethod
+    def get_test_gender_pie():
+            """Returns the frequency of each treatment type."""
+            return {"Male":7, "Female": 12}
+    
+    @staticmethod
+    def get_treatment_gender_pie():
+            """Returns the frequency of each treatment type."""
+            return {"Male":7, "Female": 12}
 
     @staticmethod
     def get_treatment_status_breakdown():
@@ -162,6 +171,15 @@ class MedicalDataAnalytics:
         return {age_group: Treatment.objects.filter(criteria).count() for age_group, criteria in age_groups.items()}
 
     @staticmethod
+    def get_treatments_by_gender():
+        """Returns the count of treatments segmented by age groups."""
+        gender_groups = {
+            'Male':  Q(patient__profile__gender='Male'),
+            'Female': Q(patient__profile__gender='Female'),
+        }
+        return {gender_group: Treatment.objects.filter(criteria).count() for gender_group, criteria in gender_groups.items()}
+
+    @staticmethod
     def get_treatment_type_by_age_group():
         """Returns the count of treatments segmented by age groups."""
         age_groups = {
@@ -176,6 +194,19 @@ class MedicalDataAnalytics:
             'Consultation': 19
         }
         return age_groups
+
+    @staticmethod
+    def get_treatment_by_gender():
+        """Returns the count of treatments segmented by gender groups."""
+        location_groups = {
+            'Harare South':  18,
+            'Harare East': 35,
+            'Harare West': 36,
+            'Harare North': 51,
+            'Otheer': 66,
+            
+        }
+        return location_groups
 
     @staticmethod
     def get_dataset(data_type = None):
