@@ -31,12 +31,12 @@ class MedicalDataAnalytics:
     @staticmethod
     def get_test_gender_pie():
             """Returns the frequency of each treatment type."""
-            return {"Male":7, "Female": 12}
+            return {"Male":17, "Female": 7}
     
     @staticmethod
     def get_treatment_gender_pie():
             """Returns the frequency of each treatment type."""
-            return {"Male":7, "Female": 12}
+            return {"Male":3, "Female": 12}
 
     @staticmethod
     def get_treatment_status_breakdown():
@@ -194,7 +194,16 @@ class MedicalDataAnalytics:
             'Consultation': 19
         }
         return age_groups
-
+    
+    @staticmethod
+    def get_treatment_gender_bar_chart_data():
+        data = {
+            'keys': ['Initial Assessment', 'Follow Up', 'Therapy', 'Surgery', 'Medication', 'Rehabilitation', 'Diagnostic', 'Preventive', 'Consultation'],
+            'male': [12, 34, 3, 23, 45, 23, 15, 4, 6],
+            'female': [22, 14, 43, 13, 25, 13, 5, 9, 16]
+        }
+        return data
+    
     @staticmethod
     def get_treatment_by_gender():
         """Returns the count of treatments segmented by gender groups."""
@@ -203,7 +212,20 @@ class MedicalDataAnalytics:
             'Harare East': 35,
             'Harare West': 36,
             'Harare North': 51,
-            'Otheer': 66,
+            'Other': 66,
+            
+        }
+        return location_groups
+
+    @staticmethod
+    def get_test_by_location():
+        """Returns the count of treatments segmented by gender groups."""
+        location_groups = {
+            'Harare South':  8,
+            'Harare East': 25,
+            'Harare West': 16,
+            'Harare North': 31,
+            'Other': 36,
             
         }
         return location_groups

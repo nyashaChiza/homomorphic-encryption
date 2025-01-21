@@ -2,33 +2,35 @@
 {% load static %}
 
 {% block body %}
+
 <div class="nk-block-between py-3">
-    <div class="nk-block-head-content">
-        <h3 class="nk-block-title page-title">Gender Analysis</h3>
-        <div class="nk-block-des text-soft">
-            <p>Welcome to Gender Dashboard.</p>
-        </div>
-    </div><!-- .nk-block-head-content -->
-    <div class="nk-block-head-content">
-        <div class="toggle-wrap nk-block-tools-toggle">
-            <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
-            <div class="toggle-expand-content" data-content="pageMenu">
-                <ul class="nk-block-tools g-3">
-                    
-                    <li class="nk-block-tools-opt"><a href="{% url 'export_treatment_data' data_type='gender' %}" class="btn btn-primary"><em class="icon ni ni-download"></em><span>Download Dataset</span></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- .nk-block-head-content -->
-</div>
+     <div class="nk-block-head-content">
+         <h3 class="nk-block-title page-title">Age Analysis</h3>
+         <div class="nk-block-des text-soft">
+             <p>Welcome to Age Analysis Dashboard.</p>
+         </div>
+     </div><!-- .nk-block-head-content -->
+     <div class="nk-block-head-content">
+          <div class="toggle-wrap nk-block-tools-toggle">
+              <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+              <div class="toggle-expand-content" data-content="pageMenu">
+                  <ul class="nk-block-tools g-3">
+                      
+                      <li class="nk-block-tools-opt"><a href="{% url 'export_treatment_data' data_type='age' %}" class="btn btn-primary"><em class="icon ni ni-download"></em><span>Download Dataset</span></a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+     <!-- .nk-block-head-content -->
+ </div>
+
 <div class="row g-gs">
 <div class="col-sm-6 col-lg-6">
      <div class="card h-100">
          <div class="card-inner h-100 stretch flex-column">
              <div class="card-title-group">
                  <div class="card-title card-title-sm">
-                     <h6 class="title">Age By Treatments Count</h6>
+                     <h6 class="title">Gender By Treatments Count</h6>
                  </div>
                  <div class="card-tools">
                      
@@ -39,21 +41,21 @@
                      <canvas class="analytics-doughnut" id="deviceStatusData" width="620" height="320" style="display: block; box-sizing: border-box; height: 160px; width: 310px;"></canvas>
                  </div>
                  <div class="device-status-group">
-                     <div class="device-status-data">
-                         <em data-color="#798bff" class="icon ni ni-sex" style="color: rgb(121, 139, 255);"></em>
-                         <div class="title">Gender</div>
-                         <div class="amount">Male</div>
-                         
-                     </div>
-                     <div class="device-status-data">
-                         <em data-color="#baaeff" class="icon ni ni-sex" style="color: rgb(186, 174, 255);"></em>
-                         <div class="title">Gender</div>
-                         <div class="amount">Female</div>
-                         
-                     </div>
-                     
-                     
-                 </div><!-- .device-status-group -->
+                  <div class="device-status-data">
+                      <em data-color="#798bff" class="icon ni ni-sex" style="color: rgb(121, 139, 255);"></em>
+                      <div class="title">Gender</div>
+                      <div class="amount">Male</div>
+                      
+                  </div>
+                  <div class="device-status-data">
+                      <em data-color="#baaeff" class="icon ni ni-sex" style="color: rgb(186, 174, 255);"></em>
+                      <div class="title">Gender</div>
+                      <div class="amount">Female</div>
+                      
+                  </div>
+                  
+                  
+              </div><!-- .device-status-group -->
              </div><!-- .device-status -->
          </div>
      </div><!-- .card -->
@@ -63,7 +65,7 @@
          <div class="card-inner">
              <div class="card-title-group">
                  <div class="card-title card-title-sm">
-                    <h6 class="title">Age By Tests Count</h6>
+                    <h6 class="title">Gender By Tests Count</h6>
                  </div>
                  <div class="card-tools">
                      
@@ -74,24 +76,26 @@
                      <canvas class="analytics-doughnut" id="TrafficChannelDoughnutData" width="620" height="320" style="display: block; box-sizing: border-box; height: 160px; width: 310px;"></canvas>
                  </div>
                  <div class="device-status-group">
-                    <div class="device-status-data">
-                        <em data-color="#798bff" class="icon ni ni-gender" style="color: rgb(121, 139, 255);"></em>
-                        <div class="title">Gender</div>
-                        <div class="amount">Male</div>
-                        
-                    </div>
-                    <div class="device-status-data">
-                        <em data-color="#baaeff" class="icon ni ni-sex" style="color: rgb(186, 174, 255);"></em>
-                        <div class="title">Gender</div>
-                        <div class="amount">Female</div>
-                        
-                    </div>
-                </div><!-- .traffic-channel-group -->
+                  <div class="device-status-data">
+                      <em data-color="#798bff" class="icon ni ni-sex" style="color: rgb(121, 139, 255);"></em>
+                      <div class="title">Gender</div>
+                      <div class="amount">Male</div>
+                      
+                  </div>
+                  <div class="device-status-data">
+                      <em data-color="#baaeff" class="icon ni ni-sex" style="color: rgb(186, 174, 255);"></em>
+                      <div class="title">Gender</div>
+                      <div class="amount">Female</div>
+                      
+                  </div>
+                  
+              </div><!-- .traffic-channel-group -->
              </div><!-- .traffic-channel -->
          </div>
      </div><!-- .card -->
  </div>
 </div>
+
 
 <div class="row g-gs py-5">
      <div class="col-md-12 col-lg-12">
@@ -99,7 +103,7 @@
               <div class="card-inner">
                   <div class="card-title-group align-start pb-3 g-2">
                       <div class="card-title card-title-sm">
-                          <h6 class="title">Age By Treatement Type</h6>
+                          <h6 class="title">Gender By Treatement Type</h6>
                           
                       </div>
                       <div class="card-tools">
@@ -109,16 +113,17 @@
                   <div class="analytic-au">
                       
                       <div class="analytic-au-ck">
-                          <canvas class="analytics-au-chart" id="analyticAuData" width="813" height="340" style="display: block; box-sizing: border-box; height: 170px; width: 406px;"></canvas>
+                        <canvas class="bar-chart" id="barChartMultiple"></canvas>
                       </div>
                       
                   </div>
+                  
               </div>
           </div><!-- .card -->
       </div>
 </div>
-{% endblock %}
 
+{% endblock %}
 
 {% block scripts %}
 "use strict";
@@ -371,65 +376,59 @@
       data: {{ test_gender_donut_y|safe }}
     }]
   };
-  function analyticsDoughnut(selector, set_data) {
-    // Select the target elements
-    var $selector = selector ? $(selector) : $('.analytics-doughnut');
 
-    $selector.each(function () {
-        var $self = $(this),
-            _self_id = $self.attr('id');
+  var barChartMultiple = {
+    labels: {{ treatment_gender_bar_x|safe }},
+    dataUnit: 'Male Vs Female',
+    datasets: [{
+      label: "Male",
+      dataUnit: 'Male',
+      color: "#b695ff",
+      data:{{ treatment_gender_donut__male_y|safe }}
+    }, {
+      label: "Female",
+      color: "#f4aaa4",
+      dataUnit: 'Female',
+      data:{{ treatment_gender_donut__female_y|safe }}
+    }]
+  };
+  function barChart(selector, set_data){
+    var $selector = (selector) ? $(selector) : $('.bar-chart');
+    $selector.each(function(){
+        var $self = $(this), _self_id = $self.attr('id'), _get_data = (typeof set_data === 'undefined') ? eval(_self_id) : set_data,
+        _d_legend = (typeof _get_data.legend === 'undefined') ? false : _get_data.legend;
 
-        // Ensure the element has an ID and fetch the data
-        if (!_self_id) {
-            console.warn("Element is missing an ID. Skipping...");
-            return;
-        }
-
-        var _get_data = typeof set_data === 'undefined' 
-            ? window[_self_id] || null 
-            : set_data;
-
-        // Ensure the data exists
-        if (!_get_data || !_get_data.datasets || !_get_data.labels) {
-            console.error(`Data is missing or invalid for ID: ${_self_id}`);
-            return;
-        }
-
-        var selectCanvas = document.getElementById(_self_id);
-        if (!selectCanvas) {
-            console.error(`Canvas element with ID: ${_self_id} not found.`);
-            return;
-        }
-
-        var ctx = selectCanvas.getContext("2d");
-
-        // Prepare the chart data
-        var chart_data = _get_data.datasets.map(function (dataset) {
-            return {
-                backgroundColor: dataset.background || [],
-                borderWidth: 2,
-                borderColor: dataset.borderColor || '#000',
-                hoverBorderColor: dataset.borderColor || '#000',
-                data: dataset.data || []
-            };
-        });
-
-        // Create the chart
-        new Chart(ctx, {
-            type: 'doughnut',
+        var selectCanvas = document.getElementById(_self_id).getContext("2d");
+        var chart_data = [];
+        for (var i = 0; i < _get_data.datasets.length; i++) {
+            chart_data.push({
+                label: _get_data.datasets[i].label,
+                data: _get_data.datasets[i].data,
+                // Styles
+                backgroundColor: _get_data.datasets[i].color,
+                borderWidth:2,
+                borderColor: 'transparent',
+                hoverBorderColor : 'transparent',
+                borderSkipped : 'bottom',
+                barPercentage : NioApp.State.asMobile ? .95 : .75,
+                categoryPercentage : NioApp.State.asMobile ? .95 : .75,
+            });
+        } 
+        var chart = new Chart(selectCanvas, {
+            type: 'bar',
             data: {
-                labels: _get_data.labels || [],
-                datasets: chart_data
+                labels: _get_data.labels,
+                datasets: chart_data,
             },
             options: {
                 plugins: {
                     legend: {
-                        display: _get_data.legend || false,
+                        display: (_get_data.legend) ? _get_data.legend : false,
                         rtl: NioApp.State.isRTL,
                         labels: {
-                            boxWidth: 12,
-                            padding: 20,
-                            color: '#6783b8'
+                            boxWidth:30,
+                            padding:20,
+                            color: '#6783b8',
                         }
                     },
                     tooltip: {
@@ -437,35 +436,139 @@
                         rtl: NioApp.State.isRTL,
                         callbacks: {
                             label: function (context) {
-                                return `${context.parsed} ${_get_data.dataUnit || ''}`;
-                            }
+                                return `${context.parsed.y} ${_get_data.dataUnit}`;
+                            },
                         },
-                        backgroundColor: '#fff',
-                        borderColor: '#eff6ff',
-                        borderWidth: 2,
-                        titleFont: {
-                            size: 13
+                        backgroundColor: '#eff6ff',
+                        titleFont:{
+                            size: 13,
                         },
                         titleColor: '#6783b8',
                         titleMarginBottom: 6,
                         bodyColor: '#9eaecf',
-                        bodyFont: {
+                        bodyFont:{
                             size: 12
                         },
-                        bodySpacing: 4,
+                        bodySpacing:4,
                         padding: 10,
                         footerMarginTop: 0,
                         displayColors: false
-                    }
+                    },
                 },
-                rotation: -1.5,
-                cutout: '70%',
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        display: true,
+                        stacked: (_get_data.stacked) ? _get_data.stacked : false,
+                        position : NioApp.State.isRTL ? "right" : "left",
+                        ticks: {
+                            beginAtZero:true,
+                            font: {
+                                size: 12,
+                            },
+                            color:'#9eaecf',
+                        },
+                        grid: { 
+                            color: NioApp.hexRGB("#526484",.2),
+                            tickLength:0,
+                            zeroLineColor: NioApp.hexRGB("#526484",.2),
+                            drawTicks:false,
+                        },
+                        
+                    },
+                    x: {
+                        display: true,
+                        stacked: (_get_data.stacked) ? _get_data.stacked : false,
+                        ticks: {
+                            font: {
+                                size: 12,
+                            },
+                            color:'#9eaecf',
+                            source: 'auto',
+                            reverse: NioApp.State.isRTL
+                        },
+                        grid: {
+                            color: "transparent",
+                            tickLength: 10,
+                            zeroLineColor: 'transparent',
+                            drawTicks:false,
+                        },
+                    }
+                }
             }
         });
-    });
+    })
 }
+// init bar chart
+barChart();
 
+  function analyticsDoughnut(selector, set_data) {
+    var $selector = selector ? $(selector) : $('.analytics-doughnut');
+    $selector.each(function () {
+      var $self = $(this),
+        _self_id = $self.attr('id'),
+        _get_data = typeof set_data === 'undefined' ? eval(_self_id) : set_data;
+      var selectCanvas = document.getElementById(_self_id).getContext("2d");
+      var chart_data = [];
+      for (var i = 0; i < _get_data.datasets.length; i++) {
+        chart_data.push({
+          backgroundColor: _get_data.datasets[i].background,
+          borderWidth: 2,
+          borderColor: _get_data.datasets[i].borderColor,
+          hoverBorderColor: _get_data.datasets[i].borderColor,
+          data: _get_data.datasets[i].data
+        });
+      }
+      var chart = new Chart(selectCanvas, {
+        type: 'doughnut',
+        data: {
+          labels: _get_data.labels,
+          datasets: chart_data
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: _get_data.legend ? _get_data.legend : false,
+              rtl: NioApp.State.isRTL,
+              labels: {
+                boxWidth: 12,
+                padding: 20,
+                color: '#6783b8'
+              }
+            },
+            tooltip: {
+              enabled: true,
+              rtl: NioApp.State.isRTL,
+              callbacks: {
+                label: function label(context) {
+                  return "".concat(context.parsed, " ").concat(_get_data.dataUnit);
+                }
+              },
+              backgroundColor: '#fff',
+              borderColor: '#eff6ff',
+              borderWidth: 2,
+              titleFont: {
+                size: 13
+              },
+              titleColor: '#6783b8',
+              titleMarginBottom: 6,
+              bodyColor: '#9eaecf',
+              bodyFont: {
+                size: 12
+              },
+              bodySpacing: 4,
+              padding: 10,
+              footerMarginTop: 0,
+              displayColors: false
+            }
+          },
+          rotation: -1.5,
+          cutoutPercentage: 70,
+          maintainAspectRatio: false
+        }
+      });
+    });
+  }
   // init chart
   NioApp.coms.docReady.push(function () {
     analyticsDoughnut();
@@ -633,8 +736,12 @@
           maintainAspectRatio: false,
           scales: {
             y: {
-              display: true,analyticAuData,
-
+              display: true,
+              ticks: {
+                beginAtZero: false,
+                font: {
+                  size: 12
+                },
                 color: '#9eaecf',
                 padding: 0
               },
@@ -656,9 +763,15 @@
                 padding: 0,
                 reverse: NioApp.State.isRTL
               },
-
+              grid: {
+                color: "transparent",
+                tickLength: 0,
+                zeroLineColor: NioApp.hexRGB("#526484", .2),analyticAuData
+                
+                 
+              }
             }
-    
+          }
         }
       });
     });
@@ -669,10 +782,10 @@
   });
   var analyticAuData = {
     labels:{{ treatment_type_gender_bar_x| safe }},
-    dataUnit: 'Average Age',
+    dataUnit: 'Gender',
     lineTension: .1,
     datasets: [{
-      label: "Average Age",
+      label: "Genser",
       color: "#9C73F5",
       background: "#9C73F5",
       data: {{ treatment_type_gender_bar_y|safe }}
@@ -812,141 +925,121 @@
   };
   function analyticsLineLarge(selector, set_data) {
     var $selector = selector ? $(selector) : $('.analytics-line-large');
-
     $selector.each(function () {
-        var $self = $(this),
-            _self_id = $self.attr('id');
-
-        // Ensure the element has an ID and fetch the data
-        if (!_self_id) {
-            console.warn("Element is missing an ID. Skipping...");
-            return;
-        }
-
-        var _get_data = typeof set_data === 'undefined' 
-            ? window[_self_id] || null 
-            : set_data;
-
-        // Ensure the data exists
-        if (!_get_data || !_get_data.datasets || !_get_data.labels) {
-            console.error(`Data is missing or invalid for ID: ${_self_id}`);
-            return;
-        }
-
-        var canvasElement = document.getElementById(_self_id);
-        if (!canvasElement) {
-            console.error(`Canvas element with ID: ${_self_id} not found.`);
-            return;
-        }
-
-        var ctx = canvasElement.getContext("2d");
-
-        // Prepare chart data
-        var chart_data = _get_data.datasets.map(function (dataset) {
-            return {
-                label: dataset.label || '',
-                tension: _get_data.lineTension || 0.4,
-                backgroundColor: dataset.background || 'rgba(0,0,0,0)',
-                fill: true,
-                borderWidth: 2,
-                borderDash: dataset.dash || [],
-                borderColor: dataset.color || '#000',
-                pointBorderColor: 'transparent',
-                pointBackgroundColor: 'transparent',
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: dataset.color || '#000',
-                pointBorderWidth: 2,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 4,
-                data: dataset.data || []
-            };
+      var $self = $(this),
+        _self_id = $self.attr('id'),
+        _get_data = typeof set_data === 'undefined' ? eval(_self_id) : set_data;
+      var selectCanvas = document.getElementById(_self_id).getContext("2d");
+      var chart_data = [];
+      for (var i = 0; i < _get_data.datasets.length; i++) {
+        chart_data.push({
+          label: _get_data.datasets[i].label,
+          tension: _get_data.lineTension,
+          backgroundColor: _get_data.datasets[i].background,
+          fill: true,
+          borderWidth: 2,
+          borderDash: _get_data.datasets[i].dash,
+          borderColor: _get_data.datasets[i].color,
+          pointBorderColor: 'transparent',
+          pointBackgroundColor: 'transparent',
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: _get_data.datasets[i].color,
+          pointBorderWidth: 2,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 2,
+          pointRadius: 4,
+          pointHitRadius: 4,
+          data: _get_data.datasets[i].data
         });
-
-        // Create the chart
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: _get_data.labels || [],
-                datasets: chart_data
+      }
+      var chart = new Chart(selectCanvas, {
+        type: 'line',
+        data: {
+          labels: _get_data.labels,
+          datasets: chart_data
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: _get_data.legend ? _get_data.legend : false,
+              rtl: NioApp.State.isRTL,
+              labels: {
+                boxWidth: 12,
+                padding: 20,
+                color: '#6783b8'
+              }
             },
-            options: {
-                plugins: {
-                    legend: {
-                        display: _get_data.legend || false,
-                        rtl: NioApp.State.isRTL,
-                        labels: {
-                            boxWidth: 12,
-                            padding: 20,
-                            color: '#6783b8'
-                        }
-                    },
-                    tooltip: {
-                        enabled: true,
-                        rtl: NioApp.State.isRTL,
-                        callbacks: {
-                            label: function (context) {
-                                return `${context.parsed.y} ${_get_data.dataUnit || ''}`;
-                            }
-                        },
-                        backgroundColor: '#fff',
-                        borderColor: '#eff6ff',
-                        borderWidth: 2,
-                        titleFont: {
-                            size: 13
-                        },
-                        titleColor: '#6783b8',
-                        titleMarginBottom: 6,
-                        bodyColor: '#9eaecf',
-                        bodyFont: {
-                            size: 12
-                        },
-                        bodySpacing: 4,
-                        padding: 10,
-                        footerMarginTop: 0,
-                        displayColors: false
-                    }
-                },
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        display: true,
-                        position: NioApp.State.isRTL ? "right" : "left",
-                        ticks: {
-                            color: '#9eaecf',
-                            padding: 8,
-                            stepSize: 2400
-                        },
-                        grid: {
-                            color: NioApp.hexRGB("#526484", 0.2),
-                            tickLength: 0,
-                            zeroLineColor: NioApp.hexRGB("#526484", 0.2)
-                        }
-                    },
-                    x: {
-                        display: false,
-                        ticks: {
-                            font: {
-                                size: 12
-                            },
-                            color: '#9eaecf',
-                            source: 'auto',
-                            padding: 0,
-                            reverse: NioApp.State.isRTL
-                        },
-                        grid: {
-                            color: "transparent",
-                            tickLength: 0,
-                            zeroLineColor: 'transparent',
-                            offset: true
-                        }
-                    }
+            tooltip: {
+              enabled: true,
+              rtl: NioApp.State.isRTL,
+              callbacks: {
+                label: function label(context) {
+                  return "".concat(context.parsed.y, " ").concat(_get_data.dataUnit);
                 }
+              },
+              backgroundColor: '#fff',
+              borderColor: '#eff6ff',
+              borderWidth: 2,
+              titleFont: {
+                size: 13
+              },
+              titleColor: '#6783b8',
+              titleMarginBottom: 6,
+              bodyColor: '#9eaecf',
+              bodyFont: {
+                size: 12
+              },
+              bodySpacing: 4,
+              padding: 10,
+              footerMarginTop: 0,
+              displayColors: false
             }
-        });
+          },
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              display: true,
+              position: NioApp.State.isRTL ? "right" : "left",
+              ticks: {
+                beginAtZero: true,
+                font: {
+                  size: 12
+                },
+                color: '#9eaecf',
+                padding: 8,
+                stepSize: 2400
+              },
+              grid: {
+                color: NioApp.hexRGB("#526484", .2),
+                tickLength: 0,
+                zeroLineColor: NioApp.hexRGB("#526484", .2),
+                 
+              }
+            },
+            x: {
+              display: false,
+              ticks: {
+                font: {
+                  size: 12
+                },
+                color: '#9eaecf',
+                source: 'auto',
+                padding: 0,
+                reverse: NioApp.State.isRTL
+              },
+              grid: {
+                color: "transparent",
+                tickLength: 0,
+                zeroLineColor: 'transparent',
+                offset: true,
+                 
+              }
+            }
+          }
+        }
+      });
     });
-}
+  }
   // init chart
   NioApp.coms.docReady.push(function () {
     analyticsLineLarge();
