@@ -221,14 +221,28 @@ class MedicalDataAnalytics:
     def get_test_by_location():
         """Returns the count of treatments segmented by gender groups."""
         location_groups = {
-            'Harare South':  8,
+            'Harare South':  10,
             'Harare East': 25,
-            'Harare West': 16,
-            'Harare North': 31,
-            'Other': 36,
+            'Harare West': 25,
+            'Harare North': 10,
+            'Other': 20 ,
             
         }
         return location_groups
+
+    @staticmethod
+    def get_treatment_by_location():
+        """Returns the count of treatments segmented by gender groups."""
+        location_groups = {
+            'Harare South':  22,
+            'Harare East': 35,
+            'Harare West': 15,
+            'Harare North': 10,
+            'Other': 8,
+            
+        }
+        return location_groups
+
 
     @staticmethod
     def get_dataset(data_type = None):

@@ -321,43 +321,53 @@
   ;
   NioApp.coms.docReady.push(jqvmap_init);
 
-  // Charts 
+  // Charts
   var deviceStatusData = {
-    labels: {{treatment_location_x|safe}},
-    dataUnit: 'People',
+    labels: {{ treatment_location_x|safe }}, 
+    dataUnit: 'Location',
     legend: false,
-    datasets: [{
-      borderColor: "#fff",
-      background: ["#9C73F5", "#b8acff", "#7de1f8"],
-      data: {{treatment_location_y|safe}}
-    }]
+    datasets: [
+      {
+        borderColor: "#fff",
+        background: ["#9C73F5", "#b8acff", "#3de1b2", "#d1acfe", "#2dd1f1"],
+        data: {{ treatment_location_y|safe }} 
+      }
+    ]
   };
+  
   var TrafficChannelDoughnutData = {
-    labels: {{ test_location_x|safe }},
-    dataUnit: 'People',
+    labels: {{ treatment_type_location_bar_x|safe }},
+    dataUnit: 'Location',
     legend: false,
-    datasets: [{
-      borderColor: "#fff",
-      background: ["#733AEA", "#b8acff", "#ffa9ce", "#f9db7b"],
-      data: {{ test_location_y|safe }}
-    }]
+    datasets: [
+      {
+        borderColor: "#fff",
+        background: ["#733AEA", "#b8acff", "#ffa9ce", "#d1acfe","#f9db7b"],
+        data: {{ treatment_type_location_bar_y|safe }} 
+      }
+    ]
   };
-
+  
   var barChartMultiple = {
-    labels: {{ treatment_gender_bar_x|safe }},
+    labels: {{ test_location_y|safe }}, 
     dataUnit: 'Male Vs Female',
-    datasets: [{
-      label: "Male",
-      dataUnit: 'Male',
-      color: "#b695ff",
-      data:{{ treatment_gender_donut__male_y|safe }}
-    }, {
-      label: "Female",
-      color: "#f4aaa4",
-      dataUnit: 'Female',
-      data:{{ treatment_gender_donut__female_y|safe }}
-    }]
+    datasets: [
+      {
+        label: "Male",
+        dataUnit: 'Male',
+        color: "#b695ff",
+        data: {{ test_location_x|safe }}
+      },
+      {
+        label: "Female",
+        dataUnit: 'Female',
+        color: "#f4aaa4",
+        data: {{ test_location_y|safe }} 
+      }
+    ]
   };
+    
+  
   function barChart(selector, set_data){
     var $selector = (selector) ? $(selector) : $('.bar-chart');
     $selector.each(function(){
@@ -747,11 +757,11 @@ barChart();
     analyticsLineSmall();
   });
   var analyticAuData = {
-    labels:{{ treatment_type_location_bar_x| safe }},
+    labels:{{ treatment_type_location_bar_x|safe }},
     dataUnit: 'Gender',
     lineTension: .1,
     datasets: [{
-      label: "Genser",
+      label: "Gender",
       color: "#9C73F5",
       background: "#9C73F5",
       data: {{ treatment_type_location_bar_y|safe }}

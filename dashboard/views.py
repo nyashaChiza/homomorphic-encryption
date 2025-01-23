@@ -52,10 +52,13 @@ class LocationDashboardView(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['test_age_donut'] = Tests.objects.all()
-        context['treatment_type_age_bar'] = Tests.objects.all()
-        context['age_test_status_bar'] = Tests.objects.all()
-        context['age_medicine_bar'] = Tests.objects.all()
+        context['test_location_y'] = list(analytics.get_test_by_location().keys())
+        context['test_location_x'] = list(analytics.get_test_by_location().values())
+        context['treatment_location_y'] = list(analytics.get_treatment_by_location().values())
+        context['treatment_location_x'] = list(analytics.get_treatment_by_location().keys())
+        context['treatment_type_location_bar_x'] = list(analytics.get_treatment_by_location().keys())
+        context['treatment_type_location_bar_y'] = list(analytics.get_treatment_by_location().values())
+
 
         return context
 
@@ -65,23 +68,16 @@ class GenderDashboardView(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['test_age_donut'] = Tests.objects.all()
         context['treatment_gender_donut_x'] = list(analytics.get_treatment_gender_pie().keys())
         context['treatment_gender_donut_y'] = list(analytics.get_treatment_gender_pie().values())
         context['test_gender_donut_x'] = list(analytics.get_test_gender_pie().keys())
         context['test_gender_donut_y'] = list(analytics.get_test_gender_pie().values())
         context['treatment_type_gender_bar_x'] = list(analytics.get_treatment_by_gender().keys())
         context['treatment_type_gender_bar_y'] = list(analytics.get_treatment_by_gender().values())
-        context['gender_test_status_bar'] = Tests.objects.all()
-        context['gender_medicine_bar'] = Tests.objects.all()
-        context['treatment_gender_bar_x'] = list(analytics.get_treatment_gender_bar_chart_data().get('keys'))#['value 1', 'value 2', 'value 3', 'value 4']
+        context['treatment_gender_bar_x'] = list(analytics.get_treatment_gender_bar_chart_data().get('keys'))
         context['treatment_gender_donut__male_y']= list(analytics.get_treatment_gender_bar_chart_data().get('male'))
         context['treatment_gender_donut__female_y'] = list(analytics.get_treatment_gender_bar_chart_data().get('female'))
-        context['treatment_location_x'] = list(analytics.get_treatment_by_gender().keys())
-        context['treatment_location_y'] = list(analytics.get_treatment_by_gender().values())
-        context['test_location_y'] = list(analytics.get_test_by_location().values())
-        context['test_location_y'] = list(analytics.get_test_by_location().values())
-
+        
         return context
     
 @method_decorator(login_required, name='dispatch')
