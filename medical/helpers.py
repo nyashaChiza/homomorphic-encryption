@@ -29,28 +29,6 @@ class MedicalDataAnalytics:
         return Treatment.objects.values('treatment_type').annotate(total=Count('treatment_type'))
 
     @staticmethod
-    def get_treatment_age_pie():
-        """Returns the frequency of treatments segmented by age groups."""
-        age_groups = {
-            '0-16': Treatment.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-16)).count(),
-            '17-30': Treatment.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-17)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-30)).count(),
-            '31-60': Treatment.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-31)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-60)).count(),
-            '61+': Treatment.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-61)).count()
-        }
-        return age_groups
-
-    @staticmethod
-    def get_test_age_pie():
-        """Returns the frequency of tests segmented by age groups."""
-        age_groups = {
-            '0-16': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-16)).count(),
-            '17-30': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-17)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-30)).count(),
-            '31-60': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-31)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-60)).count(),
-            '61+': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-61)).count()
-        }
-        return age_groups
-
-    @staticmethod
     def get_test_gender_pie():
         """Returns the frequency of tests segmented by gender."""
         gender_groups = {
@@ -71,13 +49,12 @@ class MedicalDataAnalytics:
     @staticmethod
     def get_tests_by_age_group():
         """Returns the count of tests segmented by age groups."""
-        today = date.today()
         age_groups = {
-            'Under 18': Tests.objects.filter(patient__profile__dob__gte=today - timedelta(days=18*365)).count(),
-            '18-35': Tests.objects.filter(patient__profile__dob__gte=today - timedelta(days=35*365), patient__profile__dob__lt=today - timedelta(days=18*365)).count(),
-            '36-50': Tests.objects.filter(patient__profile__dob__gte=today - timedelta(days=50*365), patient__profile__dob__lt=today - timedelta(days=35*365)).count(),
-            '51-65': Tests.objects.filter(patient__profile__dob__gte=today - timedelta(days=65*365), patient__profile__dob__lt=today - timedelta(days=50*365)).count(),
-            '66 and above': Tests.objects.filter(patient__profile__dob__lt=today - timedelta(days=66*365)).count(),
+            'Under 18': Tests.objects.filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-18)).count(),
+            '18-35': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-18)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-35)).count(),
+            '36-50': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-36)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-50)).count(),
+            '51-65': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-51)).filter(patient__profile__dob__gte=date.today().replace(year=date.today().year-65)).count(),
+            '66 and above': Tests.objects.filter(patient__profile__dob__lte=date.today().replace(year=date.today().year-66)).count(),
         }
         return age_groups
 

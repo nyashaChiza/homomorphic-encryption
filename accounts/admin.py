@@ -58,7 +58,7 @@ class ProfileAdmin(admin.ModelAdmin):
     # Fields to display when viewing or editing a profile
     fieldsets = (
         (None, {'fields': ('user',)}),
-        ('Profile Info', {'fields': ('gender', 'address', 'contact', 'dob', 'emergency_contact')}),
+        ('Profile Info', {'fields': ('gender', 'address','location' ,'contact', 'dob', 'emergency_contact')}),
         ('Timestamps', {'fields': ('created', 'updated')}),
     )
     

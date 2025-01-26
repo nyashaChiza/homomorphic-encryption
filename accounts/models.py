@@ -101,9 +101,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')  # One-to-One relationship
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)  # Reduced max_length for gender
     address = models.TextField(blank=True, null=True)
-    location = models.CharField(max_length=40, choices=LOCATION_CHOICES, blank=True, null=True)
+    location = models.CharField(max_length=40, choices=LOCATION_CHOICES)
     contact = models.CharField(max_length=15, blank=True, null=True)  # Contact field with realistic length
-    dob = models.DateField(blank=True, null=True)  # Date of birth
+    dob = models.DateField()  # Date of birth
     emergency_contact = models.CharField(max_length=15, blank=True, null=True)  # Emergency contact field
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

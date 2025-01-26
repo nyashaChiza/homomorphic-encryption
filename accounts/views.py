@@ -96,6 +96,12 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         # Optionally, limit to certain users if required
         return get_object_or_404(User, pk=self.kwargs.get('pk'))
+    
+# View to update an existing user account
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'users/detail.html'
+
 
 
 def user_delete_view(request, pk):

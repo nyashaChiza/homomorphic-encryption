@@ -2,7 +2,7 @@ from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from accounts import views
 from .views import (
-    UserListView, AccountDetailView, ProfileUpdateView, ProfileCreateView, 
+    UserListView, AccountDetailView, ProfileUpdateView, ProfileCreateView, UserDetailView,
     UserCreateView, UserUpdateView, custom_logout, user_delete_view
 )
 

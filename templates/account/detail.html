@@ -30,35 +30,35 @@
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                                         <div class="data-col">
                                             <span class="data-label">Full Name</span>
-                                            <span class="data-value">{{ request.user }}</span>
+                                            <span class="data-value">{{ user }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div><!-- data-item -->
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                                         <div class="data-col">
                                             <span class="data-label">UserName</span>
-                                            <span class="data-value">{{ request.user.username}}</span>
+                                            <span class="data-value">{{ user.username}}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div><!-- data-item -->
                                     <div class="data-item">
                                         <div class="data-col">
                                             <span class="data-label">Email</span>
-                                            <span class="data-value">{{ request.user.email }}</span>
+                                            <span class="data-value">{{ user.email }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span></div>
                                     </div><!-- data-item -->
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                                         <div class="data-col">
                                             <span class="data-label">Role</span>
-                                            <span class="data-value text-soft">{{ request.user.role }}</span>
+                                            <span class="data-value text-soft">{{ user.role }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div><!-- data-item -->
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                                         <div class="data-col">
                                             <span class="data-label">Date Joined</span>
-                                            <span class="data-value">{{ request.user.created }}</span>
+                                            <span class="data-value">{{ user.created }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div><!-- data-item -->
@@ -74,14 +74,14 @@
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
                                             <span class="data-label">Gender</span>
-                                            <span class="data-value">{{ request.user.profile.gender }}</span>
+                                            <span class="data-value">{{ user.profile.gender }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
                                             <span class="data-label">Address</span>
-                                            <span class="data-value">{{ request.user.profile.address }}</span>
+                                            <span class="data-value">{{ user.profile.address }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
@@ -89,7 +89,7 @@
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
                                             <span class="data-label">Contact</span>
-                                            <span class="data-value">{{ request.user.profile.contact }}</span>
+                                            <span class="data-value">{{ user.profile.contact }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
@@ -97,21 +97,21 @@
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
                                             <span class="data-label">Date Of Birth</span>
-                                            <span class="data-value">{{ request.user.profile.dob }}</span>
+                                            <span class="data-value">{{ user.profile.dob }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
                                             <span class="data-label">Emergency Contact</span>
-                                            <span class="data-value">{{ request.user.profile.emergency_contact }}</span>
+                                            <span class="data-value">{{ user.profile.emergency_contact }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
                                     <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
                                         <div class="data-col">
                                             <span class="data-label">Location</span>
-                                            <span class="data-value">{{ request.user.profile.location }}</span>
+                                            <span class="data-value">{{ user.profile.location }}</span>
                                         </div>
                                         <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                                     </div>
@@ -125,14 +125,14 @@
                                 <div class="card-inner">
                                     <div class="user-card">
                                         <div class="user-avatar bg-primary">
-                                            <span>{{ request.user.avatar }}</span>
+                                            <span>{{ user.avatar }}</span>
                                         </div>
                                         <div class="user-info">
-                                            <span class="lead-text">{{ request.user }}</span>
-                                            <span class="sub-text">{{ request.user.email}}</span>
+                                            <span class="lead-text">{{ user }}</span>
+                                            <span class="sub-text">{{ user.email}}</span>
                                         </div>
                                         <div class="user-action">
-                                            {% if not request.user.profile %}
+                                            {% if not user.profile %}
                                             <div class="dropdown">
                                                 <a class="btn btn-icon btn-trigger me-n2" data-bs-toggle="dropdown" href="#" aria-expanded="false"><em class="icon ni ni-more-v"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
