@@ -9,6 +9,13 @@ from medical.forms import TestsForm, TreatmentForm, TestResultsForm, MedicineFor
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from .forms import TreatmentForm, TreatmentMedicationFormSet
+# views.py
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import Medication, Treatment
+from medical.helpers import MedicalCalculations
+
+calculus = MedicalCalculations()
 
 class TestListView(LoginRequiredMixin, ListView):
     model = Tests
@@ -237,3 +244,50 @@ def medication_delete_view(request, pk):
 
     return redirect(reverse('medicine_index'))
 
+
+
+def medication_adherence(request):
+    patient_id = request.GET.get('patient_id')
+    medication_id = request.GET.get('medication_id')
+
+    if not (patient_id and medication_id):
+        return JsonResponse({'error': 'Patient ID and Medication ID are required.'}, status=400)
+
+    adherence = calculus.calculate_medication_adherence(patient_id, medication_id)
+    return render(request, 'stats/medication_adherence.html', {'adherence': adherence})
+
+
+def average_recovery_time(request):
+    treatment_type = request.GET.get('treatment_type')
+
+    if not treatment_type:
+        return JsonResponse({'error': 'Treatment type is required.'}, status=400)
+
+    avg_recovery = calculus.calculate_average_recovery_time(treatment_type)
+    return render(request, 'stats/average_recovery_time.html', {'avg_recovery': avg_recovery})
+
+
+def high_risk_patients(request):
+    threshold = request.GET.get('threshold', 3)  # Default threshold is 3 follow-ups
+    high_risk = calculus.find_high_risk_patients(int(threshold))
+    return render(request, 'stats/high_risk_patients.html', {'high_risk': high_risk})
+
+
+def treatment_success_rate(request):
+    treatment_type = request.GET.get('treatment_type')
+
+    if not treatment_type:
+        return JsonResponse({'error': 'Treatment type is required.'}, status=400)
+
+    success_rate = calculus.calculate_treatment_success_rate(treatment_type)
+    return render(request, 'stats/treatment_success_rate.html', {'success_rate': success_rate})
+
+
+def common_symptoms(request):
+    treatment_type = request.GET.get('treatment_type')
+
+    if not treatment_type:
+        return JsonResponse({'error': 'Treatment type is required.'}, status=400)
+
+    common_symptoms = calculus.get_common_symptoms_for_treatment(treatment_type)
+    return render(request, 'stats/common_symptoms.html', {'common_symptoms': common_symptoms})
