@@ -245,7 +245,6 @@ def medication_delete_view(request, pk):
     return redirect(reverse('medicine_index'))
 
 
-
 def medication_adherence(request):
     patient_id = request.GET.get('patient_id')
     medication_id = request.GET.get('medication_id')
