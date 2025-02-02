@@ -94,6 +94,14 @@
                         <span class="nk-menu-text">Medicine</span>
                     </a>
                 </li>
+                <li class="nk-menu-item">
+                    <a href="{% url 'stats_index' %}" class="nk-menu-link">
+                        <span class="nk-menu-icon">
+                            <em class="icon ni ni-bag"></em>
+                        </span>
+                        <span class="nk-menu-text">Analytics</span>
+                    </a>
+                </li>
                 {% endif %}
                 {% if user.role == 'Doctor' or user.role == 'Admin' or user.role == 'Patient' %}
                     <li class="nk-menu-item">

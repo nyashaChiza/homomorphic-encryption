@@ -11,8 +11,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 
-
 analytics = MedicalDataAnalytics()
+
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
@@ -122,3 +122,6 @@ def export_treatment_data(request, data_type=None):
         writer.writerow(row)
     
     return response
+
+
+

@@ -22,6 +22,26 @@ class TestListView(LoginRequiredMixin, ListView):
     template_name = 'tests/index.html'
     context_object_name = 'tests'
 
+class StatsIndexView(LoginRequiredMixin, ListView):
+    model = Tests
+    template_name = 'research/analytics/index.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['patients']= User.objects.filter(role='Patient')
+        context['medication']= Medication.objects.all()
+        context['treatment_types'] = [type_[0] for type_ in  Treatment.TREATMENT_TYPE_CHOICES]
+
+        if self.request.GET.get('patient_id') and self.request.GET.get('medication_id'):
+            context['medical_adherence'] = calculus.calculate_medication_adherence(self.request.GET.get('patient_id'), self.request.GET.get('medication_id'))
+        
+        if self.request.GET.get('treatment_type'):
+            context['average_recovery_type'] = calculus.calculate_average_recovery_time(self.request.GET.get('treatment_type'))
+        
+        return context
+        
+
 class TestDetailView(DetailView):
     template_name = 'tests/detail.html'
     context_object_name = 'test'
@@ -243,6 +263,7 @@ def medication_delete_view(request, pk):
     messages.success(request, 'Medicine deleted successfully!')
 
     return redirect(reverse('medicine_index'))
+ 
 
 
 def medication_adherence(request):
@@ -253,7 +274,8 @@ def medication_adherence(request):
         return JsonResponse({'error': 'Patient ID and Medication ID are required.'}, status=400)
 
     adherence = calculus.calculate_medication_adherence(patient_id, medication_id)
-    return render(request, 'stats/medication_adherence.html', {'adherence': adherence})
+    print()
+    return redirect('stats_index') #render(request, 'research/analytics/index.html', {'medical_adherence': adherence})
 
 
 def average_recovery_time(request):
@@ -263,13 +285,13 @@ def average_recovery_time(request):
         return JsonResponse({'error': 'Treatment type is required.'}, status=400)
 
     avg_recovery = calculus.calculate_average_recovery_time(treatment_type)
-    return render(request, 'stats/average_recovery_time.html', {'avg_recovery': avg_recovery})
+    return render(request, 'research/analytics/index.html', {'avg_recovery': avg_recovery})
 
 
 def high_risk_patients(request):
     threshold = request.GET.get('threshold', 3)  # Default threshold is 3 follow-ups
     high_risk = calculus.find_high_risk_patients(int(threshold))
-    return render(request, 'stats/high_risk_patients.html', {'high_risk': high_risk})
+    return render(request, 'research/analytics/index.html', {'high_risk': high_risk})
 
 
 def treatment_success_rate(request):

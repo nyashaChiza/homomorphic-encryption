@@ -2,17 +2,7 @@ from datetime import timedelta
 from django.db import models
 import uuid
 
-TREATMENT_TYPE_CHOICES = (
-    ('Initial Assessment', 'Initial Assessment'),
-    ('Follow Up', 'Follow Up'),
-    ('Therapy', 'Therapy'),
-    ('Surgery', 'Surgery'),
-    ('Medication', 'Medication'),
-    ('Rehabilitation', 'Rehabilitation'),
-    ('Diagnostic', 'Diagnostic'),
-    ('Preventive', 'Preventive'),
-    ('Consultation', 'Consultation'),
-)
+
 
 STATUS_CHOICES = ( 
     ('Pending', 'Pending'),
@@ -59,6 +49,17 @@ FREQUENCY_CHOICES = (
 
 
 class Treatment(models.Model):
+    TREATMENT_TYPE_CHOICES = (
+    ('Initial Assessment', 'Initial Assessment'),
+    ('Follow Up', 'Follow Up'),
+    ('Therapy', 'Therapy'),
+    ('Surgery', 'Surgery'),
+    ('Medication', 'Medication'),
+    ('Rehabilitation', 'Rehabilitation'),
+    ('Diagnostic', 'Diagnostic'),
+    ('Preventive', 'Preventive'),
+    ('Consultation', 'Consultation'),
+)
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     patient = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='treatments', limit_choices_to={'role':'Patient'})
     doctor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='assessments')

@@ -19,7 +19,7 @@ class MedicalDataAnalytics:
             data = Treatment.objects.values('patient__profile__location', 'treatment_type', 'status', 'created', 'follow_up_date')
         else:
             data = []
-
+  
         # Code to convert data to CSV can be added here
         return data
 

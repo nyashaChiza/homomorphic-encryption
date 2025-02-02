@@ -24,8 +24,8 @@ class MedicalCalculations:
           if prescribed and total_treatment_days:
                expected_daily_dosage = prescribed / total_treatment_days.days
                adherence = (expected_daily_dosage / prescribed) * 100
-               return round(adherence, 2)
-          return "Not enough data to calculate adherence"
+               return {'status': 'Success', 'value':round(adherence, 2)}
+          return {'status': 'Failed', 'value':"Not enough data to calculate adherence"}
 
 
      def calculate_average_recovery_time(self,treatment_type):
@@ -38,7 +38,7 @@ class MedicalCalculations:
                Avg('duration')
           )['duration__avg']
 
-          return f"{avg_recovery.days} days" if avg_recovery else "Not enough data"
+          return {'status': 'Success','value':f"{avg_recovery.days} days"} if avg_recovery else {'status': 'Failed','value':"Not enough data"}
 
 
      def find_high_risk_patients(self,follow_up_threshold):

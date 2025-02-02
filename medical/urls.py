@@ -21,6 +21,7 @@ urlpatterns = [
     path('medicine/create', views.MedicineCreateView.as_view() , name='medicine_create'),
     path('medicine/update/<int:pk>', views.MedicineUpdateView.as_view() , name='medicine_update'),
     path('medications/delete/<int:pk>/', views.medication_delete_view, name='medicine_delete'),
+    path('stats/index/', views.StatsIndexView.as_view(), name='stats_index'),
     path('stats/medication-adherence/', views.medication_adherence, name='medication_adherence'),
     path('stats/average-recovery-time/', views.average_recovery_time, name='average_recovery_time'),
     path('stats/high-risk-patients/', views.high_risk_patients, name='high_risk_patients'),
