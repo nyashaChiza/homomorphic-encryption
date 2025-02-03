@@ -50,7 +50,10 @@ class MedicalCalculations:
           ).annotate(follow_up_count=Count('follow_up_date')).filter(
                follow_up_count__gte=follow_up_threshold
           )
-          return list(high_risk_patients)  # Return patient IDs and usernames
+          if high_risk_patients:
+               return {'status': 'Success', 'value': 'high_risk_patients'}
+          else:
+               return {'status': 'Failed', 'value': 'No Patients Found'}
 
 
      def calculate_treatment_success_rate(self,treatment_type):

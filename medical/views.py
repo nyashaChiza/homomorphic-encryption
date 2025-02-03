@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render
 from medical.models import Tests, Treatment, Medication
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -38,7 +39,11 @@ class StatsIndexView(LoginRequiredMixin, ListView):
         
         if self.request.GET.get('treatment_type'):
             context['average_recovery_type'] = calculus.calculate_average_recovery_time(self.request.GET.get('treatment_type'))
-        
+
+
+        if self.request.GET.get('follow_up_date'):
+            context['patients'] = calculus.find_high_risk_patients(self.request.GET.get('follow_up_date'))
+
         return context
         
 
