@@ -67,8 +67,8 @@ class MedicalCalculations:
 
           if total_treatments > 0:
                success_rate = (successful_treatments / total_treatments) * 100
-               return f"{success_rate:.2f}% success rate"
-          return "No data for this treatment type"
+               return {'status':'Success', 'value': f"{success_rate:.2f}% success rate"}
+          return {'status':'Failed', 'value':"No data for this treatment type"}
 
 
      def get_common_symptoms_for_treatment(self,treatment_type):
@@ -82,4 +82,11 @@ class MedicalCalculations:
           symptom_counter = Counter(
                symptom for symptom_list in symptoms if symptom_list for symptom in symptom_list.split(",")
           )
-          return symptom_counter.most_common(5)  # Return top 5 symptoms
+          common_symptoms = symptom_counter.most_common(5)
+          common_symptoms = [sympthom[0] for sympthom in common_symptoms]
+          if common_symptoms :
+               return {'status': 'Success', 'value':common_symptoms}
+          else:
+               return {'status': 'Failed', 'value':"no symthoms found"}
+
+       # Return top 5 symptoms

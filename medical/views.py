@@ -44,6 +44,12 @@ class StatsIndexView(LoginRequiredMixin, ListView):
         if self.request.GET.get('follow_up_date'):
             context['patients'] = calculus.find_high_risk_patients(self.request.GET.get('follow_up_date'))
 
+        if self.request.GET.get('type'):
+            context['treatment_success_rate'] = calculus.calculate_treatment_success_rate(self.request.GET.get('type'))
+
+        if self.request.GET.get('treatment'):
+            context['common_symptoms'] = calculus.get_common_symptoms_for_treatment(self.request.GET.get('treatment'))
+
         return context
         
 

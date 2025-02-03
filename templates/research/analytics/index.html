@@ -5,7 +5,7 @@
 <div class="nk-block-head">
      <div class="nk-block-between">
           <div class="nk-block-head-content">
-               <h4 class="nk-block-title">Analytic Calclus</h4>
+               <h4 class="nk-block-title">Analytic Calculus</h4>
           </div>
 
      </div>
@@ -195,7 +195,7 @@
                                    <div class="form-group">
                                         <label class="form-label" for="cf-full-name">Select Treatment Type
                     </label>
-                                        <select name="treatment_type" class="form-select js-select2" data-search="on">
+                                        <select name="type" class="form-select js-select2" data-search="on">
                                              {% for treatment_type in treatment_types %}
                                              <option value='{{treatment_type}}'>{{treatment_type}}</option>
                                              {% endfor %}
@@ -206,17 +206,58 @@
                                         <button type="submit"
                                              class="btn btn-lg btn-primary">Calculate</button>
                                    </div>
-                                   {% if average_recovery_type.status == 'Success' %}
+                                   {% if treatment_success_rate.status == 'Success' %}
                                    <div class="example-alert">
                                         <div class="alert alert-fill alert-success alert-icon">
-                                            <em class="icon ni ni-check-circle"></em>{{ average_recovery_type.value }}
+                                            <em class="icon ni ni-check-circle"></em>{{ treatment_success_rate.value }}
                                         </div>
                                     </div>
 
-                                   {% elif average_recovery_type.status == 'Failed'  %}
+                                   {% elif treatment_success_rate.status == 'Failed'  %}
                                     <div class="example-alert">
                                         <div class="alert alert-fill alert-danger alert-dismissible alert-icon">
-                                            <em class="icon ni ni-cross-circle"></em> <strong>failed</strong>! {{ average_recovery_type.value }} <button class="close" data-bs-dismiss="alert"></button>
+                                            <em class="icon ni ni-cross-circle"></em> <strong>failed</strong>! {{ treatment_success_rate.value }} <button class="close" data-bs-dismiss="alert"></button>
+                                        </div>
+                                    </div>
+                                    {% endif%}
+                              </form>
+                         </div>
+                    </div>
+               </div>
+               <div class="accordion-item">
+                    <a href="#" class="accordion-head collapsed" data-bs-toggle="collapse"
+                         data-bs-target="#accordion-item-5" aria-expanded="false">
+                         <h6 class="title">Identify the most reported symptoms for a specific treatment type.</h6>
+                         <span class="accordion-icon"></span>
+                    </a>
+                    <div class="accordion-body collapse" id="accordion-item-5" data-bs-parent="#accordion">
+                         <div class="accordion-inner">
+                              <form action="{% url 'stats_index' %}">
+                                   <div class="form-group">
+                                        <label class="form-label" for="cf-full-name">Select Treatment Type
+                    </label>
+                                        <select name="treatment" class="form-select js-select2" data-search="on">
+                                             {% for treatment_type in treatment_types %}
+                                             <option value='{{treatment_type}}'>{{treatment_type}}</option>
+                                             {% endfor %}
+                                        </select>
+                                   </div>
+                                   
+                                   <div class="form-group">
+                                        <button type="submit"
+                                             class="btn btn-lg btn-primary">Calculate</button>
+                                   </div>
+                                   {% if common_symptoms.status == 'Success' %}
+                                   <div class="example-alert">
+                                        <div class="alert alert-fill alert-success alert-icon">
+                                            <em class="icon ni ni-check-circle"></em>{{ common_symptoms.value }}
+                                        </div>
+                                    </div>
+
+                                   {% elif common_symptoms.status == 'Failed'  %}
+                                    <div class="example-alert">
+                                        <div class="alert alert-fill alert-danger alert-dismissible alert-icon">
+                                            <em class="icon ni ni-cross-circle"></em> <strong>failed</strong>! {{ common_symptoms.value }} <button class="close" data-bs-dismiss="alert"></button>
                                         </div>
                                     </div>
                                     {% endif%}
