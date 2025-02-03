@@ -3,13 +3,14 @@ from django.shortcuts import render
 from medical.models import Tests, Treatment, Medication
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
-from accounts.models import User
+from accounts.models import User, Approval
 from django.contrib import messages 
 from medical.helpers import get_treatments_with_medication
 from medical.forms import TestsForm, TreatmentForm, TestResultsForm, MedicineForm
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from .forms import TreatmentForm, TreatmentMedicationFormSet
+from accounts.forms import UserForm
 # views.py
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -111,6 +112,36 @@ class TestCreateView(LoginRequiredMixin, CreateView):
         messages.success(self.request, 'Test added successfully!')
 
         return response
+
+
+class PatientCreateView(LoginRequiredMixin, CreateView):
+    model = Tests
+    form_class = UserForm
+    template_name = 'patients/add_patient.html'
+    context_object_name = 'tests'
+    success_url = reverse_lazy('patient_index')
+
+    def get_form(self) :
+        form = super().get_form()
+        roles = [('','---------'), ('Patient', 'Patient')]
+        form.fields['role'].choices = roles
+
+        return form
+    
+    def form_valid(self, form):
+        # Call the parent class's form_valid method to save the form
+        response = super().form_valid(form)
+
+
+        # Add a success message
+        patient = User.objects.last()
+        doctor = self.request.user
+
+        Approval.objects.create(patient=patient, doctor=doctor, status='Granted')
+        messages.success(self.request, f'Patient added successfully!')
+
+        return response
+
 
 class TestResultsView(LoginRequiredMixin, UpdateView):
     model = Tests
@@ -277,49 +308,3 @@ def medication_delete_view(request, pk):
  
 
 
-def medication_adherence(request):
-    patient_id = request.GET.get('patient_id')
-    medication_id = request.GET.get('medication_id')
-
-    if not (patient_id and medication_id):
-        return JsonResponse({'error': 'Patient ID and Medication ID are required.'}, status=400)
-
-    adherence = calculus.calculate_medication_adherence(patient_id, medication_id)
-    print()
-    return redirect('stats_index') #render(request, 'research/analytics/index.html', {'medical_adherence': adherence})
-
-
-def average_recovery_time(request):
-    treatment_type = request.GET.get('treatment_type')
-
-    if not treatment_type:
-        return JsonResponse({'error': 'Treatment type is required.'}, status=400)
-
-    avg_recovery = calculus.calculate_average_recovery_time(treatment_type)
-    return render(request, 'research/analytics/index.html', {'avg_recovery': avg_recovery})
-
-
-def high_risk_patients(request):
-    threshold = request.GET.get('threshold', 3)  # Default threshold is 3 follow-ups
-    high_risk = calculus.find_high_risk_patients(int(threshold))
-    return render(request, 'research/analytics/index.html', {'high_risk': high_risk})
-
-
-def treatment_success_rate(request):
-    treatment_type = request.GET.get('treatment_type')
-
-    if not treatment_type:
-        return JsonResponse({'error': 'Treatment type is required.'}, status=400)
-
-    success_rate = calculus.calculate_treatment_success_rate(treatment_type)
-    return render(request, 'stats/treatment_success_rate.html', {'success_rate': success_rate})
-
-
-def common_symptoms(request):
-    treatment_type = request.GET.get('treatment_type')
-
-    if not treatment_type:
-        return JsonResponse({'error': 'Treatment type is required.'}, status=400)
-
-    common_symptoms = calculus.get_common_symptoms_for_treatment(treatment_type)
-    return render(request, 'stats/common_symptoms.html', {'common_symptoms': common_symptoms})

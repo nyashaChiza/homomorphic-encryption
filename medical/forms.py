@@ -1,6 +1,7 @@
 
 from django import forms
 from django.forms import inlineformset_factory
+from accounts.models import User
 from medical.models import Treatment, Tests, Medication, TreatmentMedication
 
 
@@ -16,6 +17,22 @@ class TreatmentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(TreatmentForm, self).__init__(*args, **kwargs)
+
+        for _, field in self.fields.items():
+                field.widget.attrs["class"] = "form-control"
+
+
+class PatientForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
+        
+        widgets = {
+            "follow_up_date": forms.widgets.DateInput(attrs={"type": "date"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(PatientForm, self).__init__(*args, **kwargs)
 
         for _, field in self.fields.items():
                 field.widget.attrs["class"] = "form-control"

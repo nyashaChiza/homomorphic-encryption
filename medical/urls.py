@@ -7,6 +7,7 @@ from medical import views
 urlpatterns = [
     path('tests', views.TestListView.as_view() , name='test_index'),
     path('tests/create', views.TestCreateView.as_view() , name='test_create'),
+    path('patient/create', views.PatientCreateView.as_view() , name='patient_create'),
     path('tests/results/<int:pk>', views.TestResultsView.as_view() , name='test_add_results'),
     path('tests/details/<int:pk>', views.TestDetailView.as_view() , name='test_details'),
     path('test/update/<int:pk>', views.TestUpdateView.as_view() , name='test_update'),
@@ -22,10 +23,4 @@ urlpatterns = [
     path('medicine/update/<int:pk>', views.MedicineUpdateView.as_view() , name='medicine_update'),
     path('medications/delete/<int:pk>/', views.medication_delete_view, name='medicine_delete'),
     path('stats/index/', views.StatsIndexView.as_view(), name='stats_index'),
-    path('stats/medication-adherence/', views.medication_adherence, name='medication_adherence'),
-    path('stats/average-recovery-time/', views.average_recovery_time, name='average_recovery_time'),
-    path('stats/high-risk-patients/', views.high_risk_patients, name='high_risk_patients'),
-    path('stats/treatment-success-rate/', views.treatment_success_rate, name='treatment_success_rate'),
-    path('stats/common-symptoms/', views.common_symptoms, name='common_symptoms'),
-
 ]
