@@ -26,6 +26,8 @@
         </tr>
       </thead>
       <tbody>
+        {{ medication_formset.management_form}}
+        {% for formset in medication_formset%}
         {% for form in medication_formset %}
         <tr>
           <td>{{ form.medication }}</td>
@@ -39,6 +41,7 @@
           </td>
         </tr>
         {% endfor %}
+        {%endfor %}
       </tbody>
     </table>
 

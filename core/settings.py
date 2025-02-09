@@ -11,6 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
+
+FERNET_KEY =  b'JiI5dcF6tMMluxv_XuO78IXnpBfOOh1B7SJ4pIZrIsk='
 DEBUG = config("DEBUG")
 
 ALLOWED_HOSTS = ['*']

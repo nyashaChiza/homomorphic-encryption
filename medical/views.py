@@ -1,5 +1,6 @@
 import datetime
 from django.shortcuts import render
+from core import settings
 from medical.models import Tests, Treatment, Medication
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
@@ -107,7 +108,6 @@ class TestCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # Call the parent class's form_valid method to save the form
         response = super().form_valid(form)
-
         # Add a success message
         messages.success(self.request, 'Test added successfully!')
 
@@ -163,6 +163,7 @@ class TreatmentDetailView(DetailView):
     model = Treatment
 
 def create_treatment(request):
+    medication_formset = TreatmentMedicationFormSet()
     if request.method == "POST":
         treatment_form = TreatmentForm(request.POST)
         medication_formset = TreatmentMedicationFormSet(request.POST)
@@ -180,18 +181,18 @@ def create_treatment(request):
         # Set the choices dynamically for the form
         treatment_form.fields['patient'].choices = patients
         treatment_form.fields['doctor'].choices = doctors
-
         if treatment_form.is_valid() and medication_formset.is_valid():
             treatment = treatment_form.save()
-
+            
             # Save each medication associated with the treatment
             medication_formset.instance = treatment
             medication_formset.save()
 
             messages.success(request, "Treatment and medications added successfully!")
-            return redirect('treatment_list')  # Redirect to a list or detail view
+            return redirect('treatment_index')  # Redirect to a list or detail view
 
     else:
+        messages.warning(request, medication_formset.error_messages)
         treatment_form = TreatmentForm()
         medication_formset = TreatmentMedicationFormSet()
 

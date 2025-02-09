@@ -1,8 +1,6 @@
 from django.db.models import Count, Q
-from django.db.models.functions import TruncMonth, TruncYear
 from ..models import Treatment, Tests, Medication
-from accounts.models import User
-from datetime import date, timedelta
+
 
 class MedicalDataAnalytics:
     """A class to generate descriptive analytics for medical data."""

@@ -52,7 +52,7 @@
                     {%for treatment in treatments %}
                     {% if treatment.patient == user %}
                             <tr>
-                                <td>{{treatment.title}}</td>
+                                <td>{{treatment.title_}}</td>
                                 <td>{{treatment.doctor}}</td>
                                 <td>{{treatment.patient}}</td>
                                 <td>{{treatment.treatment_type}}</td>
@@ -72,7 +72,7 @@
                             </tr>
                     {% elif user.role == 'Doctor' %}
                     <tr>
-                        <td>{{treatment.title}}</td>
+                        <td>{{treatment.title_}}</td>
                         <td>{{treatment.doctor}}</td>
                         <td>{{treatment.patient}}</td>
                         <td>{{treatment.treatment_type}}</td>

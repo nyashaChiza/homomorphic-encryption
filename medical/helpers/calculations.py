@@ -1,6 +1,5 @@
 from django.db.models import Sum, Avg, Count, F
 from collections import Counter
-
 from medical.models import Treatment, TreatmentMedication
 
 

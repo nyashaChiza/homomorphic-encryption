@@ -1,7 +1,29 @@
 from datetime import timedelta
 from django.db import models
 import uuid
+from cryptography.fernet import Fernet
+import base64
+import os
 
+from core import settings
+
+# Generate a key (store this securely)
+SECRET_KEY = settings.FERNET_KEY
+cipher = Fernet(SECRET_KEY)
+
+def encrypt_data(data):
+    if not data:
+        return None
+    return cipher.encrypt(data.encode()).decode()  # Convert bytes to string
+
+def decrypt_data(encrypted_data):
+    try:
+        if not encrypted_data:
+            return None
+        return cipher.decrypt(encrypted_data.encode()).decode()  # Convert string back to bytes
+    except:
+        return 'encrypted'  # Handle cases where the Profile is not linked
+    
 
 
 STATUS_CHOICES = ( 
@@ -75,7 +97,32 @@ class Treatment(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.title_}"
+    
+    @property 
+    def title_(self):
+        return decrypt_data(self.title)
+    
+
+    @property 
+    def description_(self):
+        return decrypt_data(self.description)
+    
+    @property 
+    def sympthoms_(self):
+        return decrypt_data(self.symptoms)
+    
+    @property 
+    def diagnosis_(self):
+        return decrypt_data(self.diagnosis)
+    
+    def save(self,*args, **kwargs):
+        self.title = encrypt_data(self.title)
+        self.description = encrypt_data(self.description)
+        self.symptoms = encrypt_data(self.symptoms)
+        self.diagnosis = encrypt_data(self.diagnosis)
+        self.notes = encrypt_data(self.notes)
+        return super().save(*args, **kwargs)
     
     def get_duration(self):
         if self.follow_up_date:
@@ -103,7 +150,31 @@ class Tests(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.title_}"
+    
+    @property 
+    def title_(self):
+        return decrypt_data(self.title)
+    
+
+    @property 
+    def description_(self):
+        return decrypt_data(self.description)
+    
+    @property 
+    def result_(self):
+        return decrypt_data(self.result)
+    
+    @property 
+    def result_description_(self):
+        return decrypt_data(self.result_description)
+    
+    def save(self,*args, **kwargs):
+        self.title = encrypt_data(self.title)
+        self.description = encrypt_data(self.description)
+        self.result = encrypt_data(self.result)
+        self.result_description = encrypt_data(self.result_description)
+        return super().save(*args, **kwargs)
 
 
 

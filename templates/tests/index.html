@@ -52,7 +52,7 @@
                     {%for test in tests %}
                     {% if test.patient == user %}
                             <tr>
-                                <td>{{test.title}}</td>
+                                <td>{{test.title_}}</td>
                                 <td>{{test.doctor}}</td>
                                 <td>{{test.patient}}</td>
                                 <td>{{test.test_type}}</td>
@@ -73,7 +73,7 @@
                             </tr>
                     {% elif user.role == 'Doctor' %}
                     <tr>
-                        <td>{{test.title}}</td>
+                        <td>{{test.title_}}</td>
                         <td>{{test.doctor}}</td>
                         <td>{{test.patient}}</td>
                         <td>{{test.test_type}}</td>
