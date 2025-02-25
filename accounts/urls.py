@@ -9,6 +9,7 @@ from .views import (
 
 urlpatterns = [
     path('', auth_views.LoginView.as_view(template_name='account/login.html'), name='account_login'),
+    path('signup/', views.AccountSignUpView.as_view(), name='accounts_signup'),
     path('logout/', views.custom_logout, name='accounts_logout'),
     path('detail/<int:pk>/', views.AccountDetailView.as_view(), name='account_detail'),
     path('profile/update/<int:pk>/', views.ProfileUpdateView.as_view(), name='profile_update'),

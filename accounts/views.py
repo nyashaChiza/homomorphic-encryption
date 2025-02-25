@@ -73,7 +73,6 @@ class ProfileCreateView(LoginRequiredMixin, CreateView):
         return form
 
 
-
 # View to create a new user account
 class UserCreateView(LoginRequiredMixin, CreateView):
     model = User
@@ -83,6 +82,18 @@ class UserCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         # Optionally, handle additional actions after creating a user, such as sending a welcome email.
+        return super().form_valid(form)
+
+
+# View to create a new user account
+class AccountSignUpView(CreateView):
+    model = User
+    form_class = UserForm  # Custom form for user creation
+    template_name = 'account/signup.html'
+    success_url = reverse_lazy('account_login')
+
+    def form_valid(self, form):
+        # Optionally, handle additional actions after creating a user, such as sending a welcome email
         return super().form_valid(form)
 
 
