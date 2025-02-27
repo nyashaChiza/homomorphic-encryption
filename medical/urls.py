@@ -19,6 +19,7 @@ urlpatterns = [
     path('treatment/update/<int:pk>', views.TreatmentUpdateView.as_view() , name='treatment_update'),
     path('patients', views.PatientstListView.as_view() , name='patient_index'),
     path('medicine', views.MedicineListView.as_view() , name='medicine_index'),
+    path('medicine/only/', views.MedicineListOnlyView.as_view() , name='medicine_only_index'),
     path('medicine/create', views.MedicineCreateView.as_view() , name='medicine_create'),
     path('medicine/update/<int:pk>', views.MedicineUpdateView.as_view() , name='medicine_update'),
     path('medications/delete/<int:pk>/', views.medication_delete_view, name='medicine_delete'),

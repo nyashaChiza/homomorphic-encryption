@@ -270,6 +270,11 @@ class MedicineListView(LoginRequiredMixin, ListView):
         context['objects'] =  get_treatments_with_medication()
         return context
 
+class MedicineListOnlyView(LoginRequiredMixin, ListView):
+    model = Medication
+    template_name = 'medicine/only_index.html'
+    context_object_name = 'meds' 
+
 
 class MedicineCreateView(LoginRequiredMixin, CreateView):
     model = Medication
@@ -305,7 +310,7 @@ def medication_delete_view(request, pk):
     Medication.objects.get(pk=pk).delete()
     messages.success(request, 'Medicine deleted successfully!')
 
-    return redirect(reverse('medicine_index'))
+    return redirect(reverse('medicine_only_index'))
  
 
 
