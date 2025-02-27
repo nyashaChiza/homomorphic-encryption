@@ -27,13 +27,21 @@
                             </div>
                             <div class="dropdown-body">
                                 <div class="nk-notification">
+                                    {% if not user.profile %}
+                                    <div class="nk-notification-item dropdown-inner">
+                                        <div class="nk-notification-content">
+                                            <div class="nk-notification-text text-warning">Please change your pasasword for security purposes and  update your profile.</div>
+                                            <div class="nk-notification-time text-danger text-bold">Urgent</div>
+                                        </div>
+                                    </div>
+                                    {% endif%}
                                     {% for note in notifications %}
                                     <a href="{% url 'approval_details' note.pk %}">
                                     {% if note.status == 'Granted' and user.role == 'Doctor' and note.doctor == user %}
 
                                     <div class="nk-notification-item dropdown-inner">
                                         <div class="nk-notification-content">
-                                            <div class="nk-notification-text text-success">{{ note.patient }} has approved this Access Request.</div>
+                                            <div class="nk-notification-text text-primary">{{ note.patient }} has approved this Access Request.</div>
                                             <div class="nk-notification-time">{{ note.updated }}</div>
                                         </div>
                                     </div>

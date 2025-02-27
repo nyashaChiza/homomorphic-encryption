@@ -7,9 +7,34 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, T
 from django.contrib import messages
 from accounts.forms import ProfileForm, UserForm
 from accounts.models import Profile
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
+
+from medical.forms import CustomPasswordChangeForm
+
 
 # Reference the User model in a dynamic manner
 User = get_user_model()
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Keep user logged in
+            messages.success(request, "Your password has been successfully updated.")
+            return redirect("account_detail")  # Change this to your preferred redirect URL
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = CustomPasswordChangeForm(request.user)
+
+    return render(request, "account/change_password.html", {"form": form})
+
 
 # View for logging out a user
 def custom_logout(request):

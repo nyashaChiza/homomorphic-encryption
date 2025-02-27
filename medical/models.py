@@ -97,7 +97,12 @@ class Treatment(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title_}"
+        try:
+            return f"{self.title_}"
+        except Exception as e:
+            settings.LOGGER.critical(e)
+            return "Encrypted Treatment"
+
     
     @property 
     def title_(self):

@@ -165,8 +165,10 @@ class MedicalDataAnalytics:
 def get_treatments_with_medication():
     """Returns treatments with their corresponding medications."""
     treatments_with_medications = []
+    
     for medicine in Medication.objects.all():
-        for treat in Treatment.objects.filter(treatment_medications=medicine):
+        for treat in Treatment.objects.filter(treatment_medications__medication=medicine):
             treatments_with_medications.append({'medicine': medicine, 'treatment': treat})
-
+    
     return treatments_with_medications
+

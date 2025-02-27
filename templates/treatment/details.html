@@ -121,10 +121,45 @@
                         </div>
                         
                     </div>
+                    <div class="data-head">
+                        <h6 class="overline-title">Medicine</h6>
+                    </div>
                     <div class="data-item">
-                        <div class="data-col">
-                            <span class="data-label">Medicine</span>
-                            <span class="data-value">{% for med in treatment.medications.all %} {{med}}, {% endfor %}</span>
+                        <div class="card-inner">
+                            <table class="datatable-init-export nowrap table" data-export-title="Export">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>
+                                            Medicine
+                                        </th>
+                                        
+                                        <th>
+                                            Administration
+                                        </th>
+                                        <th>
+                                            Quantity
+                                        </th>
+                                        <th>
+                                            Frequency
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for object in object.treatment_medications.all %}
+                                            <tr>
+                                                <td>{{object.medication}}</td>
+                                                <td>{{object.method_of_administration}}</td>
+                                                <td>{{object.quantity}}</td>
+                                                <td>{{object.frequency}}</td>
+                                                
+                                            </tr>
+                                  
+                                        
+                
+                                    {% endfor%}
+                                </tbody>
+                            </table>
                         </div>
                         
                     </div>

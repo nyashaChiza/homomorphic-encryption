@@ -138,6 +138,7 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <ul class="link-list-opt no-bdr">
                                                         <li><a href="{% url 'profile_create' %}"><em class="icon ni ni-edit-fill"></em><span>Create Profile</span></a></li>
+                                                        <li><a href="{% url 'change_password' %}"><em class="icon ni ni-edit-fill"></em><span>Change Password</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -146,7 +147,8 @@
                                                 <a class="btn btn-icon btn-trigger me-n2" data-bs-toggle="dropdown" href="#" aria-expanded="false"><em class="icon ni ni-more-v"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <ul class="link-list-opt no-bdr">
-                                                        <li><a href="{% url 'profile_update' user.pk %}"><em class="icon ni ni-edit-fill"></em><span>Uodate Profile</span></a></li>
+                                                        <li><a href="{% url 'profile_update' user.pk %}"><em class="icon ni ni-edit-fill"></em><span>Update Profile</span></a></li>
+                                                        <li><a href="{% url 'change_password'  %}"><em class="icon ni ni-edit-fill"></em><span>Change Password</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>

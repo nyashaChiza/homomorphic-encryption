@@ -11,6 +11,7 @@
         <div class="my-3">
             <form method="post">
                 {% csrf_token %}
+                
                 {{ treatment_form.as_p }}
             
                  <!-- Treatment Medication Formset Table -->
@@ -49,11 +50,13 @@
 
 
   <script>
-    function removeRow(button) {
-      // Remove the row corresponding to the delete button clicked
-      var row = button.closest("tr");
-      row.remove();
+    document.addEventListener("DOMContentLoaded", function () {
+    let alertDiv = document.querySelector(".alert.alert-pro.alert-warning");
+    if (alertDiv) {
+        alertDiv.style.display = "none";
     }
+});
+
   </script>
 
 

@@ -47,6 +47,7 @@ class User(AbstractUser):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     role = models.CharField(choices=ROLE_CHOICES, max_length=20)
     email = models.EmailField(unique=True)
+    changed_password = models.BooleanField(default=False)
 
     # Add related_name to avoid clashes with the auth.User model
     groups = models.ManyToManyField(

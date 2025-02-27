@@ -100,7 +100,7 @@ class TestCreateView(LoginRequiredMixin, CreateView):
             doctors = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
             form.fields['doctor'].label = 'Doctor/ Clerk'
         
-        form.fields['patient'].choices = patients
+        # form.fields['patient'].choices = patients
         form.fields['doctor'].choices = doctors
 
         return form
@@ -167,7 +167,7 @@ def create_treatment(request):
     if request.method == "POST":
         treatment_form = TreatmentForm(request.POST)
         medication_formset = TreatmentMedicationFormSet(request.POST)
-
+        
         # Dynamically set patient and doctor choices based on user role
         if request.user.role in ['Doctor', 'Clerk']:
             patients = [('','---------')]
@@ -179,7 +179,7 @@ def create_treatment(request):
             doctors = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
 
         # Set the choices dynamically for the form
-        treatment_form.fields['patient'].choices = patients
+        # treatment_form.fields['patient'].choices = patients
         treatment_form.fields['doctor'].choices = doctors
         if treatment_form.is_valid() and medication_formset.is_valid():
             treatment = treatment_form.save()
@@ -206,7 +206,7 @@ def create_treatment(request):
             doctors = [(patient.pk, patient) for patient in User.objects.filter(role='Doctor').all()]
 
         # Set the choices dynamically for the form
-        treatment_form.fields['patient'].choices = patients
+        # treatment_form.fields['patient'].choices = patients
         treatment_form.fields['doctor'].choices = doctors
 
     context = {
