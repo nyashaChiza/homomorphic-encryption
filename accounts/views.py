@@ -27,7 +27,9 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Keep user logged in
             messages.success(request, "Your password has been successfully updated.")
-            return redirect("account_detail")  # Change this to your preferred redirect URL
+            request.user.changed_password = True
+            request.user.save()
+            return redirect("dashboard")  # Change this to your preferred redirect URL
         else:
             messages.error(request, "Please correct the errors below.")
     else:

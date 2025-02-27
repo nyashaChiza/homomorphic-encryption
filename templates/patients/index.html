@@ -64,7 +64,7 @@
                                 <td>{{approval.patient.tests.count }}</td>
                                 <td>{% if approval.patient|has_access:user %}<em class="icon ni ni-check-circle-cut text-success"></em>{% else %}<em class="icon ni ni-cross-circle text-danger"></em>{% endif %}</td>
                                 <td class="tb-tnx-action">
-                                    {% if approval.patient|has_access:user %}
+                                    
                                     <div class="dropdown">
                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
@@ -74,7 +74,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    {% endif %}
+                                   
                                 </td>
                             </tr>
                   

@@ -27,10 +27,10 @@
                             </div>
                             <div class="dropdown-body">
                                 <div class="nk-notification">
-                                    {% if not user.profile %}
+                                    {% if not user.changed_password %}
                                     <div class="nk-notification-item dropdown-inner">
                                         <div class="nk-notification-content">
-                                            <div class="nk-notification-text text-warning">Please change your pasasword for security purposes and  update your profile.</div>
+                                            <div class="nk-notification-text text-warning">Please change your pasasword for security purposes.</div>
                                             <div class="nk-notification-time text-danger text-bold">Urgent</div>
                                         </div>
                                     </div>

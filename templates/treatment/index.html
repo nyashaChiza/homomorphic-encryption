@@ -63,7 +63,7 @@
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                             <ul class="link-list-plain">
                                                 <li><a href="{% url 'treatment_details' treatment.pk %}" class='px-1'>Details</a></li>
-                                                {% if user.role != 'Patient' %} <li><a href="{% url 'treatment_update' treatment.pk %}" class='px-1'>Update</a></li>{% endif %}
+                                                {% if user.role != 'Patient' or 'Doctor' %} <li><a href="{% url 'treatment_update' treatment.pk %}" class='px-1'>Update</a></li>{% endif %}
                                                 </ul>
                                         </div>
                                     </div>
