@@ -71,7 +71,7 @@
                                 </td>
                                 
                             </tr>
-                    {% elif user.role == 'Doctor' %}
+                    {% elif user.role == 'Doctor' or user.role == 'Admin' %}
                     <tr>
                         <td>{{test.title_}}</td>
                         <td>{{test.doctor}}</td>
